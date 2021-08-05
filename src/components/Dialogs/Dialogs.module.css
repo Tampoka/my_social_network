@@ -2,10 +2,12 @@
 display: grid;
 grid-template-columns: 2fr 10fr;
     background-color: lightblue;
+    height: 100%;
 }
 
 .dialogItems {
 padding: 10px;
+
 }
 
  .dialog {
