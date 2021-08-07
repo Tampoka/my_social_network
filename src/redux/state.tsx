@@ -8,7 +8,7 @@ let state = {
             {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
         ],
     },
-    messagesPage: {
+    dialogsPage: {
         dialogs: [
             {id: 1, name: "Dimych"},
             {id: 2, name: "Victor"},

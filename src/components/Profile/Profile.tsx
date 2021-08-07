@@ -3,7 +3,10 @@ import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-type ProfilePropsType= {
+type ProfilePropsType={
+    state:statePropsType
+}
+type statePropsType= {
     posts:Array<PostPropsType>
 }
 type PostPropsType={
@@ -14,7 +17,7 @@ type PostPropsType={
 const Profile=(props:ProfilePropsType)=> {
     return  <div>
        <ProfileInfo/>
-       <MyPosts posts={props.posts}/>
+       <MyPosts posts={props.state.posts}/>
     </div>
     }
 
