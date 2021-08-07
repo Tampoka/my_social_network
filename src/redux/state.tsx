@@ -22,3 +22,5 @@ let state = {
     {id: 5, message: "Are you going to gim today?"},
 ]
 }
+
+export default state

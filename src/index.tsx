@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import DialogItem from "./components/Dialogs/DialogItem/DialogItem";
+import state from './redux/state'
 
 ReactDOM.render(
-    <App posts={posts} dialogs={dialogs} messages={messages}/>,
+    <App state={state}/>,
   document.getElementById('root')
 );
 
