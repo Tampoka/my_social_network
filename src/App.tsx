@@ -39,7 +39,6 @@ type MessagePropsType = {
 }
 const App = (props: AppPropsType) => {
     return (
-        <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Nav/>
@@ -52,7 +51,6 @@ const App = (props: AppPropsType) => {
                     <Redirect to="/profile"/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 };
 
