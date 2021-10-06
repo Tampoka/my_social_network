@@ -6,7 +6,7 @@ type ProfilePropsType={
     state:statePropsType
 }
 type statePropsType= {
-    posts:Array<PostPropsType>
+    posts:PostPropsType[]
 }
 type PostPropsType={
     id:number
