@@ -7,8 +7,8 @@ type DialogsPropsType={
     state:statePropsType
 }
 type statePropsType={
-    dialogs: Array<DialogPropsType>
-    messages:Array<MessagePropsType>
+    dialogs: DialogPropsType[]
+    messages:MessagePropsType[]
 }
 type DialogPropsType={
     id:number
