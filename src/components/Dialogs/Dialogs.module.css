@@ -24,3 +24,8 @@ padding: 10px;
 .messages .message {
 
 }
+.sendMessage {
+    display: flex;
+
+    margin-top: 20px;
+}

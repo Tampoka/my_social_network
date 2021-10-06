@@ -3,22 +3,22 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
-type DialogsPropsType={
-    state:statePropsType
+type DialogsPropsType = {
+    state: statePropsType
 }
-type statePropsType={
+type statePropsType = {
     dialogs: DialogPropsType[]
-    messages:MessagePropsType[]
+    messages: MessagePropsType[]
 }
-type DialogPropsType={
-    id:number
-    name:string
+type DialogPropsType = {
+    id: number
+    name: string
 }
-type MessagePropsType={
-    id:number
-    message:string
+type MessagePropsType = {
+    id: number
+    message: string
 }
-const Dialogs = (props:DialogsPropsType) => {
+const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = props.state.messages.map(m => <Message message={m.message}/>)
@@ -30,6 +30,10 @@ const Dialogs = (props:DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
+                <div className={s.sendMessage}>
+                    <textarea placeholder={"Write a message"}></textarea>
+                    <button>Send message</button>
+                </div>
             </div>
         </div>
     );
