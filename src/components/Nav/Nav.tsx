@@ -17,7 +17,7 @@ type FriendPropsType={
 }
 
 const Nav = (props:NavPropsType) => {
-  return <div>
+  return <div className={s.navContainer}>
     <nav className={s.nav}>
       <ul>
         <li className={s.item}>
