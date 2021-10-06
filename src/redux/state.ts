@@ -1,37 +1,37 @@
 
-type PostPropsType={
+export type PostPropsType={
     id:number
     message:string
     likesCount:number
 }
-type DialogPropsType={
+export type DialogPropsType={
     id:number
     name:string
 }
-type MessagePropsType={
+export type MessagePropsType={
     id:number
     message:string
 }
-type FriendPropsType={
+export type FriendPropsType={
     id:number
     name:string
     img:string
     isOnline:boolean
 }
 
-type ProfilePagePropsType={
+export type ProfilePagePropsType={
     posts:PostPropsType[]
 }
-type DialogsPagePropsType={
+export type DialogsPagePropsType={
     dialogs:DialogPropsType[]
     messages:MessagePropsType[]
 }
 
-type SidebarPropsType={
+export type SidebarPropsType={
     friends:FriendPropsType[]
 }
 
-type RootPropsType={
+export type RootPropsType={
     profilePage:ProfilePagePropsType
     dialogsPage:DialogsPagePropsType
     sidebar:SidebarPropsType
