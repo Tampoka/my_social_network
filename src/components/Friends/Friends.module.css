@@ -2,6 +2,7 @@
 .avatarContainer {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 
     background-color: #8fc28f;
     padding: 10px;
@@ -14,6 +15,9 @@
     overflow: hidden;
 }
 
+.active {
+    border: 3px solid green;
+}
 .avatar img {
     object-fit: cover;
 }
