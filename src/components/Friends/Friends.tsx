@@ -1,4 +1,5 @@
 import React from "react";
+import s from "./Friends.module.css"
 
 type FriendsPropsType = {
     state: statePropsType
@@ -13,13 +14,13 @@ type FriendPropsType = {
     isOnline: boolean
 }
 const Friends = (props: FriendsPropsType) => {
-    let avatar = props.state.friends.map(f => <div key={f.id} className={"avatar"}>
-        <img src={f.img}/>
-        <span>{f.name}</span>
+    let avatar = props.state.friends.map(f => <div key={f.id} >
+        <div className={s.avatar}><img src={f.img}/></div>
+        <div className={s.userName}>{f.name}</div>
     </div>)
     return (
         <div>
-            <div className={"avatarContainer"}>{avatar}</div>
+            <div className={s.avatarContainer}>{avatar}</div>
         </div>
     )
 }

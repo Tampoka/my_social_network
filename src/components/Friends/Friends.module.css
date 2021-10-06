@@ -1,0 +1,23 @@
+
+.avatarContainer {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: #8fc28f;
+    padding: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar img {
+    object-fit: cover;
+}
+
+.userName {
+    color: black;
+}
