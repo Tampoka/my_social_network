@@ -1,18 +1,12 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfilePagePropsType} from "../../redux/state";
 
 type ProfilePropsType={
-    state:statePropsType
+    state:ProfilePagePropsType
 }
-type statePropsType= {
-    posts:PostPropsType[]
-}
-type PostPropsType={
-    id:number
-    message:string
-    likesCount:number
-}
+
 const Profile=(props:ProfilePropsType)=> {
     return  <div>
        <ProfileInfo/>

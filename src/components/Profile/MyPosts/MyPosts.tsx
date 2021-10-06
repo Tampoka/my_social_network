@@ -1,15 +1,12 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {PostPropsType} from "../../../redux/state";
 
 type MyPostsPropsType = {
-    posts: Array<PostPropsType>
+    posts: PostPropsType[]
 }
-type PostPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+
 const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()

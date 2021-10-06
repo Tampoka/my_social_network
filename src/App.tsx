@@ -8,48 +8,12 @@ import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import {RootPropsType} from "./redux/state";
 
-type AppPropsType = {
-    state: statePropsType
+type statePropsType={
+    state:RootPropsType
 }
-type statePropsType = {
-    dialogsPage: dialogsPropsType
-    profilePage: profilePropsType
-    sidebar:sidebarPropsType
-}
-
-type sidebarPropsType={
-    friends:FriendPropsType[]
-}
-
-type FriendPropsType={
-    id:number
-    name:string
-    img:string
-    isOnline:boolean
-}
-type profilePropsType = {
-    posts: PostPropsType[]
-}
-type PostPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-type dialogsPropsType = {
-    dialogs: DialogPropsType[]
-    messages: MessagePropsType[]
-}
-type DialogPropsType = {
-    id: number
-    name: string
-}
-type MessagePropsType = {
-    id: number
-    message: string
-}
-
-const App = (props: AppPropsType) => {
+const App = (props: statePropsType) => {
     return (
         <div className="app-wrapper">
             <Header/>
