@@ -25,6 +25,20 @@ let state = {
             {id: 5, message: "Are you going to gim today?"},
         ]
     },
+    sideBar:{
+        friends:[
+            {
+                id:1, name:"Bob",img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=386&q=80",isOnline:true
+            },
+            {
+                id:2, name:"Kate",img: "https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",isOnline:false
+            },
+            {
+                id:3, name:"John",img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",isOnline:true
+            },
+
+        ]
+    }
 }
 
 export default state
