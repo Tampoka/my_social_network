@@ -15,7 +15,7 @@ type AppPropsType = {
 type statePropsType = {
     dialogsPage: dialogsPropsType
     profilePage: profilePropsType
-    sideBar:sidebarPropsType
+    sidebar:sidebarPropsType
 }
 
 type sidebarPropsType={
@@ -53,7 +53,7 @@ const App = (props: AppPropsType) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Nav state={props.state.sideBar}/>
+            <Nav state={props.state.sidebar}/>
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 <Route path="/profile" render={() => <Profile state={props.state.profilePage}/>}/>

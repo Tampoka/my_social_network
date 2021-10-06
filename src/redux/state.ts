@@ -1,4 +1,42 @@
-let state = {
+
+type PostPropsType={
+    id:number
+    message:string
+    likesCount:number
+}
+type DialogPropsType={
+    id:number
+    name:string
+}
+type MessagePropsType={
+    id:number
+    message:string
+}
+type FriendPropsType={
+    id:number
+    name:string
+    img:string
+    isOnline:boolean
+}
+
+type ProfilePagePropsType={
+    posts:PostPropsType[]
+}
+type DialogsPagePropsType={
+    dialogs:DialogPropsType[]
+    messages:MessagePropsType[]
+}
+
+type SidebarPropsType={
+    friends:FriendPropsType[]
+}
+
+type RootPropsType={
+    profilePage:ProfilePagePropsType
+    dialogsPage:DialogsPagePropsType
+    sidebar:SidebarPropsType
+}
+let state:RootPropsType = {
     profilePage: {
         posts: [
             {id: 1, message: "How are you?", likesCount: 19},
@@ -25,7 +63,7 @@ let state = {
             {id: 5, message: "Are you going to gim today?"},
         ]
     },
-    sideBar:{
+    sidebar:{
         friends:[
             {
                 id:1, name:"Bob",img: "https://images.unsplash.com/photo-1600603955656-e3c9e1ad7f64?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",isOnline:true
@@ -41,4 +79,12 @@ let state = {
     }
 }
 
+export const addPost=(postMessage:string)=>{
+    const newPost={
+        id:5,
+        message:postMessage,
+        likesCount:0
+    }
+    state.profilePage.posts.push(newPost)
+}
 export default state
