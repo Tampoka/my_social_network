@@ -15,6 +15,18 @@ type AppPropsType = {
 type statePropsType = {
     dialogsPage: dialogsPropsType
     profilePage: profilePropsType
+    sideBar:sidebarPropsType
+}
+
+type sidebarPropsType={
+    friends:FriendPropsType[]
+}
+
+type FriendPropsType={
+    id:number
+    name:string
+    img:string
+    isOnline:boolean
 }
 type profilePropsType = {
     posts: PostPropsType[]
@@ -41,7 +53,7 @@ const App = (props: AppPropsType) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Nav/>
+            <Nav state={props.state.sideBar}/>
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 <Route path="/profile" render={() => <Profile state={props.state.profilePage}/>}/>
