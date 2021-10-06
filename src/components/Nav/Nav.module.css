@@ -2,6 +2,7 @@
 .nav {
     grid-area: n;
     background-color: pink;
+    min-height: 50vh;
 }
 
 .nav ul {
