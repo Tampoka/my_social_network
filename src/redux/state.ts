@@ -47,7 +47,7 @@ let state:RootStateType = {
             {id: 4, message: "How important is to be proactive?", likesCount: 27},
             {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
         ],
-        newPostText:"Hello!"
+        newPostText:""
     },
     dialogsPage: {
         dialogs: [
