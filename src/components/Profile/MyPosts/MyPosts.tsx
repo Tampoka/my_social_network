@@ -13,6 +13,7 @@ const MyPosts :React.FC<MyPostsPropsType>= (props ) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPost = () => {
         props.addPostCallback(newPostElement.current?newPostElement.current.value:"")
+        newPostElement.current!.value=""
     }
     return (
         <div className={s.postsBlock}>
