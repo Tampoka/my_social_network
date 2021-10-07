@@ -8,10 +8,10 @@ import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootPropsType} from "./redux/state";
+import {RootStateType} from "./redux/state";
 
 type statePropsType={
-    state:RootPropsType
+    state:RootStateType
 }
 const App = (props: statePropsType) => {
     return (

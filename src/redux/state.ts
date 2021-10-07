@@ -1,42 +1,42 @@
 
-export type PostPropsType={
+export type PostPType ={
     id:number
     message:string
     likesCount:number
 }
-export type DialogPropsType={
+export type DialogType ={
     id:number
     name:string
 }
-export type MessagePropsType={
+export type MessageType ={
     id:number
     message:string
 }
-export type FriendPropsType={
+export type FriendType ={
     id:number
     name:string
     img:string
     isOnline:boolean
 }
 
-export type ProfilePagePropsType={
-    posts:PostPropsType[]
+export type ProfilePageType ={
+    posts:PostPType[]
 }
-export type DialogsPagePropsType={
-    dialogs:DialogPropsType[]
-    messages:MessagePropsType[]
-}
-
-export type SidebarPropsType={
-    friends:FriendPropsType[]
+export type DialogsPageType ={
+    dialogs:DialogType[]
+    messages:MessageType[]
 }
 
-export type RootPropsType={
-    profilePage:ProfilePagePropsType
-    dialogsPage:DialogsPagePropsType
-    sidebar:SidebarPropsType
+export type SidebarType ={
+    friends:FriendType[]
 }
-let state:RootPropsType = {
+
+export type RootStateType ={
+    profilePage:ProfilePageType
+    dialogsPage:DialogsPageType
+    sidebar:SidebarType
+}
+let state:RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: "How are you?", likesCount: 19},
