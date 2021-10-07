@@ -80,7 +80,6 @@ let state:RootStateType = {
 }
 
 export const addPost=(postMessage:string)=>{
-    debugger
     const newPost:PostPType={
         id:6,
         message:postMessage,
