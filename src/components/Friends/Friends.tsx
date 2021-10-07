@@ -1,19 +1,12 @@
 import React from "react";
 import s from "./Friends.module.css"
+import {SidebarType} from "../../redux/state";
 
 type FriendsPropsType = {
-    state: statePropsType
+    state: SidebarType
 }
-type statePropsType = {
-    friends: FriendPropsType[]
-}
-type FriendPropsType = {
-    id: number
-    name: string
-    img: string
-    isOnline: boolean
-}
-const Friends = (props: FriendsPropsType) => {
+
+const Friends:React.FC<FriendsPropsType> = (props) => {
 
     const avatar = props.state.friends.map(f => {
         const activeClass = f.isOnline?s.active:''
