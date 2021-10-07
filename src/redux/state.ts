@@ -80,8 +80,9 @@ let state:RootStateType = {
 }
 
 export const addPost=(postMessage:string)=>{
+    debugger
     const newPost:PostPType={
-        id:5,
+        id:6,
         message:postMessage,
         likesCount:0
     }
