@@ -91,4 +91,10 @@ export const addPost=(postMessage:string)=>{
     state.profilePage.posts.push(newPost)
     rerenderEntireTree(state)
 }
+
+export const updateNewPostText=(newText:string)=>{
+    state.profilePage.newPostText=newText
+    rerenderEntireTree(state)
+}
+
 export default state
