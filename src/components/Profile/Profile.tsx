@@ -7,7 +7,7 @@ type ProfilePropsType={
     state:ProfilePageType
 }
 
-const Profile=(props:ProfilePropsType)=> {
+const Profile:React.FC<ProfilePropsType>=(props)=> {
     return  <div>
        <ProfileInfo/>
        <MyPosts posts={props.state.posts}/>

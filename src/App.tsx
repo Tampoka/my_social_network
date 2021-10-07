@@ -13,7 +13,7 @@ import {RootStateType} from "./redux/state";
 type statePropsType={
     state:RootStateType
 }
-const App = (props: statePropsType) => {
+const App:React.FC<statePropsType> = (props) => {
     return (
         <div className="app-wrapper">
             <Header/>

@@ -7,7 +7,7 @@ type MyPostsPropsType = {
     posts: PostPType[]
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts :React.FC<MyPostsPropsType>= (props ) => {
     let postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPost = () => {

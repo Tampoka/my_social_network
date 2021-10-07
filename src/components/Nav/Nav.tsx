@@ -1,22 +1,13 @@
 import React from "react";
 import s from "./Nav.module.css";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Friends from "../Friends/Friends";
+import {SidebarType} from "../../redux/state";
 
 type NavPropsType={
-  state:statePropsType
+  state:SidebarType
 }
-type statePropsType={
-  friends: FriendPropsType[]
-}
-type FriendPropsType={
-  id:number
-  name:string
-  img:string
-  isOnline:boolean
-}
-
-const Nav = (props:NavPropsType) => {
+const Nav:React.FC<NavPropsType> = (props) => {
   return <div className={s.navContainer}>
     <nav className={s.nav}>
       <ul>
