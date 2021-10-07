@@ -11,7 +11,7 @@ const Friends:React.FC<FriendsPropsType> = (props) => {
     const avatar = props.state.friends.map(f => {
         const activeClass = f.isOnline?s.active:''
         return <div key={f.id}>
-            <div className={`${s.avatar} ${activeClass}`}><img src={f.img}/></div>
+            <div className={`${s.avatar} ${activeClass}`}><img src={f.img} alt={"User "+f.name}/></div>
             <div className={s.userName}>{f.name}</div>
         </div>
     })
