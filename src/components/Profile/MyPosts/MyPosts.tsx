@@ -13,10 +13,13 @@ type MyPostsPropsType = {
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
+
     const onAddPost = () => {
         props.addPostCallback(newPostElement.current ? newPostElement.current.value : "")
-        newPostElement.current!.value = ""
+        props.updateNewPostText("")
+        // newPostElement.current!.value = ""
     }
+
     const onPostTextChange = () => {
         props.updateNewPostText(newPostElement.current!.value)
     }
