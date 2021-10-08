@@ -14,8 +14,8 @@ type statePropsType = {
     state: RootStateType
     addPost: () => void
     updateNewPostText: (newText: string) => void
-    addMessage:()=>void
-    updateNewMessageText:(newText: string) => void
+    addMessage: () => void
+    updateNewMessageText: (newText: string) => void
 }
 const App: React.FC<statePropsType> = (props) => {
     return (
@@ -23,12 +23,14 @@ const App: React.FC<statePropsType> = (props) => {
             <Header/>
             <Nav state={props.state.sidebar}/>
             <div className="app-wrapper-content">
-                <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}
-                                                              addMessage={props.addMessage}
-                                                              updateNewMessageText={props.updateNewMessageText}/>}/>
-                <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
-                                                              addPost={props.addPost}
-                                                              updateNewPostText={props.updateNewPostText}/>}/>
+                <Route path="/dialogs" render={() =>
+                    <Dialogs state={props.state.dialogsPage}
+                             addMessage={props.addMessage}
+                             updateNewMessageText={props.updateNewMessageText}/>}/>
+                <Route path="/profile" render={() =>
+                    <Profile profilePage={props.state.profilePage}
+                             addPost={props.addPost}
+                             updateNewPostText={props.updateNewPostText}/>}/>
                 <Route path="/news" component={News}/>
                 <Route path="/music" component={Music}/>
                 <Route path="/settings" component={Settings}/>
