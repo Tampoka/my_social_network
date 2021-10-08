@@ -1,5 +1,4 @@
-
-let store:StoreType = {
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -64,9 +63,9 @@ let store:StoreType = {
         this._callSubscriber = observer
     },
 
-    dispatch(action:any) {
+    dispatch(action) {
         if (action.type === "ADD-POST") {
-            const newPost: PostPType = {
+            const newPost: PostType = {
                 id: 6,
                 message: this._state.profilePage.newPostText,
                 likesCount: 0
@@ -95,14 +94,31 @@ let store:StoreType = {
     },
 }
 
-export type StoreType={
-    _state:RootStateType
-    _callSubscriber:()=>void
-    getState:()=>RootStateType
-    subscribe:(observer: () => void)=>void
-    dispatch:(action:any)=>void
+export type AddPostActionType = {
+    type: "ADD-POST"
 }
-export type PostPType = {
+
+export type UpdateNewPostActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText:string
+}
+
+export type AddMessageActionType = {
+    type: "ADD-MESSAGE"
+}
+
+export type UpdateNewMessageActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    newText:string
+}
+export type StoreType = {
+    _state: RootStateType
+    _callSubscriber: () => void
+    getState: () => RootStateType
+    subscribe: (observer: () => void) => void
+    dispatch: (action: AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType) => void
+}
+export type PostType = {
     id: number
     message: string
     likesCount: number
@@ -123,7 +139,7 @@ export type FriendType = {
 }
 
 export type ProfilePageType = {
-    posts: PostPType[]
+    posts: PostType[]
     newPostText: string
 }
 export type DialogsPageType = {

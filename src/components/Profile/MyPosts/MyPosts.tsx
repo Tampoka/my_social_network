@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostPType} from "../../../redux/state";
+import {PostType} from "../../../redux/state";
 
 type MyPostsPropsType = {
-    posts: PostPType[]
+    posts: PostType[]
     newPostText: string
     dispatch: any
 }
