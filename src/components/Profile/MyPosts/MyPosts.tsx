@@ -1,12 +1,12 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostPType, updateNewPostText} from "../../../redux/state";
+import {PostPType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: PostPType[]
     newPostText:string
-    addPostCallback: (postMessage: string) => void
+    addPostCallback: () => void
     updateNewPostText:(newText:string)=>void
 }
 
@@ -15,9 +15,8 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const onAddPost = () => {
-        props.addPostCallback(newPostElement.current ? newPostElement.current.value : "")
+        props.addPostCallback()
         props.updateNewPostText("")
-        // newPostElement.current!.value = ""
     }
 
     const onPostTextChange = () => {
