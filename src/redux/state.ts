@@ -55,7 +55,7 @@ let store = {
     getState(){
         return this._state
     },
-    onChange() {
+    _callSubscriber() {
         console.log("state changed")
     },
     addPost() {
@@ -66,11 +66,11 @@ let store = {
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ""
-        this.onChange()
+        this._callSubscriber()
     },
     updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText
-        this.onChange()
+        this._callSubscriber()
     },
     addMessage() {
         const newMessage: MessageType = {
@@ -79,14 +79,14 @@ let store = {
         }
         this._state.dialogsPage.messages.push(newMessage)
         this._state.dialogsPage.newMessageText = ""
-        this.onChange()
+        this._callSubscriber()
     },
     updateNewMessageText(newText: string) {
         this._state.dialogsPage.newMessageText = newText
-        this.onChange()
+        this._callSubscriber()
     },
     subscribe(observer: () => void) {
-        this.onChange = observer
+        this._callSubscriber = observer
     }
 
 }
