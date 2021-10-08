@@ -6,17 +6,22 @@ import {DialogsPageType} from "../../redux/state";
 
 type DialogsPropsType = {
     state: DialogsPageType
-    addMessage:()=>void
-    updateNewMessageText:(newText: string) => void
+    dispatch: any
 }
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = props.state.messages.map(m => <Message message={m.message}/>)
 
-    const onAddMessage = () => props.addMessage()
-    const onMessageTextChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-        props.updateNewMessageText(e.currentTarget.value)
+    const onAddMessage = () => {
+        props.dispatch({type: "ADD-MESSAGE"})
+    }
+    const onMessageTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const action = {
+            type: "UPDATE-NEW-MESSAGE-TEXT",
+            newText: e.currentTarget.value
+        };
+        props.dispatch(action)
     }
 
     return (

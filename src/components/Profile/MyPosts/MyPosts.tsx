@@ -5,20 +5,23 @@ import {PostPType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: PostPType[]
-    newPostText:string
-    addPostCallback: () => void
-    updateNewPostText:(newText:string)=>void
+    newPostText: string
+    dispatch: any
 }
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const onAddPost = () => {
-        props.addPostCallback()
+        props.dispatch({type: "ADD-POST"})
     }
 
-    const onPostTextChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+    const onPostTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const action = {
+            type: "UPDATE-NEW-POST-TEXT",
+            newText: e.currentTarget.value
+        };
+        props.dispatch(action)
     }
     return (
         <div className={s.postsBlock}>
