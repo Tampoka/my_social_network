@@ -1,5 +1,5 @@
 
-let rerenderEntireTree=()=>{
+let onChange=()=>{
     console.log("state changed")
 }
 
@@ -95,12 +95,12 @@ export const addPost=()=>{
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText=""
-    rerenderEntireTree()
+    onChange()
 }
 
 export const updateNewPostText=(newText:string)=>{
     state.profilePage.newPostText=newText
-    rerenderEntireTree()
+    onChange()
 }
 
 export const addMessage=()=>{
@@ -110,12 +110,17 @@ export const addMessage=()=>{
     }
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newMessageText=""
-    rerenderEntireTree()
+    onChange()
 }
 
 export const updateNewMessageText=(newText:string)=>{
     state.dialogsPage.newMessageText=newText
-    rerenderEntireTree()
+    onChange()
 }
+
+export  const subscribe = (observer:()=>void) => {
+onChange=observer
+}
+
 
 export default state
