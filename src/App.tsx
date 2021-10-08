@@ -8,11 +8,11 @@ import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import {ActionsType, RootStateType} from "./redux/state";
 
 type statePropsType = {
     state: RootStateType
-   dispatch:any
+   dispatch:(action:ActionsType)=>void
 }
 const App: React.FC<statePropsType> = (props) => {
     return (
