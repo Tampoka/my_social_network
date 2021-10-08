@@ -1,4 +1,5 @@
-let store = {
+
+let store:StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -59,7 +60,7 @@ let store = {
     getState() {
         return this._state
     },
-    subscribe(observer: () => void) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 
@@ -94,7 +95,13 @@ let store = {
     },
 }
 
-
+export type StoreType={
+    _state:RootStateType
+    _callSubscriber:()=>void
+    getState:()=>RootStateType
+    subscribe:(observer: () => void)=>void
+    dispatch:(action:any)=>void
+}
 export type PostPType = {
     id: number
     message: string
