@@ -47,7 +47,7 @@ let state:RootStateType = {
             {id: 4, message: "How important is to be proactive?", likesCount: 27},
             {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
         ],
-        newPostText:""
+        newPostText:"Hello!"
     },
     dialogsPage: {
         dialogs: [
@@ -82,10 +82,10 @@ let state:RootStateType = {
     }
 }
 
-export const addPost=(postMessage:string)=>{
+export const addPost=()=>{
     const newPost:PostPType={
         id:6,
-        message:postMessage,
+        message:state.profilePage.newPostText,
         likesCount:0
     }
     state.profilePage.posts.push(newPost)
