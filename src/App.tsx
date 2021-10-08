@@ -8,20 +8,24 @@ import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import {RootStateType, updateNewMessageText} from "./redux/state";
 
-type statePropsType={
-    state:RootStateType
-    addPost:()=>void
-    updateNewPostText:(newText:string)=>void
+type statePropsType = {
+    state: RootStateType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    addMessage:()=>void
+    updateNewMessageText:(newText: string) => void
 }
-const App:React.FC<statePropsType> = (props) => {
+const App: React.FC<statePropsType> = (props) => {
     return (
         <div className="app-wrapper">
             <Header/>
             <Nav state={props.state.sidebar}/>
             <div className="app-wrapper-content">
-                <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage} />}/>
+                <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}
+                                                              addMessage={props.addMessage}
+                                                              updateNewMessageText={props.updateNewMessageText}/>}/>
                 <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
                                                               addPost={props.addPost}
                                                               updateNewPostText={props.updateNewPostText}/>}/>
