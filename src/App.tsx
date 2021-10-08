@@ -12,10 +12,7 @@ import {RootStateType} from "./redux/state";
 
 type statePropsType = {
     state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
+   dispatch:any
 }
 const App: React.FC<statePropsType> = (props) => {
     return (
@@ -25,12 +22,10 @@ const App: React.FC<statePropsType> = (props) => {
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() =>
                     <Dialogs state={props.state.dialogsPage}
-                             addMessage={props.addMessage}
-                             updateNewMessageText={props.updateNewMessageText}/>}/>
+                             dispatch={props.dispatch}/>}/>
                 <Route path="/profile" render={() =>
                     <Profile profilePage={props.state.profilePage}
-                             addPost={props.addPost}
-                             updateNewPostText={props.updateNewPostText}/>}/>
+                             dispatch={props.dispatch}/>}/>
                 <Route path="/news" component={News}/>
                 <Route path="/music" component={Music}/>
                 <Route path="/settings" component={Settings}/>
