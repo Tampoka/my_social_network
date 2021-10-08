@@ -111,12 +111,16 @@ export type UpdateNewMessageActionType = {
     type: "UPDATE-NEW-MESSAGE-TEXT"
     newText:string
 }
+
+export type ActionsType=AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType
+
+
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     getState: () => RootStateType
     subscribe: (observer: () => void) => void
-    dispatch: (action: AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 export type PostType = {
     id: number
