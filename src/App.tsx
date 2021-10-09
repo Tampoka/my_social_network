@@ -8,7 +8,8 @@ import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {ActionsType, RootStateType} from "./redux/store";
+import {RootStateType} from "./redux/store";
+import {ActionsType} from "./redux/profile-reducer";
 
 type statePropsType = {
     state: RootStateType

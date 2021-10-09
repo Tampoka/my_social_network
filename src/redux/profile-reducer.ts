@@ -29,9 +29,9 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
 export type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
-const addPostActionCreator = ()=> ({type: ADD_POST}as const)
+export const addPostActionCreator = ()=> ({type: ADD_POST}as const)
 
-const updateNewPostTextActionCreator = (text: string)=> ({
+export const updateNewPostTextActionCreator = (text: string)=> ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 } as const)
