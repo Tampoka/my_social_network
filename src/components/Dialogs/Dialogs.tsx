@@ -17,10 +17,6 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         props.dispatch({type: "ADD-MESSAGE"})
     }
     const onMessageTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // const action = {
-        //     type: "UPDATE-NEW-MESSAGE-TEXT",
-        //     newText: e.currentTarget.value
-        // };
         props.dispatch({
             type: "UPDATE-NEW-MESSAGE-TEXT",
             newText: e.currentTarget.value
