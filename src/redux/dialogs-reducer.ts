@@ -1,4 +1,4 @@
-import {AddMessageActionType, DialogsPageType, MessageType, UpdateNewMessageActionType} from "./state";
+import {AddMessageActionType, DialogsPageType, MessageType, UpdateNewMessageActionType} from "./store";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
