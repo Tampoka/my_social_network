@@ -3,7 +3,7 @@ import {AddPostActionType, PostType, ProfilePageType, UpdateNewPostActionType} f
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-export const profileReducer=(state:ProfilePageType, action:AddPostActionType|UpdateNewPostActionType)=>{
+const profileReducer=(state:ProfilePageType, action:AddPostActionType|UpdateNewPostActionType)=>{
     if (action.type === ADD_POST) {
         const newPost: PostType = {
             id: 6,
@@ -18,3 +18,5 @@ export const profileReducer=(state:ProfilePageType, action:AddPostActionType|Upd
     }
     return state
 }
+
+export default profileReducer
