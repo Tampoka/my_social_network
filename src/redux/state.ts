@@ -108,7 +108,7 @@ export const addPostActionCreator = (): AddPostActionType => {
 }
 
 
-export const UpdateNewPostTextActionCreator = (text: string): UpdateNewPostActionType => ({
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostActionType => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 })
@@ -119,7 +119,7 @@ export const addMessageActionCreator = (): AddMessageActionType => {
     }
 }
 
-export const UpdateNewMessageTextActionCreator = (text: string): UpdateNewMessageActionType => ({
+export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newText: text
 })
