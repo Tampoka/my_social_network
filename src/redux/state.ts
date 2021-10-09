@@ -71,7 +71,7 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-POST") {
+        if (action.type === ADD_POST) {
             const newPost: PostType = {
                 id: 6,
                 message: this._state.profilePage.newPostText,
@@ -81,11 +81,11 @@ let store: StoreType = {
             this._state.profilePage.newPostText = ""
             this._callSubscriber()
 
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber()
 
-        } else if (action.type === "ADD-MESSAGE") {
+        } else if (action.type === ADD_MESSAGE) {
             const newMessage: MessageType = {
                 id: 6,
                 message: this._state.dialogsPage.newMessageText,
@@ -94,7 +94,7 @@ let store: StoreType = {
             this._state.dialogsPage.newMessageText = ""
             this._callSubscriber()
 
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogsPage.newMessageText = action.newText
             this._callSubscriber()
         }
