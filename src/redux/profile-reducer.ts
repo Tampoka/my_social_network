@@ -1,4 +1,5 @@
-import {AddPostActionType, PostType, ProfilePageType, UpdateNewPostActionType} from "./store";
+import {PostType, ProfilePageType} from "./store";
+import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reducer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -21,5 +22,19 @@ const profileReducer=(state:ProfilePageType, action:AddPostActionType|UpdateNewP
             return state
     }
 }
+
+export type ActionsType=AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType
+
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+
+export type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
+
+const addPostActionCreator = ()=> ({type: ADD_POST}as const)
+
+const updateNewPostTextActionCreator = (text: string)=> ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+} as const)
+
 
 export default profileReducer
