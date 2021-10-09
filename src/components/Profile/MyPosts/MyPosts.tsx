@@ -1,25 +1,13 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsType, AddPostActionType, PostType, UpdateNewPostActionType} from "../../../redux/state";
+import {ActionsType, addPostActionCreator, PostType, UpdateNewPostTextActionCreator} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
     dispatch: (action: ActionsType) => void
 }
-
-const addPostActionCreator = (): AddPostActionType => {
-    return {
-        type: "ADD-POST"
-    }
-}
-
-const UpdateNewPostTextActionCreator = (text: string): UpdateNewPostActionType => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: text
-})
-
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
