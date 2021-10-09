@@ -101,11 +101,8 @@ let store: StoreType = {
     },
 }
 
-export const addPostActionCreator = (): AddPostActionType => {
-    return {
-        type: ADD_POST
-    }
-}
+export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+
 
 
 export const updateNewPostTextActionCreator = (text: string): UpdateNewPostActionType => ({
@@ -113,11 +110,7 @@ export const updateNewPostTextActionCreator = (text: string): UpdateNewPostActio
     newText: text
 })
 
-export const addMessageActionCreator = (): AddMessageActionType => {
-    return {
-        type: ADD_MESSAGE
-    }
-}
+export const addMessageActionCreator = (): AddMessageActionType => ( {type: ADD_MESSAGE})
 
 export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
