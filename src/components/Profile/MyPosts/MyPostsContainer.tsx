@@ -22,4 +22,4 @@ const MyPostsContainer: React.FC<MyPostsContainerPropsType> = (props) => {
                     newPostText={state.profilePage.newPostText}/>
 }
 
-export default MyPosts
+export default MyPostsContainer
