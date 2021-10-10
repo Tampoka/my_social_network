@@ -1,50 +1,29 @@
-import React, {ChangeEvent} from 'react';
-import s from './Dialogs.module.css'
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
+import React from 'react';
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
-import {DialogsPageType} from "../../redux/store";
-import {ActionsType} from "../../redux/profile-reducer";
+import {StoreType} from "../../redux/store";
+import Dialogs from "./Dialogs";
 
 
-type DialogsPropsType = {
-    state: DialogsPageType
-    dispatch: (action:ActionsType)=>void
+type DialogsContainerPropsType = {
+    store: StoreType
 }
-const Dialogs: React.FC<DialogsPropsType> = (props) => {
+const DialogsContainer: React.FC<DialogsContainerPropsType> = (props) => {
 
-    let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.state.messages.map(m => <Message message={m.message}/>)
+    const state = props.store.getState()
 
     const onAddMessage = () => {
-        props.dispatch(addMessageActionCreator())
+        props.store.dispatch(addMessageActionCreator())
     }
-    const onMessageTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text= e.currentTarget.value
-        props.dispatch(updateNewMessageTextActionCreator(text))
+    const onMessageTextChange = (text:string) => {
+        props.store.dispatch(updateNewMessageTextActionCreator(text))
     }
 
-    return (
-        <div className={s.dialogs}>
-            <div className={s.dialogItems}>
-                {dialogsElements}
-            </div>
-            <div className={s.messages}>
-                {messagesElements}
-                <div className={s.sendMessage}>
-                    <div>
-                    <textarea placeholder={"Write a message"}
-                              onChange={onMessageTextChange}
-                              value={props.state.newMessageText}
-                    />
-                    </div>
-                    <div>
-                        <button onClick={onAddMessage}>Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+    return <Dialogs dialogs={state.dialogsPage.dialogs}
+                    messages={state.dialogsPage.messages}
+                    newMessageText={state.dialogsPage.newMessageText}
+                    addMessage={onAddMessage}
+                    updateNewMessageText={onMessageTextChange}/>
+
 }
 
-export default Dialogs
+export default DialogsContainer
