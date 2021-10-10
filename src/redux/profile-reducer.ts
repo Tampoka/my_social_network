@@ -4,7 +4,18 @@ import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reduce
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-const profileReducer=(state:ProfilePageType, action:ActionsType)=>{
+const initialState={
+    posts: [
+        {id: 1, message: "How are you?", likesCount: 19},
+        {id: 2, message: "Where have you been?", likesCount: 3},
+        {id: 3, message: "Pics from our party yesterday", likesCount: 8},
+        {id: 4, message: "How important is to be proactive?", likesCount: 27},
+        {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
+    ],
+    newPostText: "Hello!"
+}
+const profileReducer=(state:ProfilePageType=initialState, action:ActionsType)=>{
+    debugger
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
