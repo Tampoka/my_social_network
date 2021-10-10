@@ -10,6 +10,7 @@ type MyPostsContainerPropsType = {
 const MyPostsContainer: React.FC<MyPostsContainerPropsType> = (props) => {
 
         const state=props.store.getState()
+
     const onAddPost = () => props.store.dispatch(addPostActionCreator())
 
     const onPostTextChange = (text: string) => {
