@@ -15,7 +15,6 @@ const initialState={
     newPostText: "Hello!"
 }
 const profileReducer=(state:ProfilePageType=initialState, action:ActionsType)=>{
-    debugger
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
