@@ -1,8 +1,8 @@
 import {DialogsPageType, MessageType} from "./store";
 import {AddPostActionType, UpdateNewPostActionType} from "./profile-reducer";
 
-export const ADD_MESSAGE = "ADD-MESSAGE";
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+const ADD_MESSAGE = "ADD-MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 const dialogsReducer=(state:DialogsPageType, action:ActionsType)=>{
     switch (action.type) {
