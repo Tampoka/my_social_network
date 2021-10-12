@@ -3,9 +3,7 @@ import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../
 import StoreContext from '../../StoreContext';
 import Dialogs from "./Dialogs";
 
-
-type DialogsContainerPropsType = {}
-const DialogsContainer: React.FC<DialogsContainerPropsType> = (props) => {
+const DialogsContainer: React.FC = () => {
     return <StoreContext.Consumer>
         {
             (store) => {

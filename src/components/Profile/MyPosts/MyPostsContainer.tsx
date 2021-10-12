@@ -3,10 +3,7 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 import MyPosts from "./MyPosts";
 import StoreContext from "../../../StoreContext";
 
-type MyPostsContainerPropsType = {
-}
-
-const MyPostsContainer: React.FC<MyPostsContainerPropsType> = (props) => {
+const MyPostsContainer: React.FC = () => {
     return <StoreContext.Consumer>
         {
             (store) => {
