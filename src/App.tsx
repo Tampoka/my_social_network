@@ -10,7 +10,7 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-  store:any
+
 }
 const App: React.FC<AppPropsType> = (props) => {
     const state=props.store.getState()
@@ -20,9 +20,9 @@ const App: React.FC<AppPropsType> = (props) => {
             <Nav state={state.sidebar}/>
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() =>
-                    <DialogsContainer store={props.store}/>}/>
+                    <DialogsContainer />}/>
                 <Route path="/profile" render={() =>
-                    <Profile store={props.store}/>}/>
+                    <Profile />}/>
                 <Route path="/news" component={News}/>
                 <Route path="/music" component={Music}/>
                 <Route path="/settings" component={Settings}/>
