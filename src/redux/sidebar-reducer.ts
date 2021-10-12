@@ -1,4 +1,13 @@
-import {SidebarType} from "./store";
+
+export type InitialStateType={
+    friends:FriendType[]
+}
+export type FriendType = {
+    id: number
+    name: string
+    img: string
+    isOnline: boolean
+}
 
 let initialState={
     friends: [
@@ -23,7 +32,7 @@ let initialState={
 
     ]
 }
-const sidebarReducer=(state:SidebarType=initialState, action:any)=>{
+const sidebarReducer=(state:InitialStateType=initialState, action:any):InitialStateType=>{
     return state
 }
 
