@@ -1,5 +1,24 @@
-import {DialogsPageType, MessageType} from "./store";
 import {AddPostActionType, UpdateNewPostActionType} from "./profile-reducer";
+
+export type InitialStateType={
+    dialogs: DialogType[]
+    messages: MessageType[]
+    newMessageText: string
+}
+export type DialogsPageType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+    newMessageText: string
+}
+
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
@@ -22,7 +41,7 @@ let initialState={
     ],
     newMessageText: "How have you been?"
 }
-const dialogsReducer=(state:DialogsPageType=initialState, action:ActionsType)=>{
+const dialogsReducer=(state:InitialStateType=initialState, action:ActionsType):InitialStateType=>{
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage: MessageType = {
