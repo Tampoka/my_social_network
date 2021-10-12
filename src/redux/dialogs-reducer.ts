@@ -1,5 +1,4 @@
 import {AddPostActionType, UpdateNewPostActionType} from "./profile-reducer";
-import {MapStateToProps} from "react-redux";
 
 export type InitialStateType={
     dialogs: DialogType[]

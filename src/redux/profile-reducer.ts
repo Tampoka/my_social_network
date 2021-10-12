@@ -1,5 +1,15 @@
-import {PostType, ProfilePageType} from "./store";
 import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reducer";
+
+export type InitialStateType={
+    posts:PostType[]
+    newPostText:string
+}
+
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -14,7 +24,7 @@ const initialState={
     ],
     newPostText: "Hello!"
 }
-const profileReducer=(state:ProfilePageType=initialState, action:ActionsType)=>{
+const profileReducer=(state:InitialStateType=initialState, action:ActionsType):InitialStateType=>{
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
