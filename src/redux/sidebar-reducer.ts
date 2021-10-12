@@ -1,4 +1,7 @@
 
+export type SidebarType={
+    friends:FriendType[]
+}
 export type InitialStateType={
     friends:FriendType[]
 }
@@ -28,9 +31,9 @@ let initialState={
             name: "John",
             img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
             isOnline: true
-        },
+        }
 
-    ]
+    ] as Array<FriendType>
 }
 const sidebarReducer=(state:InitialStateType=initialState, action:any):InitialStateType=>{
     return state

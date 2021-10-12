@@ -5,7 +5,7 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    const postElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    const postElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>)
 
     const onAddPost = () => props.addPost()
 

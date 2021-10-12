@@ -1,4 +1,4 @@
-//
+import React from "react";
 // let store: StoreType = {
 //     _state: {
 //         profilePage: {
@@ -71,7 +71,7 @@
 //         this._callSubscriber()
 //     }
 // }
-
+//
 // export type StoreType = {
 //     _state: RootStateType
 //     _callSubscriber: () => void
@@ -79,36 +79,36 @@
 //     subscribe: (observer: () => void) => void
 //     dispatch: (action: ActionsType) => void
 // }
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
-type DialogType = {
-    id: number
-    name: string
-}
-type MessageType = {
-    id: number
-    message: string
-}
-type FriendType = {
-    id: number
-    name: string
-    img: string
-    isOnline: boolean
-}
-
-type ProfilePageType = {
-    posts: PostType[]
-    newPostText: string
-}
-
-
-type SidebarType = {
-    friends: FriendType[]
-}
-
-
-
-
+// type PostType = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
+// type DialogType = {
+//     id: number
+//     name: string
+// }
+// type MessageType = {
+//     id: number
+//     message: string
+// }
+// type FriendType = {
+//     id: number
+//     name: string
+//     img: string
+//     isOnline: boolean
+// }
+//
+// type ProfilePageType = {
+//     posts: PostType[]
+//     newPostText: string
+// }
+//
+//
+// type SidebarType = {
+//     friends: FriendType[]
+// }
+//
+//
+//
+//

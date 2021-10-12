@@ -6,9 +6,8 @@ import {DialogsPropsType} from "./DialogsContainer";
 
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
-// let props.DialogPage=state
-    let dialogsElements =props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message}/>)
+    let dialogsElements =props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>)
 
     const onAddMessage = () => props.addMessage()
     const onMessageTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
