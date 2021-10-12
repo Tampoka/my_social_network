@@ -10,7 +10,7 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-
+store:any
 }
 const App: React.FC<AppPropsType> = (props) => {
     const state=props.store.getState()
