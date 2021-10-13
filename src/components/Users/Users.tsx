@@ -11,7 +11,10 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
                 <div>
                     <div className={s.userPhoto}><img src={u.photoUrl} alt="user"/></div>
                     <div>
-                        <button>Follow</button>
+                        {u.isFollowing
+                            ?<button onClick={()=>props.unFollow(u.id)}>UnFollow</button>
+                            :<button onClick={()=>props.follow(u.id)}>Follow</button>}
+
                     </div>
                 </div>
                 <div>
