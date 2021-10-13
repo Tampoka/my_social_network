@@ -14,9 +14,9 @@ export type LocationType = {
     city: string
     country: string
 }
-//
-// const ADD_POST = "ADD-POST";
-// const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+
+const FOLLOW = "FOLLOW";
+const UNFOLLOW = "UNFOLLOW";
 
 const initialState = {
     users: [
@@ -43,16 +43,23 @@ const initialState = {
         },
     ]
 }
-const UsersReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const UsersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-
+        case FOLLOW:
+        return state
+        case UNFOLLOW:
+            return state
         default:
             return state
     }
 }
 
-export const followAC = () => ({type: 'FOLLOW'})
-export const unFollowAC = () => ({type: 'UNFOLLOW'})
+export  type ActionsType=FollowActionType|UnFollowActionType
+export type FollowActionType=ReturnType<typeof followAC>
+export type UnFollowActionType=ReturnType<typeof unFollowAC>
+export const followAC = (id:number) => ({type: FOLLOW,
+userId:id})
+export const unFollowAC = (id:number) => ({type: UNFOLLOW,userId:id})
 
 
 export default UsersReducer
