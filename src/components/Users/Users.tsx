@@ -9,7 +9,7 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
         {
             props.usersPage.users.map(u => <div key={u.id}>
                 <div>
-                    <div><img src={u.photoUrl} alt="user"/></div>
+                    <div className={s.userPhoto}><img src={u.photoUrl} alt="user"/></div>
                     <div>
                         <button>Follow</button>
                     </div>
