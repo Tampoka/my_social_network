@@ -4,7 +4,7 @@ import s from "./Users.module.css";
 
 
 const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
-    {props.usersPage.users.length<=3&&props.setUsers([
+    props.usersPage.users.length<=3&&props.setUsers([
         {
             id: 1,
             fullName: "Kate",
@@ -29,11 +29,11 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
             isFollowing: false,
             location: {city: "Melbourne", country: "Australia"}
         },
-    ])}
-    return <div>
+    ])
+    return <div className={s.usersContainer}>
         {
             props.usersPage.users.map(u => <div key={u.id} className={s.user}>
-                <div>
+                <div className={s.avatar}>
                     <div className={s.userPhoto}><img src={u.photoUrl} alt="user"/></div>
                     <div>
                         {u.isFollowing
@@ -42,11 +42,11 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
 
                     </div>
                 </div>
-                <div>
-                    <div>{u.fullName}</div>
-                    <div>{u.status}</div>
+                <div className={s.userInfo}>
+                    <div className={s.userName}>{u.fullName}</div>
+                    <div className={s.status}>{u.status}</div>
                 </div>
-                <div>
+                <div className={s.userLocation}>
                     <span>{u.location.country}</span>
                     <span>{u.location.city}</span>
                 </div>
