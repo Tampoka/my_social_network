@@ -7,7 +7,7 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
 
     return <div>
         {
-            props.usersPage.users.map(u => <div key={u.id}>
+            props.usersPage.users.map(u => <div key={u.id} className={s.user}>
                 <div>
                     <div className={s.userPhoto}><img src={u.photoUrl} alt="user"/></div>
                     <div>
@@ -16,10 +16,11 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
                 </div>
                 <div>
                     <div>{u.fullName}</div>
-                    <div>
-                        <span>{u.location.country}</span>
-                        <span>{u.location.city}</span>
-                    </div>
+                    <div>{u.status}</div>
+                </div>
+                <div>
+                    <span>{u.location.country}</span>
+                    <span>{u.location.city}</span>
                 </div>
             </div>)
         }
