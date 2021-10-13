@@ -1,5 +1,6 @@
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
+import s from "./Users.module.css";
 
 
 const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
@@ -8,7 +9,7 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
         {
             props.usersPage.users.map(u => <div key={u.id}>
                 <div>
-                    <div><img src="" alt=""/></div>
+                    <div><img src={u.photoUrl} alt="user"/></div>
                     <div>
                         <button>Follow</button>
                     </div>
