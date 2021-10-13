@@ -65,7 +65,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, isFollowing: true}
+                        return {...u, isFollowing: false}
                     }
                     return u
                 })
