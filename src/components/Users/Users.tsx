@@ -35,7 +35,7 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
         {
             props.usersPage.users.map(u => <div key={u.id} className={s.user}>
                 <div className={s.avatar}>
-                    <div className={s.userPhoto}><img src={u.photos.small} alt="user"/></div>
+                    <div className={s.userPhoto}><img src={u.photos.small??userPhoto} alt="user"/></div>
                     <div>
                         {u.isFollowing
                             ?<button onClick={()=>props.unFollow(u.id)}>UnFollow</button>
