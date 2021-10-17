@@ -4,8 +4,11 @@ export type InitialStateType = {
 
 export type UserType = {
     id: number
-    fullName: string
-    photoUrl:string
+    name: string
+    photos: {
+        small:string
+        large:string
+    }
     status: string
     isFollowing: boolean
     location: LocationType
