@@ -1,40 +1,40 @@
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import s from "./Users.module.css";
+import axios from "axios";
 
+//
+// export type GetUserResponseType={
+//     items:UserType[]
+//     error:string|null
+// }
+// export type UserType={
+//    name:string
+//    id:number
+//    photos:{
+//        small:string|null|undefined
+//        large:string|null|undefined
+//    }
+//    status:string|null
+//     followed:boolean
+//     uniqueUrlName:string|null
+// }
 
 const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
-    props.usersPage.users.length<=3&&props.setUsers([
-        {
-            id: 1,
-            fullName: "Kate",
-            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
-            status: "I am looking for new job",
-            isFollowing: true,
-            location: {city: "New York", country: "USA"}
-        },
-        {
-            id: 2,
-            fullName: "John",
-            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
-            status: "I am moved to new office",
-            isFollowing: true,
-            location: {city: "London", country: "Great Britain"}
-        },
-        {
-            id: 3,
-            fullName: "Bob",
-            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
-            status: "Happiest ever",
-            isFollowing: false,
-            location: {city: "Melbourne", country: "Australia"}
-        },
-    ])
+
+    if(props.usersPage.users.length===0){
+        debugger
+        axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response=>{
+                debugger
+                props.setUsers(response.data.items)
+            })
+    }
     return <div className={s.usersContainer}>
         {
             props.usersPage.users.map(u => <div key={u.id} className={s.user}>
                 <div className={s.avatar}>
-                    <div className={s.userPhoto}><img src={u.photoUrl} alt="user"/></div>
+                    <div className={s.userPhoto}><img src={u.photos.small} alt="user"/></div>
                     <div>
                         {u.isFollowing
                             ?<button onClick={()=>props.unFollow(u.id)}>UnFollow</button>
@@ -43,12 +43,12 @@ const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
                     </div>
                 </div>
                 <div className={s.userInfo}>
-                    <div className={s.userName}>{u.fullName}</div>
+                    <div className={s.userName}>{u.name}</div>
                     <div className={s.status}>{u.status}</div>
                 </div>
                 <div className={s.userLocation}>
-                    <span>{u.location.country}</span>
-                    <span>{u.location.city}</span>
+                    <span>{"u.location.country"}</span>
+                    <span>{"u.location.city"}</span>
                 </div>
             </div>)
         }
