@@ -2,6 +2,7 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import s from "./Users.module.css";
 import axios from "axios";
+import userPhoto from "./../../assets/images/user.png"
 
 //
 // export type GetUserResponseType={
