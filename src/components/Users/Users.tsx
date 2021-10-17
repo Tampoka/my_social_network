@@ -23,15 +23,17 @@ import userPhoto from "./../../assets/images/user.png"
 
 const Users: React.FC<UsersPropsType> = (props: UsersPropsType) => {
 
-    if(props.usersPage.users.length===0){
-        debugger
+    let getUsers=()=>{
+        if(props.usersPage.users.length===0){
         axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
             .then(response=>{
-                debugger
                 props.setUsers(response.data.items)
             })
+        }
     }
     return <div className={s.usersContainer}>
+
+        <button onClick={()=>getUsers()}>get users</button>
         {
             props.usersPage.users.map(u => <div key={u.id} className={s.user}>
                 <div className={s.avatar}>
