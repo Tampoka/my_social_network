@@ -1,24 +1,25 @@
 .usersContainer {
-    padding: 5px;
+    padding: 10px;
+    width: 600px;
 }
 
 .user {
     display: flex;
-    margin: 15px;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 45px;
 }
 
 .userPhoto {
     width: 70px;
     height: 70px;
     object-fit: contain;
-    margin: 10px;
 }
 
 .avatar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
 }
 
 .status {
@@ -27,9 +28,9 @@
 
 .userName {
     font-size: larger;
+    align-self: flex-start;
 }
 
 .userLocation {
-    margin: 10px;
 
 }
