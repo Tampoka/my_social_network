@@ -22,7 +22,7 @@ import {UsersPropsType} from "./UsersContainer";
 // }
 
 
-class Users extends React.Component<UsersPropsType, any>{
+class Users extends React.Component<UsersPropsType, any> {
     componentDidMount() {
         axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
@@ -30,9 +30,16 @@ class Users extends React.Component<UsersPropsType, any>{
             })
     }
 
-    render(){
+    render() {
         return <div className={s.usersContainer}>
             <div className={s.users}>
+                <div>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
                 {
                     this.props.usersPage.users.map(u => <div key={u.id} className={s.user}>
                             <div className={s.avatar}>
@@ -60,4 +67,5 @@ class Users extends React.Component<UsersPropsType, any>{
         </div>
     }
 }
+
 export default Users
