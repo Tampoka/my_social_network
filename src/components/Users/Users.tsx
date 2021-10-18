@@ -3,7 +3,6 @@ import s from "./Users.module.css";
 import userPhoto from "./../../assets/images/user.png"
 import axios from "axios";
 import {UsersPropsType} from "./UsersContainer";
-import any = jasmine.any;
 
 //
 // export type GetUserResponseType={
@@ -24,13 +23,13 @@ import any = jasmine.any;
 
 
 class Users extends React.Component<UsersPropsType, any>{
-    constructor() {
-        super();
-            axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                })
+    componentDidMount() {
+        axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
+
     render(){
         return <div className={s.usersContainer}>
             <div className={s.users}>
