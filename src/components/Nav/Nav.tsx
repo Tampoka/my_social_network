@@ -12,29 +12,22 @@ const Nav:React.FC<NavPropsType> = (props) => {
     <nav className={s.nav}>
       <ul>
         <li className={s.item}>
-          <NavLink to="/profile" activeClassName={s.active}>
-            Profile
-          </NavLink>
+          <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/dialogs" activeClassName={s.active}>
-            Messages
-          </NavLink>
+          <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/news" activeClassName={s.active}>
-            News
-          </NavLink>
+          <NavLink to="/users" activeClassName={s.active}>Users</NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/music" activeClassName={s.active}>
-            Music
-          </NavLink>
+          <NavLink to="/news" activeClassName={s.active}>News</NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/settings" activeClassName={s.active}>
-            Settings
-          </NavLink>
+          <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
+        </li>
+        <li className={s.item}>
+          <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
         </li>
       </ul>
     </nav>
