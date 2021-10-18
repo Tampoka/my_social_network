@@ -29,9 +29,13 @@ class Users extends React.Component<UsersPropsType, any> {
                 this.props.setUsers(response.data.items)
             })
     }
-
     render() {
         let pagesCount=this.props.totalUsersCount/this.props.pageSize
+
+        let pages=[]
+        for (let i=1;i<=pagesCount;i++){
+            pages.push(i)
+        }
         return <div className={s.usersContainer}>
             <div className={s.users}>
                 <div>
