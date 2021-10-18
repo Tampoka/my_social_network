@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "./../../assets/images/user.png"
 import axios from "axios";
 import {UsersPropsType} from "./UsersContainer";
+import any = jasmine.any;
 
 //
 // export type GetUserResponseType={
@@ -23,23 +24,18 @@ import {UsersPropsType} from "./UsersContainer";
 
 
 class Users extends React.Component<UsersPropsType, any>{
-    getUsers = () => {
-        if (this.props.usersPage.users.length === 0) {
+    constructor() {
+        super();
             axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => {
                     this.props.setUsers(response.data.items)
                 })
-        }
     }
-
     render(){
         return <div className={s.usersContainer}>
-
-            <button onClick={() => this.getUsers()}>GET USERS</button>
             <div className={s.users}>
                 {
                     this.props.usersPage.users.map(u => <div key={u.id} className={s.user}>
-
                             <div className={s.avatar}>
                                 <div className={s.userPhoto}><img src={u.photos.small ?? userPhoto} alt="user"/></div>
                                 <div>
