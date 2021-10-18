@@ -24,7 +24,7 @@ import {UsersPropsType} from "./UsersContainer";
 
 class Users extends React.Component<UsersPropsType, any> {
     componentDidMount() {
-        axios.get<any>("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
