@@ -3,6 +3,10 @@
     width: 600px;
 }
 
+.selectedPage {
+font-weight: bold;
+}
+
 .user {
     display: flex;
     justify-content: space-between;

@@ -35,7 +35,7 @@ class Users extends React.Component<UsersPropsType, any> {
             <div className={s.users}>
                 <div>
                     <span>1</span>
-                    <span>2</span>
+                    <span className={s.selectedPage}>2</span>
                     <span>3</span>
                     <span>4</span>
                     <span>5</span>
