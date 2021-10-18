@@ -31,6 +31,7 @@ class Users extends React.Component<UsersPropsType, any> {
     }
 
     render() {
+        let pagesCount=this.props.totalUsersCount/this.props.pageSize
         return <div className={s.usersContainer}>
             <div className={s.users}>
                 <div>
