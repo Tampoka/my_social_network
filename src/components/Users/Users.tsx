@@ -41,12 +41,13 @@ class Users extends React.Component<UsersPropsType, any> {
 
             <div className={s.users}>
                 {pages.map(p => {
-                   return <span className={this.props.currentPage === p? s.selectedPage:''}>{p}</span>
+                   return <span className={this.props.currentPage === p? s.selectedPage:''}
+                   onClick={()=>this.props.setCurrentPage(p)}>{p}</span>
                 })}
                 {
                     this.props.usersPage.users.map(u => <div key={u.id} className={s.user}>
                             <div className={s.avatar}>
-                                <div className={s.userPhoto}><img src={u.photos.small ?? userPhoto} alt="user"/></div>
+                                <div className={s.userPhoto}><img src={u.photos.small ?u.photos.small :userPhoto} alt="user"/></div>
                                 <div>
                                     {u.isFollowing
                                         ? <button onClick={() => this.props.unFollow(u.id)}>UnFollow</button>
