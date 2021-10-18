@@ -1,5 +1,7 @@
 export type InitialStateType = {
     users: UserType[]
+    pageSize:number
+    totalUsersCount:number
 }
 
 export type UserType = {
@@ -49,7 +51,9 @@ const initialState = {
         //     isFollowing: false,
         //     location: {city: "Melbourne", country: "Australia"}
         // },
-    ]
+    ],
+    pageSize:5,
+    totalUsersCount:0
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
