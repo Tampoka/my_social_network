@@ -54,7 +54,7 @@ const initialState = {
         // },
     ],
     pageSize:5,
-    totalUsersCount:0,
+    totalUsersCount:19,
     currentPage:1
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
