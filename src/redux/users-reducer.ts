@@ -57,7 +57,7 @@ const initialState = {
     ],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2
+    currentPage: 1
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
