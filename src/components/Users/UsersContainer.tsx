@@ -6,14 +6,15 @@ import {
     InitialStateType,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
+    setUsersAC,
+    toggleIsFetchingAC,
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
-import preloader from "../../assets/loader/Interwind-1.5s-367px.svg"
+import Preloader from "../../common/Preloader/Preloader";
 
 
 // export type GetUserResponseType = {
@@ -59,15 +60,16 @@ class UsersContainer extends React.Component<UsersApiComponentPropsType, any> {
     render() {
         return <>
             {this.props.isFetching
-                ? <img src={preloader} alt="loader"/>
-                : <Users totalUsersCount={this.props.totalUsersCount}
+                ?<Preloader/>
+                : null
+            }
+                <Users totalUsersCount={this.props.totalUsersCount}
                          pageSize={this.props.pageSize}
                          currentPage={this.props.currentPage}
                          onPageChanged={this.onPageChanged}
                          users={this.props.usersPage.users}
                          follow={this.props.follow}
                          unFollow={this.props.unFollow}/>
-            }
         </>
     }
 
@@ -87,7 +89,7 @@ type MapDispatchToPropsType = {
     setUsers: (users: UserType[]) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
-    toggleIsFetching:(isFetching:boolean)=>void
+    toggleIsFetching: (isFetching: boolean) => void
 }
 
 export type UsersApiComponentPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -119,7 +121,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         setTotalUsersCount: (totalUsersCount: number) => {
             dispatch(setTotalUsersCountAC(totalUsersCount))
         },
-        toggleIsFetching:(isFetching:boolean)=>{
+        toggleIsFetching: (isFetching: boolean) => {
             dispatch(toggleIsFetchingAC(isFetching))
         }
     }
