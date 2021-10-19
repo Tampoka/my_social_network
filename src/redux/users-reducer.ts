@@ -3,6 +3,7 @@ export type InitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching:boolean
 }
 
 export type UserType = {
@@ -57,7 +58,8 @@ const initialState = {
     ],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching:true
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
