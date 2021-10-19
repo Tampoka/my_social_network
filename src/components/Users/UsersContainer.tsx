@@ -4,12 +4,13 @@ import {Dispatch} from "redux";
 import {
     followAC,
     InitialStateType,
-    setCurrentPageAC, setTotalUsersCountAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
     setUsersAC,
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
-import UsersC from "./Users";
+import UsersApiComponent from "./UsersApiComponent";
 
 type MapStateToPropsType = {
     usersPage: InitialStateType
@@ -25,7 +26,7 @@ type MapDispatchToPropsType = {
     setTotalUsersCount:(totalUsersCount:number)=>void
 }
 
-export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type UsersApiComponentPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -57,4 +58,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersC)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent)
