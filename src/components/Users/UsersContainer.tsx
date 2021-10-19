@@ -6,7 +6,7 @@ import {
     InitialStateType,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleIsFetchingAC,
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
@@ -36,8 +36,10 @@ import preloader from "../../assets/loader/Interwind-1.5s-367px.svg"
 
 class UsersContainer extends React.Component<UsersApiComponentPropsType, any> {
     componentDidMount() {
+        this.props.toggleIsFetching(true)
         axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
 
@@ -83,6 +85,7 @@ type MapDispatchToPropsType = {
     setUsers: (users: UserType[]) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
+    toggleIsFetching:(isFetching:boolean)=>void
 }
 
 export type UsersApiComponentPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -113,6 +116,9 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setTotalUsersCount: (totalUsersCount: number) => {
             dispatch(setTotalUsersCountAC(totalUsersCount))
+        },
+        toggleIsFetching:(isFetching:boolean)=>{
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }
