@@ -13,6 +13,9 @@ import {
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
+import preloader from "./../../assets/loader/Interwind-1.5s-367px.svg"
+
+
 
 
 // export type GetUserResponseType = {
@@ -33,7 +36,7 @@ import Users from "./Users";
 // }
 
 
-class UsersApiComponent extends React.Component<UsersApiComponentPropsType, any> {
+class UsersContainer extends React.Component<UsersApiComponentPropsType, any> {
     componentDidMount() {
         axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
@@ -52,30 +55,35 @@ class UsersApiComponent extends React.Component<UsersApiComponentPropsType, any>
     }
 
     render() {
-        return <Users totalUsersCount={this.props.totalUsersCount}
-                      pageSize={this.props.pageSize}
-                      currentPage={this.props.currentPage}
-                      onPageChanged={this.onPageChanged}
-                      users={this.props.usersPage.users}
-                      follow={this.props.follow}
-                      unFollow={this.props.unFollow}
-        />
+        return <>
+            {this.props.isFetching
+                ? <img src={preloader} alt="loader"/>
+                :null}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   onPageChanged={this.onPageChanged}
+                   users={this.props.usersPage.users}
+                   follow={this.props.follow}
+                   unFollow={this.props.unFollow}/>
+        </>
     }
 }
 
 type MapStateToPropsType = {
     usersPage: InitialStateType
     pageSize: number
-    totalUsersCount:number
-    currentPage:number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (users: UserType[]) => void
-    setCurrentPage:(pageNumber:number)=>void
-    setTotalUsersCount:(totalUsersCount:number)=>void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
 }
 
 export type UsersApiComponentPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -84,8 +92,9 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         usersPage: state.usersPage,
         pageSize: state.usersPage.pageSize,
-        totalUsersCount:state.usersPage.totalUsersCount,
-        currentPage:state.usersPage.currentPage
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
@@ -100,14 +109,14 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         setUsers: (users: UserType[]) => {
             dispatch(setUsersAC(users))
         },
-        setCurrentPage:(pageNumber:number)=>{
+        setCurrentPage: (pageNumber: number) => {
             dispatch(setCurrentPageAC(pageNumber))
         },
-        setTotalUsersCount:(totalUsersCount:number)=>{
+        setTotalUsersCount: (totalUsersCount: number) => {
             dispatch(setTotalUsersCountAC(totalUsersCount))
         }
     }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
