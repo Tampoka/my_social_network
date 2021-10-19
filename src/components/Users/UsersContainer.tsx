@@ -13,9 +13,7 @@ import {
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
-import preloader from "./../../assets/loader/Interwind-1.5s-367px.svg"
-
-
+import preloader from "../../assets/loader/Interwind-1.5s-367px.svg"
 
 
 // export type GetUserResponseType = {
@@ -58,16 +56,17 @@ class UsersContainer extends React.Component<UsersApiComponentPropsType, any> {
         return <>
             {this.props.isFetching
                 ? <img src={preloader} alt="loader"/>
-                :null}
-            <Users totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                   users={this.props.usersPage.users}
-                   follow={this.props.follow}
-                   unFollow={this.props.unFollow}/>
+                : <Users totalUsersCount={this.props.totalUsersCount}
+                         pageSize={this.props.pageSize}
+                         currentPage={this.props.currentPage}
+                         onPageChanged={this.onPageChanged}
+                         users={this.props.usersPage.users}
+                         follow={this.props.follow}
+                         unFollow={this.props.unFollow}/>
+            }
         </>
     }
+
 }
 
 type MapStateToPropsType = {
