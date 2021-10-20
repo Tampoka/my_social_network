@@ -15,28 +15,28 @@ import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
 
 
-// export type GetUserResponseType = {
-//     items: ResponseUserType[]
-//     error: string | null
-//     totalCount: number
-// }
-// export type ResponseUserType = {
-//     name: string
-//     id: number
-//     photos: {
-//         small: string | null | undefined
-//         large: string | null | undefined
-//     }
-//     status: string | null
-//     followed: boolean
-//     uniqueUrlName: string | null
-// }
+export type GetUserResponseType = {
+    items: ResponseUserType[]
+    error: string | null
+    totalCount: number
+}
+export type ResponseUserType = {
+    name: string
+    id: number
+    photos: {
+        small: string | null | undefined
+        large: string | null | undefined
+    }
+    status: string | null
+    followed: boolean
+    uniqueUrlName: string | null
+}
 
 
 class UsersContainer extends React.Component<UsersApiComponentPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get<GetUserResponseType,any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
