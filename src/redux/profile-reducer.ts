@@ -1,8 +1,10 @@
 import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reducer";
+import {GetProfileResponseType} from "../components/Profile/ProfileContainer";
 
 export type InitialStateType={
     posts:PostType[]
     newPostText:string
+    profile:GetProfileResponseType|null
 }
 
 type PostType = {
@@ -13,6 +15,7 @@ type PostType = {
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET-USER-PROFILE";
 
 const initialState={
     posts: [
@@ -22,7 +25,8 @@ const initialState={
         {id: 4, message: "How important is to be proactive?", likesCount: 27},
         {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
     ],
-    newPostText: "Hello!"
+    newPostText: "Hello!",
+    profile:null
 }
 const profileReducer=(state:InitialStateType=initialState, action:ActionsType):InitialStateType=>{
     switch (action.type) {
@@ -39,22 +43,31 @@ const profileReducer=(state:InitialStateType=initialState, action:ActionsType):I
         case UPDATE_NEW_POST_TEXT:
             return {...state,
             newPostText:action.newText}
+        case SET_USER_PROFILE:
+            return {...state, profile:action.profile}
         default:
             return state
     }
 }
 
-export type ActionsType=AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType
+export type ActionsType=AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType|SetUserProfileType
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
 export type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
+
+export type SetUserProfileType = ReturnType<typeof setUserProfile>
 
 export const addPostActionCreator = ()=> ({type: ADD_POST}as const)
 
 export const updateNewPostTextActionCreator = (text: string)=> ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
+} as const)
+
+export const setUserProfile = (profile: GetProfileResponseType)=> ({
+    type: SET_USER_PROFILE,
+    profile
 } as const)
 
 
