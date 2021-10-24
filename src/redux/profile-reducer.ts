@@ -1,18 +1,37 @@
 import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reducer";
-import {GetProfileResponseType} from "../components/Profile/ProfileContainer";
 
 export type InitialStateType={
     posts:PostType[]
     newPostText:string
-    profile:GetProfileResponseType|null
+    profile:null|ProfileType
 }
 
-type PostType = {
+export type PostType = {
     id: number
     message: string
     likesCount: number
 }
-
+export type ProfileType={
+    aboutMe: string | null
+    contacts: {
+        facebook: string | null
+        github: string | null
+        instagram: string | null
+        mainLink: string | null
+        twitter: string | null
+        vk: string | null
+        website: string | null
+        youtube: string | null
+    }
+    fullName: string | null
+    lookingForAJob: boolean | null
+    lookingForAJobDescription: string | null
+    photos: {
+        small: string | null
+        large: string | null
+    }
+    userId: number
+}
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
@@ -65,7 +84,7 @@ export const updateNewPostTextActionCreator = (text: string)=> ({
     newText: text
 } as const)
 
-export const setUserProfile = (profile: GetProfileResponseType)=> ({
+export const setUserProfile = (profile: ProfileType)=> ({
     type: SET_USER_PROFILE,
     profile
 } as const)
