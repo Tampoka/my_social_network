@@ -1,7 +1,11 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
+import {ProfileType} from "../../../redux/profile-reducer";
 
-const ProfileInfo = () => {
+export type ProfileInfoPropsType={
+    profile:null|ProfileType
+}
+const ProfileInfo:React.FC<ProfileInfoPropsType> = (props) => {
     return (
         <div>
             <div>
