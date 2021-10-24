@@ -1,11 +1,12 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profile-reducer";
+import userPhoto from "../../../assets/images/user.png"
 
-export type ProfileInfoPropsType={
-    profile:null|ProfileType
+export type ProfileInfoPropsType = {
+    profile: null | ProfileType
 }
-const ProfileInfo:React.FC<ProfileInfoPropsType> = (props) => {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
     return (
         <div>
             <div>
@@ -15,7 +16,8 @@ const ProfileInfo:React.FC<ProfileInfoPropsType> = (props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img className={s.avatar}
-                     src="https://i.pinimg.com/originals/df/5f/5b/df5f5b1b174a2b4b6026cc6c8f9395c1.jpg" alt=""/>
+                     src={profile.photos.large ? profile.photos.large : userPhoto}
+                     alt={"User avatar" + profile.fullName}/>
             </div>
         </div>)
 }
