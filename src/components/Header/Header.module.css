@@ -1,5 +1,10 @@
 
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 60px;
     grid-area: h;
     background-color: green;
 }
@@ -7,4 +12,8 @@
 .header img {
     width: 40px;
     margin: 10px;
+}
+
+.loginBlock {
+margin:10px
 }
