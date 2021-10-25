@@ -6,17 +6,19 @@ import {setAuthUserData} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps} from "react-router-dom";
 
-class HeaderContainer extends React.Component {
+class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
         axios.get<any>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
             .then(response => {
-                debugger
+                if(response.data.resultCode===0){
+                    this.props.setAuthUserData(response.data.data.login)
+                }
             })
     }
 
     render() {
-        return <Header/>
+        return <Header {...this.props}/>
     }
 }
 
