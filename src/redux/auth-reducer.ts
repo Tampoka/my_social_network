@@ -28,9 +28,9 @@ export  type ActionsType =
     SetUserDataActionType
 
 
-export type SetUserDataActionType = ReturnType<typeof setUserData>
+export type SetUserDataActionType = ReturnType<typeof setAuthUserData>
 
-export const setUserData = (userId:null | string, email:null | string, login:null | string) => ({
+export const setAuthUserData = (userId:null | string, email:null | string, login:null | string) => ({
     type: SET_USER_DATA,
     data:{userId, email, login}
 } as const)
