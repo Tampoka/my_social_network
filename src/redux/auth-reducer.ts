@@ -1,66 +1,19 @@
-export type InitialStateType = {
-    users: UserType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
-
-export type UserType = {
-    id: number
-    name: string
-    photos: {
-        small: string
-        large: string
-    }
-    status: string
-    isFollowing: boolean
-    location: LocationType
-}
-
-export type LocationType = {
-    city: string
-    country: string
-}
-
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET-USERS";
-const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
-const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 
+
+export type InitialStateType = {
+    userId: null | string
+    email: null | string
+    login: null | string
+}
+
+
 const initialState = {
-    users: [
-        // {
-        //     id: 1,
-        //     fullName: "Kate",
-        //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
-        //     status: "I am looking for new job",
-        //     isFollowing: true,
-        //     location: {city: "New York", country: "USA"}
-        // },
-        // {
-        //     id: 2,
-        //     fullName: "John",
-        //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
-        //     status: "I am moved to new office",
-        //     isFollowing: true,
-        //     location: {city: "London", country: "Great Britain"}
-        // },
-        // {
-        //     id: 3,
-        //     fullName: "Bob",
-        //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
-        //     status: "Happiest ever",
-        //     isFollowing: false,
-        //     location: {city: "Melbourne", country: "Australia"}
-        // },
-    ],
-    pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 1,
-    isFetching: false
+    userId: null,
+    email: null,
+    login: null,
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
