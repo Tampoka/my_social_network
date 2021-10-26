@@ -4,6 +4,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress:boolean
 }
 
 export type UserType = {
@@ -32,35 +33,37 @@ const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 
 const initialState = {
     users: [
-        // {
-        //     id: 1,
-        //     fullName: "Kate",
-        //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
-        //     status: "I am looking for new job",
-        //     followed: true,
-        //     location: {city: "New York", country: "USA"}
-        // },
-        // {
-        //     id: 2,
-        //     fullName: "John",
-        //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
-        //     status: "I am moved to new office",
-        //     followed: true,
-        //     location: {city: "London", country: "Great Britain"}
-        // },
-        // {
-        //     id: 3,
-        //     fullName: "Bob",
-        //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
-        //     status: "Happiest ever",
-        //     followed: false,
-        //     location: {city: "Melbourne", country: "Australia"}
-        // },
+       /* {
+            id: 1,
+            fullName: "Kate",
+            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
+            status: "I am looking for new job",
+            followed: true,
+            location: {city: "New York", country: "USA"}
+        },
+        {
+            id: 2,
+            fullName: "John",
+            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
+            status: "I am moved to new office",
+            followed: true,
+            location: {city: "London", country: "Great Britain"}
+        },
+        {
+            id: 3,
+            fullName: "Bob",
+            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
+            status: "Happiest ever",
+            followed: false,
+            location: {city: "Melbourne", country: "Australia"}
+        },*/
     ],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress:false
+
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
