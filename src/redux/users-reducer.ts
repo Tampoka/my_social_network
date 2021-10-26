@@ -4,7 +4,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress:boolean
+    followingInProgress: boolean
 }
 
 export type UserType = {
@@ -26,43 +26,44 @@ export type LocationType = {
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET-USERS";
-const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
-const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
-const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
+const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
 
 const initialState = {
     users: [
-       /* {
-            id: 1,
-            fullName: "Kate",
-            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
-            status: "I am looking for new job",
-            followed: true,
-            location: {city: "New York", country: "USA"}
-        },
-        {
-            id: 2,
-            fullName: "John",
-            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
-            status: "I am moved to new office",
-            followed: true,
-            location: {city: "London", country: "Great Britain"}
-        },
-        {
-            id: 3,
-            fullName: "Bob",
-            photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
-            status: "Happiest ever",
-            followed: false,
-            location: {city: "Melbourne", country: "Australia"}
-        },*/
+        /* {
+             id: 1,
+             fullName: "Kate",
+             photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
+             status: "I am looking for new job",
+             followed: true,
+             location: {city: "New York", country: "USA"}
+         },
+         {
+             id: 2,
+             fullName: "John",
+             photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
+             status: "I am moved to new office",
+             followed: true,
+             location: {city: "London", country: "Great Britain"}
+         },
+         {
+             id: 3,
+             fullName: "Bob",
+             photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
+             status: "Happiest ever",
+             followed: false,
+             location: {city: "Melbourne", country: "Australia"}
+         },*/
     ],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress:false
+    followingInProgress: false
 
 }
 const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -98,6 +99,8 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
             return {...state, totalUsersCount: action.totalUsersCount}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {...state, followingInProgress: action.followingInProgress}
         default:
             return state
     }
@@ -110,6 +113,7 @@ export  type ActionsType =
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
     | ToggleIsFetchingActionType
+    | ToggleFollowingProgress
 
 export type FollowActionType = ReturnType<typeof follow>
 export type UnFollowActionType = ReturnType<typeof unFollow>
@@ -117,6 +121,7 @@ export type SetUsersActionType = ReturnType<typeof setUsers>
 export type SetCurrentPageActionType = ReturnType<typeof setCurrentPage>
 export type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 export type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
+export type ToggleFollowingProgress = ReturnType<typeof toggleFollowingProgress>
 
 export const follow = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unFollow = (userId: number) => ({type: UNFOLLOW, userId} as const)
@@ -127,6 +132,10 @@ export const setTotalUsersCount = (totalUsersCount: number) => ({
     totalUsersCount
 } as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
+export const toggleFollowingProgress = (followingInProgress: boolean) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    followingInProgress
+} as const)
 
 
 export default usersReducer
