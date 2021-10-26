@@ -37,13 +37,13 @@ const Users: React.FC<UsersPropsType> = (props) => {
                                                                   alt="user"/></div>
                             </NavLink>
                             <div>
-                                {u.isFollowing
+                                {u.followed
                                     ? <button onClick={() => {
                                         axios.delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                             {
                                                 withCredentials: true,
                                                 headers: {
-                                                    "API-KEY": "82fa16ed-95a0-443a-971f-758c662141ce"
+                                                    "API-KEY": "b22dc3a8-54db-4578-99ea-53ac8029e06a"
                                                 }
                                             })
                                             .then(response => {
@@ -57,7 +57,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
                                             {}, {
                                                 withCredentials: true,
                                                 headers: {
-                                                    "API-KEY": "82fa16ed-95a0-443a-971f-758c662141ce"
+                                                    "API-KEY": "b22dc3a8-54db-4578-99ea-53ac8029e06a"
                                                 }
                                             })
                                             .then(response => {

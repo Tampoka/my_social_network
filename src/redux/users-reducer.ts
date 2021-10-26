@@ -14,7 +14,7 @@ export type UserType = {
         large: string
     }
     status: string
-    isFollowing: boolean
+    followed: boolean
     location: LocationType
 }
 
@@ -37,7 +37,7 @@ const initialState = {
         //     fullName: "Kate",
         //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dMYMr1CCTycSQd2YQatl4bvzK5T90Renlw&usqp=CAU",
         //     status: "I am looking for new job",
-        //     isFollowing: true,
+        //     followed: true,
         //     location: {city: "New York", country: "USA"}
         // },
         // {
@@ -45,7 +45,7 @@ const initialState = {
         //     fullName: "John",
         //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8wvbPOt0gK-5yGATP1Beo7Mkk7LT1M6KZLw&usqp=CAU",
         //     status: "I am moved to new office",
-        //     isFollowing: true,
+        //     followed: true,
         //     location: {city: "London", country: "Great Britain"}
         // },
         // {
@@ -53,7 +53,7 @@ const initialState = {
         //     fullName: "Bob",
         //     photoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbz8f-cdfPQtfH1EP3x1V2pMDyLpDMmuzKbg&usqp=CAU",
         //     status: "Happiest ever",
-        //     isFollowing: false,
+        //     followed: false,
         //     location: {city: "Melbourne", country: "Australia"}
         // },
     ],
@@ -69,7 +69,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, isFollowing: true}
+                        return {...u, followed: true}
                     }
                     return u
                 })
@@ -79,7 +79,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, isFollowing: false}
+                        return {...u, followed: false}
                     }
                     return u
                 })
