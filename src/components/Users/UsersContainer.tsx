@@ -13,13 +13,13 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import { usersAPI} from "../../api/api";
 
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        getUsers(this.props.currentPage, this.props.pageSize)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 debugger
                 this.props.toggleIsFetching(false)
@@ -33,7 +33,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
 
-        getUsers(pageNumber, this.props.pageSize)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
             .then(data => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(data.items)
