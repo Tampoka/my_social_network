@@ -19,7 +19,9 @@ import {getUsers} from "../../api/api";
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        getUsers(this.props.currentPage,this.props.pageSize).then(response => {
+        getUsers(this.props.currentPage, this.props.pageSize)
+            .then(response => {
+                debugger
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -31,7 +33,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
 
-            getUsers(pageNumber, this.props.pageSize)
+        getUsers(pageNumber, this.props.pageSize)
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)

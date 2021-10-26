@@ -19,9 +19,10 @@ export type ResponseUserType = {
 }
 
 
-export const getUsers=(currentPage=1,pageSize=10)=>{
-    return axios.get<GetUserResponseType,any>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,
+export const getUsers = (currentPage = 1, pageSize = 10) => {
+    return axios.get<GetUserResponseType, any>(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,
         {
             withCredentials: true
         })
+        .then(response=>response.data)
 }
