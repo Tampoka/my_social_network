@@ -1,5 +1,6 @@
 import axios from "axios";
 import {UserType} from "../redux/users-reducer";
+import {ProfileType} from "../redux/profile-reducer";
 
 
 type GetUserResponseType = {
@@ -8,22 +9,24 @@ type GetUserResponseType = {
     totalCount: number
 }
 
-type FollowResponseType={
-    data:any
-    messages:string[]
-    fieldsErrors:string[]
-    resultCode:0|1
+type FollowResponseType = {
+    data: any
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: 0 | 1
 }
 
-type AuthMeResponseType={
-    data:{
-        id:string|null
-        login:string
-        email:string
+type GetProfileResponseType = ProfileType
+
+type AuthMeResponseType = {
+    data: {
+        id: string | null
+        login: string
+        email: string
     }
     fieldsErrors: string[]
     messages: string[]
-    resultCode: 0|1
+    resultCode: 0 | 1
 }
 const instance = axios.create({
     withCredentials: true,
@@ -33,30 +36,31 @@ const instance = axios.create({
     }
 })
 
-export const usersAPI= {
-    getUsers (currentPage = 1, pageSize = 10) {
+export const usersAPI = {
+    getUsers(currentPage = 1, pageSize = 10) {
         return instance.get<GetUserResponseType>(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
-    follow(userId:number) {
+    follow(userId: number) {
         return instance.post<FollowResponseType>(`follow/${userId}`)
             .then(response => response.data)
     },
-    unFollow(userId:number) {
+    unFollow(userId: number) {
         return instance.delete<FollowResponseType>(`follow/${userId}`)
             .then(response => response.data)
     }
 }
 
-export const profileAPI={
-getProfile(){
-    instance.get
-}
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instance.get<GetProfileResponseType>(`profile/${userId}`)
+            .then(response=>response.data)
+    }
 }
 
-export const authAPI={
-authMe(){
-    return instance.get<AuthMeResponseType>(`auth/me`)
-        .then(response=>response.data)
-}
+export const authAPI = {
+    authMe() {
+        return instance.get<AuthMeResponseType>(`auth/me`)
+            .then(response => response.data)
+    }
 }
