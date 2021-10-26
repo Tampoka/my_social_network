@@ -1,21 +1,18 @@
 import axios from "axios";
+import {UserType} from "../redux/users-reducer";
 
 
-export type GetUserResponseType = {
-    items: ResponseUserType[]
+type GetUserResponseType = {
+    items: UserType[]
     error: string | null
     totalCount: number
 }
-export type ResponseUserType = {
-    name: string
-    id: number
-    photos: {
-        small: string | null | undefined
-        large: string | null | undefined
-    }
-    status: string | null
-    followed: boolean
-    uniqueUrlName: string | null
+
+type FollowResponseType={
+    data:any
+    messages:string[]
+    fieldsErrors:string[]
+    resultCode:number
 }
 
 const instance = axios.create({
@@ -28,7 +25,23 @@ const instance = axios.create({
 
 export const usersAPI= {
     getUsers (currentPage = 1, pageSize = 10) {
-        return instance.get<GetUserResponseType, any>(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<GetUserResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => response.data)
+    },
+    follow(userId:number) {
+        return instance.post<FollowResponseType>(`follow/${userId}`)
+            .then(response => response.data)
+    },
+    unFollow(userId:number) {
+        return instance.delete<FollowResponseType>(`follow/${userId}`)
             .then(response => response.data)
     }
+}
+
+export const profileAPI={
+
+}
+
+export const authAPI={
+
 }

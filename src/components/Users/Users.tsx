@@ -4,6 +4,7 @@ import userPhoto from "./../../assets/images/user.png"
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
     totalUsersCount: number
@@ -39,32 +40,21 @@ const Users: React.FC<UsersPropsType> = (props) => {
                             <div>
                                 {u.followed
                                     ? <button onClick={() => {
-                                        axios.delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                            {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "b22dc3a8-54db-4578-99ea-53ac8029e06a"
-                                                }
-                                            })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
+                                        usersAPI.unFollow(u.id)
+                                            .then(data => {
+                                                if (data.resultCode === 0) {
                                                     props.unFollow(u.id)
                                                 }
                                             })
                                     }}>UnFollow</button>
                                     : <button onClick={() => {
-                                        axios.post<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                            {}, {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "b22dc3a8-54db-4578-99ea-53ac8029e06a"
-                                                }
-                                            })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
+                                        usersAPI.follow(u.id)
+                                            .then(data => {
+                                                if (data.resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
                                             })
+
                                     }}>Follow</button>}
 
                             </div>
