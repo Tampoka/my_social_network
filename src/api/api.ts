@@ -12,9 +12,19 @@ type FollowResponseType={
     data:any
     messages:string[]
     fieldsErrors:string[]
-    resultCode:number
+    resultCode:0|1
 }
 
+type AuthMeResponseType={
+    data:{
+        id:string|null
+        login:string
+        email:string
+    }
+    fieldsErrors: string[]
+    messages: string[]
+    resultCode: 0|1
+}
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -39,9 +49,14 @@ export const usersAPI= {
 }
 
 export const profileAPI={
-
+getProfile(){
+    instance.get
+}
 }
 
 export const authAPI={
-
+authMe(){
+    return instance.get<AuthMeResponseType>(`auth/me`)
+        .then(response=>response.data)
+}
 }
