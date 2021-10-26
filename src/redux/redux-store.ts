@@ -21,5 +21,7 @@ const composeEnhancers = composeWithDevTools
 let store=createStore(rootReducer,  composeEnhancers())
 
 
+// @ts-ignore
+window.store=store
 
 export default store
