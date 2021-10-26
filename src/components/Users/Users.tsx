@@ -40,7 +40,12 @@ const Users: React.FC<UsersPropsType> = (props) => {
                                 {u.isFollowing
                                     ? <button onClick={() => {
                                         axios.delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                             {withCredentials: true})
+                                            {
+                                                withCredentials: true,
+                                                headers: {
+                                                    "API-KEY": "82fa16ed-95a0-443a-971f-758c662141ce"
+                                                }
+                                            })
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
                                                     props.unFollow(u.id)
@@ -49,7 +54,12 @@ const Users: React.FC<UsersPropsType> = (props) => {
                                     }}>UnFollow</button>
                                     : <button onClick={() => {
                                         axios.post<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                            {}, {withCredentials: true})
+                                            {}, {
+                                                withCredentials: true,
+                                                headers: {
+                                                    "API-KEY": "82fa16ed-95a0-443a-971f-758c662141ce"
+                                                }
+                                            })
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
                                                     props.follow(u.id)
