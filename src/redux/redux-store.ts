@@ -18,7 +18,7 @@ export type AppStateType=ReturnType<typeof rootReducer>
 const composeEnhancers = composeWithDevTools
 
 
-let store=createStore(rootReducer, applyMiddleware(thunkMiddleware,composeEnhancers()))
+let store=createStore(rootReducer, composeEnhancers(applyMiddleware()))
 
 
 // @ts-ignore
