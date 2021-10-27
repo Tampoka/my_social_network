@@ -74,15 +74,15 @@ const profileReducer=(state:InitialStateType=initialState, action:ProfileActions
 
 export type ProfileActionsType =AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType|SetUserProfileType
 
-export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type AddPostActionType = ReturnType<typeof addPost>
 
-export type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextActionCreator>
+export type UpdateNewPostActionType = ReturnType<typeof updateNewPostText>
 
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
 
-export const addPostActionCreator = ()=> ({type: ADD_POST}as const)
+export const addPost = ()=> ({type: ADD_POST}as const)
 
-export const updateNewPostTextActionCreator = (text: string)=> ({
+export const updateNewPostText = (text: string)=> ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 } as const)
@@ -91,6 +91,7 @@ export const setUserProfile = (profile: ProfileType)=> ({
     type: SET_USER_PROFILE,
     profile
 } as const)
+
 
 // thunk
 
