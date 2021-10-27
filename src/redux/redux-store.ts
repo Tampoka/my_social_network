@@ -5,23 +5,25 @@ import sidebarReducer from "./sidebar-reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
+import thunkMiddleware from "redux-thunk"
 
-let rootReducer=combineReducers({
-    profilePage:profileReducer,
-    dialogsPage:dialogsReducer,
-    sidebar:sidebarReducer,
-    usersPage:usersReducer,
-    auth:authReducer
+let rootReducer = combineReducers({
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    sidebar: sidebarReducer,
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
-export type AppStateType=ReturnType<typeof rootReducer>
-const composeEnhancers = composeWithDevTools
+export type AppStateType = ReturnType<typeof rootReducer>
 
+const middlewareEnhancer = applyMiddleware(thunkMiddleware)
+const composedEnhancers = composeWithDevTools(middlewareEnhancer)
 
-let store=createStore(rootReducer, composeEnhancers(applyMiddleware()))
+let store = createStore(rootReducer, composedEnhancers)
 
 
 // @ts-ignore
-window.store=store
+window.store = store
 
 export default store
