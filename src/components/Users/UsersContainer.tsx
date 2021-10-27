@@ -1,18 +1,18 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {follow, getUsersThunkCreator, InitialStateType, setCurrentPage, unFollow} from "../../redux/users-reducer";
+import {follow, getUsers, InitialStateType, setCurrentPage, unFollow} from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
 
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize)
+        this.props.getUsers(pageNumber, this.props.pageSize)
 
     }
 
@@ -43,7 +43,7 @@ type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setCurrentPage: (pageNumber: number) => void
-    getUsersThunkCreator:(currentPage:number, pageSize:number)=>void
+    getUsers:(currentPage:number, pageSize:number)=>void
 }
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -63,7 +63,7 @@ let mapDispatchToProps = {
     follow,
     unFollow,
     setCurrentPage,
-    getUsersThunkCreator
+    getUsers: getUsers
 }
 
 
