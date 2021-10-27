@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 export type InitialStateType = {
     users: UserType[]
     pageSize: number
@@ -100,10 +102,12 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
         case TOGGLE_IS_FOLLOWING_PROGRESS:
-            return {...state,
+            return {
+                ...state,
                 followingInProgress: action.isFetching
-            ?[...state.followingInProgress,action.userId]
-            :state.followingInProgress.filter(id=>id!==action.userId)}
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state
     }
@@ -135,11 +139,27 @@ export const setTotalUsersCount = (totalUsersCount: number) => ({
     totalUsersCount
 } as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
-export const toggleFollowingProgress = (isFetching:boolean, userId:number) => ({
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
     isFetching,
     userId
 } as const)
+
+
+//thunk
+export const getUsersThunkCreator = (currentPage:number, pageSize:number) => {
+    return (dispatch:ThunkDispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+
+            })
+    }
+}
+}
 
 
 export default usersReducer
