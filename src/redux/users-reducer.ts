@@ -157,7 +157,6 @@ export const getUsers = (currentPage:number, pageSize:number) => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsers(data.items))
                 dispatch(setTotalUsersCount(data.totalCount))
-
             })
     }
 }
@@ -187,5 +186,7 @@ export const follow = (userId:number) => {
             })
     }
 }
+
+
 
 export default usersReducer

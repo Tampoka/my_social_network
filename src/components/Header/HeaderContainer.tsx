@@ -7,12 +7,6 @@ import {AppStateType} from "../../redux/redux-store";
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
-      /*  authAPI.authMe().then(data => {
-            let {id, email, login} = data.data
-            if (data.resultCode === 0) {
-                this.props.setAuthUserData(id, email, login)
-            }
-        })*/
         this.props.getAuth()
     }
 

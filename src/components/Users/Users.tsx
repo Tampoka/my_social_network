@@ -34,30 +34,14 @@ const Users: React.FC<UsersContainerPropsType & UsersPropsType> = (props) => {
                             <div>
                                 {u.followed
                                     ? <button onClick={() => {
-                                     /*   props.toggleFollowingProgress(true, u.id)
-                                        usersAPI.unFollow(u.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.unFollow(u.id)
-                                                }
-                                                props.toggleFollowingProgress(false, u.id)
-                                            })*/
                                         props.unFollow(u.id)
                                     }}
-                                              disabled={props.followingInProgress.some(id => id === u.id)}>UnFollow</button>
-                                    : <button onClick={() => {/*
-                                        props.toggleFollowingProgress(true, u.id)
-                                        usersAPI.follow(u.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.follow(u.id)
-                                                }
-                                                props.toggleFollowingProgress(false, u.id)
-                                            })*/
+                                              disabled={props.followingInProgress.some(id => id === u.id)}>
+                                        UnFollow</button>
+                                    : <button onClick={() => {
                                         props.follow(u.id)
                                     }}
                                               disabled={props.followingInProgress.some(id => id === u.id)}>Follow</button>}
-
                             </div>
                         </div>
                         <div className={s.userInfo}>

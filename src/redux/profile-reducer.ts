@@ -1,4 +1,7 @@
 import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reducer";
+import {ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./redux-store";
+import {profileAPI} from "../api/api";
 
 export type InitialStateType={
     posts:PostType[]
@@ -47,7 +50,7 @@ const initialState={
     newPostText: "Hello!",
     profile:null
 }
-const profileReducer=(state:InitialStateType=initialState, action:ActionsType):InitialStateType=>{
+const profileReducer=(state:InitialStateType=initialState, action:ProfileActionsType):InitialStateType=>{
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
@@ -69,7 +72,7 @@ const profileReducer=(state:InitialStateType=initialState, action:ActionsType):I
     }
 }
 
-export type ActionsType=AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType|SetUserProfileType
+export type ProfileActionsType =AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType|SetUserProfileType
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
@@ -88,6 +91,17 @@ export const setUserProfile = (profile: ProfileType)=> ({
     type: SET_USER_PROFILE,
     profile
 } as const)
+
+// thunk
+
+export const showUserProfile = (userId:number) => {
+    return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        profileAPI.getProfile(userId)
+            .then(data=>{
+                dispatch(setUserProfile(data))
+            })
+    }
+}
 
 
 export default profileReducer
