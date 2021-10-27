@@ -3,7 +3,6 @@ import s from "./Users.module.css";
 import userPhoto from "./../../assets/images/user.png"
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 import {UsersContainerPropsType} from "./UsersContainer";
 
 export type UsersPropsType = {
@@ -35,17 +34,18 @@ const Users: React.FC<UsersContainerPropsType & UsersPropsType> = (props) => {
                             <div>
                                 {u.followed
                                     ? <button onClick={() => {
-                                        props.toggleFollowingProgress(true, u.id)
+                                     /*   props.toggleFollowingProgress(true, u.id)
                                         usersAPI.unFollow(u.id)
                                             .then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.unFollow(u.id)
                                                 }
                                                 props.toggleFollowingProgress(false, u.id)
-                                            })
+                                            })*/
+                                        props.unFollow(u.id)
                                     }}
                                               disabled={props.followingInProgress.some(id => id === u.id)}>UnFollow</button>
-                                    : <button onClick={() => {
+                                    : <button onClick={() => {/*
                                         props.toggleFollowingProgress(true, u.id)
                                         usersAPI.follow(u.id)
                                             .then(data => {
@@ -53,7 +53,8 @@ const Users: React.FC<UsersContainerPropsType & UsersPropsType> = (props) => {
                                                     props.follow(u.id)
                                                 }
                                                 props.toggleFollowingProgress(false, u.id)
-                                            })
+                                            })*/
+                                        props.follow(u.id)
                                     }}
                                               disabled={props.followingInProgress.some(id => id === u.id)}>Follow</button>}
 
