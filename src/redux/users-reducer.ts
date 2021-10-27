@@ -1,4 +1,6 @@
 import {usersAPI} from "../api/api";
+import {ThunkDispatch} from "redux-thunk"
+import {AppStateType} from "./redux-store";
 
 export type InitialStateType = {
     users: UserType[]
@@ -68,7 +70,7 @@ const initialState = {
     followingInProgress: [20416]
 
 }
-const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -113,7 +115,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
     }
 }
 
-export  type ActionsType =
+export  type UsersActionsType =
     FollowActionType
     | UnFollowActionType
     | SetUsersActionType
@@ -148,7 +150,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 
 //thunk
 export const getUsersThunkCreator = (currentPage:number, pageSize:number) => {
-    return (dispatch:ThunkDispatch) => {
+    return (dispatch:ThunkDispatch<AppStateType, unknown, UsersActionsType>) => {
         dispatch(toggleIsFetching(true))
         usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
@@ -158,7 +160,6 @@ export const getUsersThunkCreator = (currentPage:number, pageSize:number) => {
 
             })
     }
-}
 }
 
 
