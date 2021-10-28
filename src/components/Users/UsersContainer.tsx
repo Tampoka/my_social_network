@@ -15,7 +15,6 @@ import Preloader from "../../common/Preloader/Preloader";
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-
     }
 
     onPageChanged = (pageNumber: number) => {

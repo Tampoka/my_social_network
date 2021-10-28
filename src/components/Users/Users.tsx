@@ -18,12 +18,13 @@ const Users: React.FC<UsersContainerPropsType & UsersPropsType> = (props) => {
         pages.push(i)
     }
 
+
     return <div className={s.usersContainer}>
         <div className={s.users}>
             {pages.map(p => {
-                return <span className={s.page+(props.currentPage === p )? s.selectedPage:''}
-                             onClick={() => props.onPageChanged(p)}>{p}</span>
-            })}
+                const pageClass = s.page + ' ' + (props.currentPage === p ? s.activePage : '')
+                return <span className={pageClass}
+                             onClick={() => props.onPageChanged(p)}>{p}</span>})}
             {
                 props.users.map(u => <div key={u.id} className={s.user}>
                         <div className={s.avatar}>

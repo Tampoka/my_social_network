@@ -6,7 +6,7 @@
 .page {
  margin-left: 10px;
 }
-.selectedPage {
+.activePage {
 font-weight: bold;
 }
 
