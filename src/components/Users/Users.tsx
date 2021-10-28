@@ -21,7 +21,7 @@ const Users: React.FC<UsersContainerPropsType & UsersPropsType> = (props) => {
     return <div className={s.usersContainer}>
         <div className={s.users}>
             {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selectedPage : ''}
+                return <span className={s.page+(props.currentPage === p )? s.selectedPage:''}
                              onClick={() => props.onPageChanged(p)}>{p}</span>
             })}
             {

@@ -28,6 +28,7 @@ type AuthMeResponseType = {
     messages: string[]
     resultCode: 0 | 1
 }
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
