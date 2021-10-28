@@ -11,6 +11,7 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
@@ -77,4 +78,4 @@ let mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default withAuthRedirect (connect(mapStateToProps, mapDispatchToProps)(UsersContainer))
