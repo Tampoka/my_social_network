@@ -44,4 +44,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile
 })
 
-export default compose<React.ComponentType> (connect(mapStateToProps, {showUserProfile}),withRouter,withAuthRedirect)(ProfileContainer)
+export default compose<React.ComponentType> (connect(mapStateToProps, {showUserProfile}),
+    withRouter,
+    // withAuthRedirect
+)
+(ProfileContainer)
