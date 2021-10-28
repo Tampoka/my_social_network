@@ -23,7 +23,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
                 <img className={s.avatar}
                      src={profile.photos.large ? profile.photos.large : userPhoto}
                      alt={"User avatar" + profile.fullName}/>
-                <ProfileStatus/>
+                <ProfileStatus status="Lets fly!!!"/>
             </div>
         </div>)
 }
