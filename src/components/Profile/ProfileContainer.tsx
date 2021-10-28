@@ -24,6 +24,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 type MapStateToPropsType = {
     profile: null | ProfileType
+    isAuth:boolean
 }
 type MapDispatchToPropsType = {
     showUserProfile: (userId:number) => void
@@ -39,7 +40,8 @@ export type ProfilePropsType =
 
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth:state.auth.isAuth
 })
 
 
