@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/my_social_network/static/css/main.b9a056c4.chunk.css",
+    "main.js": "/my_social_network/static/js/main.9c79265c.chunk.js",
+    "main.js.map": "/my_social_network/static/js/main.9c79265c.chunk.js.map",
+    "runtime-main.js": "/my_social_network/static/js/runtime-main.4f8d7c0b.js",
+    "runtime-main.js.map": "/my_social_network/static/js/runtime-main.4f8d7c0b.js.map",
+    "static/js/2.a71c008a.chunk.js": "/my_social_network/static/js/2.a71c008a.chunk.js",
+    "static/js/2.a71c008a.chunk.js.map": "/my_social_network/static/js/2.a71c008a.chunk.js.map",
+    "static/js/3.61ef3fd7.chunk.js": "/my_social_network/static/js/3.61ef3fd7.chunk.js",
+    "static/js/3.61ef3fd7.chunk.js.map": "/my_social_network/static/js/3.61ef3fd7.chunk.js.map",
+    "index.html": "/my_social_network/index.html",
+    "static/css/main.b9a056c4.chunk.css.map": "/my_social_network/static/css/main.b9a056c4.chunk.css.map",
+    "static/js/2.a71c008a.chunk.js.LICENSE.txt": "/my_social_network/static/js/2.a71c008a.chunk.js.LICENSE.txt",
+    "static/media/Interwind-1.5s-367px.59830f26.svg": "/my_social_network/static/media/Interwind-1.5s-367px.59830f26.svg",
+    "static/media/user.d874ab6f.png": "/my_social_network/static/media/user.d874ab6f.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4f8d7c0b.js",
+    "static/js/2.a71c008a.chunk.js",
+    "static/css/main.b9a056c4.chunk.css",
+    "static/js/main.9c79265c.chunk.js"
+  ]
+}
