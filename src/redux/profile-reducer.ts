@@ -3,11 +3,11 @@ import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {profileAPI} from "../api/api";
 
-export type InitialStateType={
-    posts:PostType[]
-    newPostText:string
-    profile:null|ProfileType
-    status:string
+export type InitialStateType = {
+    posts: PostType[]
+    newPostText: string
+    profile: null | ProfileType
+    status: string
 }
 
 export type PostType = {
@@ -15,7 +15,7 @@ export type PostType = {
     message: string
     likesCount: number
 }
-export type ProfileType={
+export type ProfileType = {
     aboutMe: string | null
     contacts: {
         facebook: string | null
@@ -39,8 +39,9 @@ export type ProfileType={
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
+const SET_STATUS = "SET-STATUS";
 
-const initialState={
+const initialState = {
     posts: [
         {id: 1, message: "How are you?", likesCount: 19},
         {id: 2, message: "Where have you been?", likesCount: 3},
@@ -49,10 +50,10 @@ const initialState={
         {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
     ],
     newPostText: "Hello!",
-    profile:null,
-    status:''
+    profile: null,
+    status: ''
 }
-const profileReducer=(state:InitialStateType=initialState, action:ProfileActionsType):InitialStateType=>{
+const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
@@ -61,46 +62,65 @@ const profileReducer=(state:InitialStateType=initialState, action:ProfileActions
                 likesCount: 0
             }
 
-            return {...state,
-            posts:[...state.posts,newPost],
-            newPostText:""}
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            }
         case UPDATE_NEW_POST_TEXT:
-            return {...state,
-            newPostText:action.newText}
+            return {
+                ...state,
+                newPostText: action.newText
+            }
         case SET_USER_PROFILE:
-            return {...state, profile:action.profile}
+            return {...state, profile: action.profile}
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state
     }
 }
 
-export type ProfileActionsType =AddPostActionType|UpdateNewPostActionType|AddMessageActionType|UpdateNewMessageActionType|SetUserProfileType
+export type ProfileActionsType =
+    AddPostActionType
+    | UpdateNewPostActionType
+    | AddMessageActionType
+    | UpdateNewMessageActionType
+    | SetUserProfileType
+    | SetStatusType
 
 export type AddPostActionType = ReturnType<typeof addPost>
-
 export type UpdateNewPostActionType = ReturnType<typeof updateNewPostText>
-
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
+export type SetStatusType = ReturnType<typeof setStatus>
 
-export const addPost = ()=> ({type: ADD_POST}as const)
+export const addPost = () => ({type: ADD_POST} as const)
 
-export const updateNewPostText = (text: string)=> ({
+export const updateNewPostText = (text: string) => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 } as const)
 
-export const setUserProfile = (profile: ProfileType)=> ({
+export const setUserProfile = (profile: ProfileType) => ({
     type: SET_USER_PROFILE,
     profile
+} as const)
+
+export const setStatus = (status: string) => ({
+    type: SET_STATUS,
+    status
 } as const)
 
 
 // thunk
 
-export const showUserProfile = (userId:number) => {
+export const showUserProfile = (userId: number) => {
     return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
         profileAPI.getProfile(userId)
-            .then(data=>{
+            .then(data => {
                 dispatch(setUserProfile(data))
             })
     }
