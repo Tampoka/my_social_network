@@ -7,6 +7,7 @@ export type InitialStateType={
     posts:PostType[]
     newPostText:string
     profile:null|ProfileType
+    status:string
 }
 
 export type PostType = {
@@ -48,7 +49,8 @@ const initialState={
         {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
     ],
     newPostText: "Hello!",
-    profile:null
+    profile:null,
+    status:''
 }
 const profileReducer=(state:InitialStateType=initialState, action:ProfileActionsType):InitialStateType=>{
     switch (action.type) {

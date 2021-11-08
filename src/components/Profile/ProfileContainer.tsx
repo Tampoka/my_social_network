@@ -13,6 +13,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
             userId = 2
         }
         this.props.showUserProfile(userId)
+        this.props.getUserStatus(userId)
     }
 
     render() {
@@ -24,6 +25,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 type MapStateToPropsType = {
     profile: null | ProfileType
+    status:string
 }
 type MapDispatchToPropsType = {
     showUserProfile: (userId: number) => void
