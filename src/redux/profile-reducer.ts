@@ -126,5 +126,15 @@ export const showUserProfile = (userId: number) => {
     }
 }
 
+export const getStatus= (userId:number) => {
+    return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        debugger
+        profileAPI.getStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data))
+            })
+    }
+}
+
 
 export default profileReducer
