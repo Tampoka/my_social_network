@@ -63,9 +63,9 @@ const initialState = {
              location: {city: "Melbourne", country: "Australia"}
          },*/
     ],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1,
+    currentPage: 8,
     isFetching: false,
     followingInProgress: [20416]
 

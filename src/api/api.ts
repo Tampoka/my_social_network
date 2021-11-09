@@ -55,15 +55,15 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile(userId: number) {
         return instance.get<GetProfileResponseType>(`profile/${userId}`)
-            .then(response=>response.data)
+            .then(response => response.data)
     },
-    getStatus(userId:number){
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
-            .then(response=>response.data)
+            .then(response => response.data)
     },
-    updateStatus(status:string){
-        return instance.put(`profile/status`,{status:status})
-            .then(response=>response.data)
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status: status})
+            .then(response => response.data)
     }
 }
 

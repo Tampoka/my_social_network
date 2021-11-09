@@ -4,10 +4,11 @@
 }
 
 .page {
- margin-left: 10px;
+    margin-left: 10px;
 }
+
 .activePage {
-font-weight: bold;
+    font-weight: bold;
 }
 
 .user {

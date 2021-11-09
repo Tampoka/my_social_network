@@ -130,7 +130,6 @@ export const showUserProfile = (userId: number) => {
 
 export const getStatus = (userId: number) => {
     return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        debugger
         profileAPI.getStatus(userId)
             .then(data => {
                 dispatch(setStatus(data as string))
@@ -140,7 +139,6 @@ export const getStatus = (userId: number) => {
 
 export const updateStatus = (status: string) => {
     return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        debugger
         profileAPI.updateStatus(status)
             .then(data => {
                 // @ts-ignore
