@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
             userId = 2
         }
         this.props.showUserProfile(userId)
-        this.props.getStatus(userId)
+            this.props.getStatus(userId)
     }
 
     render() {
@@ -21,7 +21,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
             <Profile {...this.props}
                      profile={this.props.profile}
                      status={this.props.status}
-            updateStatus={this.props.updateStatus}/>
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }
