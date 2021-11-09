@@ -132,7 +132,7 @@ export const getStatus = (userId: number) => {
     return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
         profileAPI.getStatus(userId)
             .then(data => {
-                dispatch(setStatus(data as string))
+                dispatch(setStatus(data))
             })
     }
 }
@@ -141,7 +141,6 @@ export const updateStatus = (status: string) => {
     return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
         profileAPI.updateStatus(status)
             .then(data => {
-                // @ts-ignore
                 if (data.resultCode === 0) {
                     dispatch(setStatus(status))
                 }

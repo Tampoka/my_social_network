@@ -12,7 +12,6 @@ type GetUserResponseType = {
 type FollowResponseType = {
     data: any
     messages: string[]
-    fieldsErrors: string[]
     resultCode: 0 | 1
 }
 
@@ -25,6 +24,12 @@ type AuthMeResponseType = {
         email: string
     }
     fieldsErrors: string[]
+    messages: string[]
+    resultCode: 0 | 1
+}
+
+type UpdateStatusResponseType= {
+    data: any
     messages: string[]
     resultCode: 0 | 1
 }
@@ -58,11 +63,11 @@ export const profileAPI = {
             .then(response => response.data)
     },
     getStatus(userId: number) {
-        return instance.get(`profile/status/${userId}`)
+        return instance.get<string>(`profile/status/${userId}`)
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status`, {status: status})
+        return instance.put<UpdateStatusResponseType>(`profile/status`, {status: status})
             .then(response => response.data)
     }
 }
