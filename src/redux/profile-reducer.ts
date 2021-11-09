@@ -73,7 +73,9 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
                 newPostText: action.newText
             }
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile}
+            return {
+                ...state, profile: action.profile
+            }
         case SET_STATUS:
             return {
                 ...state,
@@ -89,13 +91,13 @@ export type ProfileActionsType =
     | UpdateNewPostActionType
     | AddMessageActionType
     | UpdateNewMessageActionType
-    | SetUserProfileType
-    | SetStatusType
+    | SetUserProfileActionType
+    | SetStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addPost>
 export type UpdateNewPostActionType = ReturnType<typeof updateNewPostText>
-export type SetUserProfileType = ReturnType<typeof setUserProfile>
-export type SetStatusType = ReturnType<typeof setStatus>
+export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetStatusActionType = ReturnType<typeof setStatus>
 
 export const addPost = () => ({type: ADD_POST} as const)
 
@@ -126,12 +128,25 @@ export const showUserProfile = (userId: number) => {
     }
 }
 
-export const getStatus= (userId:number) => {
+export const getStatus = (userId: number) => {
     return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
         debugger
         profileAPI.getStatus(userId)
             .then(data => {
-                dispatch(setStatus(data))
+                dispatch(setStatus(data as string))
+            })
+    }
+}
+
+export const updateStatus = (status: string) => {
+    return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        debugger
+        profileAPI.updateStatus(status)
+            .then(data => {
+                // @ts-ignore
+                if (data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
             })
     }
 }
