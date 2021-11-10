@@ -4,9 +4,11 @@ import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, minLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../FormControls/FormControls";
 
 const maxLength10=maxLengthCreator(10)
 const minLength5=minLengthCreator(5)
+
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     const postElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
                                                                 key={p.id}/>)
@@ -40,7 +42,7 @@ const AddPostForm: React.FC<InjectedFormProps<AddPostType>> = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field name="post"
-                       component="textarea"
+                       component={Textarea}
                        validate={[required,maxLength10,minLength5]}
                        placeholder='Enter your thoughts'/>
             </div>
