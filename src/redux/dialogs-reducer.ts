@@ -34,14 +34,14 @@ let initialState = {
         {id: 4, message: "Can you help me with code review today?"},
         {id: 5, message: "Are you going to gim today?"},
     ],
-    newMessageText: "How have you been?"
+    newMessageText: ""
 }
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage: MessageType = {
                 id: 6,
-                message: state.newMessageText,
+                message: action.newMessage,
             }
             return {
                 ...state,
@@ -67,7 +67,8 @@ export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageTextActionCreator>
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
+export const
+    addMessageActionCreator = (message:string) => ({type: ADD_MESSAGE,newMessage:message} as const)
 
 export const updateNewMessageTextActionCreator = (text: string) => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
