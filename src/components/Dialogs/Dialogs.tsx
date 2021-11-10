@@ -13,12 +13,12 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         <Message message={m.message} key={m.id}/>
     ));
 
-    // const onAddMessage = () => props.addMessage();
-
-    // const onMessageTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     const text = e.currentTarget.value;
-    //     props.updateNewMessageText(text);
-    // };
+    /*   const onAddMessage = () => props.addMessage();
+       const onMessageTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+           const text = e.currentTarget.value;
+           props.updateNewMessageText(text);
+       };
+   */
 
     const onSubmit = (formData: AddMessageType) => {
         props.addMessage(formData.message)

@@ -1,4 +1,4 @@
-import {AddMessageActionType, UpdateNewMessageActionType} from "./dialogs-reducer";
+import {AddMessageActionType} from "./dialogs-reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {profileAPI} from "../api/api";
@@ -90,7 +90,6 @@ export type ProfileActionsType =
     AddPostActionType
     | UpdateNewPostActionType
     | AddMessageActionType
-    | UpdateNewMessageActionType
     | SetUserProfileActionType
     | SetStatusActionType
 
