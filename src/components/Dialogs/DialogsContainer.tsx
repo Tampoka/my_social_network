@@ -1,7 +1,6 @@
 import {
     addMessageActionCreator,
     InitialStateType,
-    updateNewMessageTextActionCreator
 } from "../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
@@ -24,7 +23,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 type MapDispatchToPropsType = {
     addMessage: (message:string) => void,
-    updateNewMessageText: (text: string) => void
 }
 
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -33,9 +31,6 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addMessage: (message:string) => {
             dispatch(addMessageActionCreator(message))
-        },
-        updateNewMessageText: (text: string) => {
-            dispatch(updateNewMessageTextActionCreator(text))
         }
     }
 }
