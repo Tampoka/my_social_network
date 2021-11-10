@@ -51,7 +51,7 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageType>> = (props) => {
                 <Field
                     name="message"
                     component="textarea"
-                    placeholder={"Write a message"}
+                    placeholder="Write a message"
                 />
             </div>
             <div>

@@ -1,5 +1,3 @@
-import {AddPostActionType, UpdateNewPostActionType} from "./profile-reducer";
-
 export type InitialStateType = {
     dialogs: DialogType[]
     messages: MessageType[]
@@ -50,8 +48,6 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionsT
     }
 }
 export type ActionsType =
-    AddPostActionType
-    | UpdateNewPostActionType
     | AddMessageActionType
 
 export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>

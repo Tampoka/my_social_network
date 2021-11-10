@@ -1,11 +1,9 @@
-import {AddMessageActionType} from "./dialogs-reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {profileAPI} from "../api/api";
 
 export type InitialStateType = {
     posts: PostType[]
-    newPostText: string
     profile: null | ProfileType
     status: string
 }
@@ -37,7 +35,6 @@ export type ProfileType = {
     userId: number
 }
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
 
@@ -49,7 +46,6 @@ const initialState = {
         {id: 4, message: "How important is to be proactive?", likesCount: 27},
         {id: 5, message: "What are your goals for today, for this week?", likesCount: 54},
     ],
-    newPostText: "Hello!",
     profile: null,
     status: ''
 }
@@ -58,20 +54,15 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
         case ADD_POST:
             const newPost: PostType = {
                 id: 6,
-                message: state.newPostText,
+                message: action.text,
                 likesCount: 0
             }
 
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
             }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
-            }
+
         case SET_USER_PROFILE:
             return {
                 ...state, profile: action.profile
@@ -88,22 +79,14 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
 
 export type ProfileActionsType =
     AddPostActionType
-    | UpdateNewPostActionType
-    | AddMessageActionType
     | SetUserProfileActionType
     | SetStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addPost>
-export type UpdateNewPostActionType = ReturnType<typeof updateNewPostText>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetStatusActionType = ReturnType<typeof setStatus>
 
-export const addPost = () => ({type: ADD_POST} as const)
-
-export const updateNewPostText = (text: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-} as const)
+export const addPost = (text: string) => ({type: ADD_POST, text} as const)
 
 export const setUserProfile = (profile: ProfileType) => ({
     type: SET_USER_PROFILE,
