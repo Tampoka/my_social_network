@@ -4,6 +4,11 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../FormControls/FormControls";
+import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
+
+const maxLength10 = maxLengthCreator(10)
+const minLength5 = minLengthCreator(5)
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let dialogsElements = props.dialogsPage.dialogs.map((d) => (
@@ -50,7 +55,8 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageType>> = (props) => {
             <div>
                 <Field
                     name="message"
-                    component="textarea"
+                    component={Textarea}
+                    validate={[required, maxLength10, minLength5]}
                     placeholder="Write a message"
                 />
             </div>
