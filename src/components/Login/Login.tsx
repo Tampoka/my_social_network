@@ -1,23 +1,35 @@
 import React from "react";
-import {Field, InjectedFormProps,reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Input} from "../FormControls/FormControls";
+import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
 
-export type FormDataType ={
-    login:string
-    password:string
-    rememberMe:boolean
+export type FormDataType = {
+    login: string
+    password: string
+    rememberMe: boolean
 }
 
-const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const maxLength10 = maxLengthCreator(10)
+const minLength5 = minLengthCreator(5)
+
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder="Login" name="login" component="input"/>
+                <Field placeholder="Login"
+                       name="login"
+                       component={Input}
+                       validate={[required, maxLength10, minLength5]}/>
             </div>
             <div>
-                <Field placeholder="Password" name="password" component="input"/>
+                <Field placeholder="Password"
+                       name="password"
+                       component={Input}
+                       validate={[required]}/>
             </div>
             <div>
-                <Field component="input" name="rememberMe" type="checkbox"/>remember me
+                <Field component={Input} name="rememberMe"
+                       type="checkbox"/>remember me
             </div>
             <div>
                 <button>Login</button>
@@ -29,9 +41,9 @@ const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
 const Login = () => {
-const onSubmit=(formData:FormDataType)=>{
-    console.log(formData)
-}
+    const onSubmit = (formData: FormDataType) => {
+        console.log(formData)
+    }
     return (
         <div>
             <h1>Login</h1>
