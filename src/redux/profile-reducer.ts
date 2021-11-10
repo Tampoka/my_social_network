@@ -57,7 +57,6 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
                 message: action.text,
                 likesCount: 0
             }
-
             return {
                 ...state,
                 posts: [...state.posts, newPost],
