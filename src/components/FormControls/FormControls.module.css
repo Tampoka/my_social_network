@@ -7,6 +7,12 @@
     margin-bottom: 10px;
 }
 
+.input[type="checkbox"]{
+    display: block;
+    width: 25px;
+    height: 25px;
+}
+
 .formControl.error input,
 .formControl.error textarea {
     border: 1px solid red;
