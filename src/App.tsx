@@ -12,12 +12,12 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {AppStateType} from "./redux/redux-store";
-import {getAuth, logout} from "./redux/auth-reducer";
 import {compose} from "redux";
+import {initializeApp} from "./redux/app-reducer";
 
 class App extends React.Component<AppPropsType> {
     componentDidMount() {
-        this.props.getAuth()
+        this.props.initializeApp()
     }
     render() {
         return (
@@ -46,8 +46,7 @@ class App extends React.Component<AppPropsType> {
 type MapStateToPropsType = {}
 
 type MapDispatchToPropsType = {
-    getAuth: () => void
-    logout: () => void
+    initializeApp:any
 }
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({})
 
@@ -55,4 +54,4 @@ type AppPropsType=MapStateToPropsType&MapDispatchToPropsType
 
 export default compose<React.ComponentType>(
     withRouter,
-connect(mapStateToProps, {getAuth, logout}))(App);
+connect(mapStateToProps, {initializeApp}))(App);
