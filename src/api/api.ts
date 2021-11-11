@@ -15,7 +15,7 @@ type FollowResponseType = {
     resultCode: 0 | 1
 }
 
-type AuthLoginResponceType={
+type AuthLoginResponceType = {
     data: any
     messages: string[]
     resultCode: 0 | 1
@@ -33,7 +33,7 @@ type AuthMeResponseType = {
     resultCode: 0 | 1
 }
 
-type UpdateStatusResponseType= {
+type UpdateStatusResponseType = {
     data: any
     messages: string[]
     resultCode: 0 | 1
@@ -82,8 +82,8 @@ export const authAPI = {
         return instance.get<AuthMeResponseType>(`auth/me`)
             .then(response => response.data)
     },
-    login(email:string,password:string,rememberMe:boolean=false) {
-        return instance.post<AuthLoginResponceType>(`auth/login`,{email,password,rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post<AuthLoginResponceType>(`auth/login`, {email, password, rememberMe})
             .then(response => response.data)
     },
     logout() {

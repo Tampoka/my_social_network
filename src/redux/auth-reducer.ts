@@ -55,4 +55,14 @@ export const getAuth = () => {
     }
 }
 
+export const login = (email:string,password:string,rememberMe:boolean) => {
+    return (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
+        authAPI.login(email,password,rememberMe).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(getAuth())
+            }
+        })
+    }
+}
+
 export default authReducer
