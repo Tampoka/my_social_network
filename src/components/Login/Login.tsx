@@ -21,13 +21,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field placeholder="Email"
                        name="email"
                        component={Input}
-                       validate={[required, maxLength10, minLength5]}/>
+                       validate={[required, minLength5]}/>
             </div>
             <div>
                 <Field placeholder="Password"
+                       type="password"
                        name="password"
                        component={Input}
-                       validate={[required, maxLength10, minLength5]}/>
+                       validate={[required, minLength5]}/>
             </div>
             <div>
                 <Field component={Input} name="rememberMe"
@@ -42,9 +43,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = (props:MapDispatchToPropsType) => {
+const Login = (props: MapDispatchToPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-       props.login(formData.email,formData.password,formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
     return (
         <div>
@@ -55,7 +56,7 @@ const Login = (props:MapDispatchToPropsType) => {
 }
 
 type MapDispatchToPropsType = {
-    login: (email:string,password:string,rememberMe:boolean) =>void
+    login: (email: string, password: string, rememberMe: boolean) => void
 }
 
-export default connect (null,{login})(Login)
+export default connect(null, {login})(Login)
