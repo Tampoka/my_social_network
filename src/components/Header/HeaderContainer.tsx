@@ -20,7 +20,7 @@ type MapStateToPropsType = {
     login: null | string
 }
 type MapDispatchToPropsType = {
-    setAuthUserData: (userId: null | string, email: null | string, login: null | string) => void
+    setAuthUserData: (userId: null | string, email: null | string, login: null | string,isAuth:boolean) => void
     getAuth:()=>void
 }
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
