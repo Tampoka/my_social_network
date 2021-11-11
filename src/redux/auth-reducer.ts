@@ -44,38 +44,35 @@ export const setAuthUserData = (userId:null | string, email:null | string, login
 
 //thunk
 
-export const getAuth = () => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
+export const getAuth = () =>
+    (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
         authAPI.authMe().then(data => {
             let {id, email, login} = data.data
             if (data.resultCode === 0) {
-                dispatch(setAuthUserData(id, email, login,true))
+                dispatch(setAuthUserData(id, email, login, true))
             }
         })
     }
-}
 
-export const login = (email:string,password:string,rememberMe:boolean) => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, FormAction>) => {
-        authAPI.login(email,password,rememberMe).then(data => {
+export const login = (email:string,password:string,rememberMe:boolean) =>
+    (dispatch: ThunkDispatch<AppStateType, unknown, FormAction>) => {
+        authAPI.login(email, password, rememberMe).then(data => {
             if (data.resultCode === 0) {
                 dispatch(getAuth())
             } else {
-                let message=data.messages.length>0?data.messages[0]:"Some error"
-                dispatch(stopSubmit("login",{_error:message}))
+                let message = data.messages.length > 0 ? data.messages[0] : "Some error"
+                dispatch(stopSubmit("login", {_error: message}))
             }
         })
     }
-}
 
-export const logout = () => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
+export const logout = () =>
+    (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
         authAPI.logout().then(data => {
             if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null,false))
+                dispatch(setAuthUserData(null, null, null, false))
             }
         })
     }
-}
 
 export default authReducer
