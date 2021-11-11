@@ -21,3 +21,9 @@
 .formControl.error span {
     color: red
 }
+
+.formSummaryError {
+    padding: 10px;
+    color: red;
+    font-size: larger;
+}

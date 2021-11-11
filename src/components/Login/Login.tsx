@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
+import s from "./../FormControls/FormControls.module.css"
 
 export type FormDataType = {
     email: string
@@ -35,6 +36,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field component={Input} name="rememberMe"
                        type="checkbox"/>remember me
             </div>
+            {props.error &&
+            <div className={s.formSummaryError}>{props.error}</div>}
             <div>
                 <button>Login</button>
             </div>
@@ -44,12 +47,12 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = (props:LoginPropsType) => {
+const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if(props.isAuth) {
+    if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
     return (
@@ -72,6 +75,6 @@ type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
 
-type LoginPropsType=MapStateToPropsType&MapDispatchToPropsType
+type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export default connect(mapStateToProps, {login})(Login)
