@@ -1,6 +1,7 @@
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {authAPI} from "../api/api";
+import {FormAction, stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET-USER-DATA";
 
@@ -55,10 +56,13 @@ export const getAuth = () => {
 }
 
 export const login = (email:string,password:string,rememberMe:boolean) => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
+    return (dispatch: ThunkDispatch<AppStateType, unknown, FormAction>) => {
         authAPI.login(email,password,rememberMe).then(data => {
             if (data.resultCode === 0) {
                 dispatch(getAuth())
+            } else {
+                let message=data.messages.length>0?data.messages[0]:"Some error"
+                dispatch(stopSubmit("login",{_error:message}))
             }
         })
     }
@@ -69,7 +73,6 @@ export const logout = () => {
         authAPI.logout().then(data => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null,false))
-
             }
         })
     }
