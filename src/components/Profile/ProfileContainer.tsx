@@ -10,7 +10,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
         let userId = Number(this.props.match.params.userId)
         if (!userId) {
-            userId = 2
+            userId = Number(this.props.authorizedUserId)
         }
         this.props.showUserProfile(userId)
             this.props.getStatus(userId)
