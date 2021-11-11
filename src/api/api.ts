@@ -15,6 +15,12 @@ type FollowResponseType = {
     resultCode: 0 | 1
 }
 
+type AuthLoginResponceType={
+    data: any
+    messages: string[]
+    resultCode: 0 | 1
+}
+
 type GetProfileResponseType = ProfileType
 
 type AuthMeResponseType = {
@@ -23,7 +29,6 @@ type AuthMeResponseType = {
         login: string
         email: string
     }
-    fieldsErrors: string[]
     messages: string[]
     resultCode: 0 | 1
 }
@@ -75,6 +80,14 @@ export const profileAPI = {
 export const authAPI = {
     authMe() {
         return instance.get<AuthMeResponseType>(`auth/me`)
+            .then(response => response.data)
+    },
+    login(email:string,password:string,rememberMe:boolean=false) {
+        return instance.post<AuthLoginResponceType>(`auth/login`,{email,password,rememberMe})
+            .then(response => response.data)
+    },
+    logout() {
+        return instance.delete<AuthLoginResponceType>(`auth/login`)
             .then(response => response.data)
     }
 }
