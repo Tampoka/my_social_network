@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
-import {Route} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -13,12 +13,12 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {AppStateType} from "./redux/redux-store";
 import {getAuth, logout} from "./redux/auth-reducer";
+import {compose} from "redux";
 
 class App extends React.Component<AppPropsType> {
     componentDidMount() {
         this.props.getAuth()
     }
-
     render() {
         return (
             <div className="app-wrapper">
@@ -53,4 +53,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({})
 
 type AppPropsType=MapStateToPropsType&MapDispatchToPropsType
 
-export default connect(mapStateToProps, {getAuth, logout})(App);
+export default compose<React.ComponentType>(
+    withRouter,
+connect(mapStateToProps, {getAuth, logout}))(App);
