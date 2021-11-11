@@ -1,9 +1,11 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../FormControls/FormControls";
-import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
+import {minLengthCreator, required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 export type FormDataType = {
     email: string
@@ -11,7 +13,6 @@ export type FormDataType = {
     rememberMe: boolean
 }
 
-const maxLength10 = maxLengthCreator(10)
 const minLength5 = minLengthCreator(5)
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
@@ -43,9 +44,13 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = (props: MapDispatchToPropsType) => {
+const Login = (props:LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
+    }
+
+    if(props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
     return (
         <div>
@@ -55,8 +60,18 @@ const Login = (props: MapDispatchToPropsType) => {
     )
 }
 
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    isAuth: state.auth.isAuth,
+})
+
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
 
-export default connect(null, {login})(Login)
+type LoginPropsType=MapStateToPropsType&MapDispatchToPropsType
+
+export default connect(mapStateToProps, {login})(Login)
