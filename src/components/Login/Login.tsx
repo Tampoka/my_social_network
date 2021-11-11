@@ -1,11 +1,12 @@
 import React from "react";
-import s from './Login.module.css'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../FormControls/FormControls";
 import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
 
 export type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -17,8 +18,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder="Login"
-                       name="login"
+                <Field placeholder="Email"
+                       name="email"
                        component={Input}
                        validate={[required, maxLength10, minLength5]}/>
             </div>
@@ -26,7 +27,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field placeholder="Password"
                        name="password"
                        component={Input}
-                       validate={[required]}/>
+                       validate={[required, maxLength10, minLength5]}/>
             </div>
             <div>
                 <Field component={Input} name="rememberMe"
@@ -41,9 +42,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = () => {
+const Login = (props:MapDispatchToPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+       props.login(formData.email,formData.password,formData.rememberMe)
     }
     return (
         <div>
@@ -53,4 +54,8 @@ const Login = () => {
     )
 }
 
-export default Login
+type MapDispatchToPropsType = {
+    login: (email:string,password:string,rememberMe:boolean) =>void
+}
+
+export default connect (null,{login})(Login)
