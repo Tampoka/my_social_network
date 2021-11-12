@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
-import {Route, withRouter} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -14,12 +14,16 @@ import {connect} from "react-redux";
 import {AppStateType} from "./redux/redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
+import Preloader from "./common/Preloader/Preloader";
 
 class App extends React.Component<AppPropsType> {
     componentDidMount() {
         this.props.initializeApp()
     }
     render() {
+        if(!this.props.initialized){
+            return <Preloader/>
+        }
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>
