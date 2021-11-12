@@ -43,12 +43,16 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-type MapStateToPropsType = {}
+type MapStateToPropsType = {
+    initialized:boolean
+}
 
 type MapDispatchToPropsType = {
     initializeApp:any
 }
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({})
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    initialized:state.app.initialized
+})
 
 type AppPropsType=MapStateToPropsType&MapDispatchToPropsType
 
