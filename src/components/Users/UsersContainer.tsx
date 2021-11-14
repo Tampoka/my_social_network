@@ -4,7 +4,6 @@ import {
     acceptFollow,
     acceptUnFollow,
     follow,
-    getUsers,
     InitialStateType,
     setCurrentPage,
     unFollow
@@ -13,6 +12,14 @@ import React from "react";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
@@ -58,6 +65,7 @@ type MapDispatchToPropsType = {
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
+/*
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         usersPage: state.usersPage,
@@ -68,6 +76,19 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
+*/
+
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        usersPage: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
+    }
+}
+
 
 let mapDispatchToProps = {
     acceptFollow,
