@@ -11,12 +11,12 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         let userId = Number(this.props.match.params.userId)
         if (!userId) {
             userId = Number(this.props.authorizedUserId)
+            if (!userId) {
+                this.props.history.push("/login")
+            }
         }
         this.props.showUserProfile(userId)
-            this.props.getStatus(userId)
-        if(!userId){
-            this.props.history.push("/login")
-        }
+        this.props.getStatus(userId)
     }
 
     render() {
@@ -32,8 +32,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 type MapStateToPropsType = {
     profile: null | ProfileType
     status: string
-    authorizedUserId:string|null,
-    isAuth:boolean
+    authorizedUserId: string | null,
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     showUserProfile: (userId: number) => void
@@ -53,8 +53,8 @@ export type ProfilePropsType =
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    authorizedUserId:state.auth.userId,
-    isAuth:state.auth.isAuth
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<React.ComponentType>(
