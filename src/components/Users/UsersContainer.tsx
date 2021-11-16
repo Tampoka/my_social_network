@@ -4,9 +4,10 @@ import {
     acceptFollow,
     acceptUnFollow,
     follow,
-    InitialStateType,
+    requestUsers,
     setCurrentPage,
-    unFollow
+    unFollow,
+    UserType
 } from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
@@ -23,11 +24,11 @@ import {
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.requestUsers(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber)
     }
 
@@ -39,14 +40,14 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
             }
             <Users {...this.props}
                    onPageChanged={this.onPageChanged}
-                   users={this.props.usersPage.users}/>
+                   users={this.props.users}/>
         </>
     }
 
 }
 
 type MapStateToPropsType = {
-    usersPage: InitialStateType
+    users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -58,7 +59,7 @@ type MapDispatchToPropsType = {
     acceptFollow: (userId: number) => void
     acceptUnFollow: (userId: number) => void
     setCurrentPage: (pageNumber: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
+    requestUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unFollow: (userId: number) => void
 }
@@ -80,7 +81,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        usersPage: getUsers(state),
+        users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
@@ -94,7 +95,7 @@ let mapDispatchToProps = {
     acceptFollow,
     acceptUnFollow,
     setCurrentPage,
-    getUsers,
+    requestUsers,
     follow,
     unFollow
 }
