@@ -20,6 +20,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 
     render() {
+        console.log("render Profile")
         return (
             <Profile {...this.props}
                      profile={this.props.profile}
@@ -50,12 +51,15 @@ export type ProfilePropsType =
     & MapDispatchToPropsType
 
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
-})
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    console.log("mstp ProfileContainer")
+    return {
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
+    }
+}
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {showUserProfile, getStatus, updateStatus}),
