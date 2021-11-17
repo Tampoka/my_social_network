@@ -7,7 +7,6 @@ import {UserType} from "./users-reducer";
 }
 
 export const getUsersSelector = createSelector(getUsers, (users: Array<UserType>) => {
-    debugger
     return users.filter((u: UserType) => true)
 })
 export const getPageSize = (state: AppStateType) => {
