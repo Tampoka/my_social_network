@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {KeyboardEvent, useState} from 'react';
 
 export type ProfileStatusPropTypes = {
     status: string
@@ -14,6 +14,12 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropTypes> = (props) => {
         setEditMode(false)
         props.updateStatus(status)
     }
+    const onEnterHandler=(e:KeyboardEvent<HTMLInputElement>)=>{
+        console.log(e)
+        if(e.key==="Enter"){
+            deactivateEditMode()
+        }
+    }
     return (
         <div>
             {!editMode &&
@@ -25,6 +31,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusPropTypes> = (props) => {
             {editMode &&
             <div>
                 <input onBlur={deactivateEditMode}
+                       onKeyPress={onEnterHandler}
                        onChange={(e) => setStatus(e.currentTarget.value)}
                        value={status}
                        autoFocus/>
