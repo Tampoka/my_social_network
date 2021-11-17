@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
@@ -9,31 +9,25 @@ import {Textarea} from "../../FormControls/FormControls";
 const maxLength10 = maxLengthCreator(10)
 const minLength5 = minLengthCreator(5)
 
-class MyPosts extends PureComponent<MyPostsPropsType> {
-   /* shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
-        return nextProps !== this.props || nextState !== this.state
-    }*/
+const MyPosts: React.FC<MyPostsPropsType> = React.memo((props) => {
+    console.log("render Posts")
+    const postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
+                                                                key={p.id}/>)
 
-    render() {
-        console.log("render Posts")
-        const postElements = this.props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
-                                                                         key={p.id}/>)
-
-        const onSubmit = (formData: AddPostType) => {
-            this.props.addPost(formData.post)
-        }
-        return (
-            <div className={s.postsBlock}>
-                <h3>My Posts</h3>
-                <AddPostReduxForm
-                    onSubmit={onSubmit}/>
-                <div className={s.posts}>
-                    {postElements}
-                </div>
-            </div>
-        )
+    const onSubmit = (formData: AddPostType) => {
+        props.addPost(formData.post)
     }
-}
+    return (
+        <div className={s.postsBlock}>
+            <h3>My Posts</h3>
+            <AddPostReduxForm
+                onSubmit={onSubmit}/>
+            <div className={s.posts}>
+                {postElements}
+            </div>
+        </div>
+    )
+})
 
 type AddPostType = {
     post: string
