@@ -36,3 +36,14 @@ test("correct post should be deleted", () => {
     //3.expectation
     expect(newState.posts.length).toBe(4)
 })
+
+test("post should not be deletef if incorrect id", () => {
+
+    //2.action
+    let action = deletePost(11)
+
+    let newState = profileReducer(initialState, action)
+
+    //3.expectation
+    expect(newState.posts.length).toBe(5)
+})
