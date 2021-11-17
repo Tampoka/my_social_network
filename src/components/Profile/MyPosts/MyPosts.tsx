@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
@@ -9,10 +9,10 @@ import {Textarea} from "../../FormControls/FormControls";
 const maxLength10 = maxLengthCreator(10)
 const minLength5 = minLengthCreator(5)
 
-class MyPosts extends React.Component<MyPostsPropsType> {
-    shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
+class MyPosts extends PureComponent<MyPostsPropsType> {
+   /* shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
         return nextProps !== this.props || nextState !== this.state
-    }
+    }*/
 
     render() {
         console.log("render Posts")
