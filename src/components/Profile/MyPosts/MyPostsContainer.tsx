@@ -1,14 +1,14 @@
-import {addPost, InitialStateType} from "../../../redux/profile-reducer";
+import {addPost, PostType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 
 type MapStateToPropsType = {
-    profilePage: InitialStateType
+    posts: PostType[]
 }
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        profilePage: state.profilePage
+        posts: state.profilePage.posts
     }
 }
 

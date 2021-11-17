@@ -16,7 +16,7 @@ class MyPosts extends React.Component<MyPostsPropsType> {
 
     render() {
         console.log("render Posts")
-        const postElements = this.props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
+        const postElements = this.props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
                                                                          key={p.id}/>)
 
         const onSubmit = (formData: AddPostType) => {
