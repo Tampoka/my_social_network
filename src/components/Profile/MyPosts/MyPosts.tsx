@@ -9,29 +9,30 @@ import {Textarea} from "../../FormControls/FormControls";
 const maxLength10 = maxLengthCreator(10)
 const minLength5 = minLengthCreator(5)
 
-const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    const postElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
-                                                                key={p.id}/>)
-
-    /*  const onAddPost = () => props.addPost()
-      const onPostTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-          const text = e.currentTarget.value
-          props.updateNewPostText(text)
-      }*/
-
-    const onSubmit = (formData: AddPostType) => {
-        props.addPost(formData.post)
+class MyPosts extends React.Component<MyPostsPropsType> {
+    shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
+        return nextProps !== this.props || nextState !== this.state
     }
-    return (
-        <div className={s.postsBlock}>
-            <h3>My Posts</h3>
-            <AddPostReduxForm
-                onSubmit={onSubmit}/>
-            <div className={s.posts}>
-                {postElements}
+
+    render() {
+        console.log("render Posts")
+        const postElements = this.props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
+                                                                         key={p.id}/>)
+
+        const onSubmit = (formData: AddPostType) => {
+            this.props.addPost(formData.post)
+        }
+        return (
+            <div className={s.postsBlock}>
+                <h3>My Posts</h3>
+                <AddPostReduxForm
+                    onSubmit={onSubmit}/>
+                <div className={s.posts}>
+                    {postElements}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 type AddPostType = {
