@@ -3,7 +3,7 @@ import {AppStateType} from "./redux-store";
 import {authAPI} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 
-const SET_USER_DATA = "SET-USER-DATA";
+const SET_USER_DATA = "/auth/SET-USER-DATA";
 
 export type InitialStateType = {
     userId: null | string
