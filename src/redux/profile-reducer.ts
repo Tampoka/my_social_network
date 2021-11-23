@@ -111,34 +111,25 @@ export const setStatus = (status: string) => ({
 
 // thunk
 
-export const showUserProfile = (userId: number) => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        profileAPI.getProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
+export const showUserProfile = (userId: number) =>
+    async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        let response = await profileAPI.getProfile(userId)
+        dispatch(setUserProfile(response))
     }
-}
 
-export const getStatus = (userId: number) => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        profileAPI.getStatus(userId)
-            .then(data => {
-                dispatch(setStatus(data))
-            })
+export const getStatus = (userId: number) =>
+    async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        let response = await profileAPI.getStatus(userId)
+        dispatch(setStatus(response))
     }
-}
 
-export const updateStatus = (status: string) => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        profileAPI.updateStatus(status)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
+export const updateStatus = (status: string) =>
+    async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        let response = await profileAPI.updateStatus(status)
+        if (response.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
     }
-}
 
 
 export default profileReducer
