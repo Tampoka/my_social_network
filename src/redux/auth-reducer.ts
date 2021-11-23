@@ -9,7 +9,7 @@ export type InitialStateType = {
     userId: null | string
     email: null | string
     login: null | string
-    isAuth:boolean
+    isAuth: boolean
 }
 
 
@@ -17,7 +17,7 @@ const initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth:false
+    isAuth: false
 }
 const authReducer = (state: InitialStateType = initialState, action: AuthActionsType): InitialStateType => {
     switch (action.type) {
@@ -37,42 +37,39 @@ export  type AuthActionsType =
 
 export type SetUserDataActionType = ReturnType<typeof setAuthUserData>
 
-export const setAuthUserData = (userId:null | string, email:null | string, login:null | string,isAuth:boolean) => ({
+export const setAuthUserData = (userId: null | string, email: null | string, login: null | string, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    payload:{userId, email, login,isAuth}
+    payload: {userId, email, login, isAuth}
 } as const)
 
 //thunk
 
 export const getAuth = () =>
-    (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
-        authAPI.authMe().then(data => {
-            let {id, email, login} = data.data
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-        })
+    async (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
+        let response = await authAPI.authMe()
+        if (response.resultCode === 0) {
+            let {id, email, login} = response.data
+            dispatch(setAuthUserData(id, email, login, true))
+        }
     }
 
-export const login = (email:string,password:string,rememberMe:boolean) =>
-    (dispatch: ThunkDispatch<AppStateType, unknown, FormAction>) => {
-        authAPI.login(email, password, rememberMe).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuth())
-            } else {
-                let message = data.messages.length > 0 ? data.messages[0] : "Some error"
-                dispatch(stopSubmit("login", {_error: message}))
-            }
-        })
+export const login = (email: string, password: string, rememberMe: boolean) =>
+    async (dispatch: ThunkDispatch<AppStateType, unknown, FormAction>) => {
+        let response = await authAPI.login(email, password, rememberMe)
+        if (response.resultCode === 0) {
+            dispatch(getAuth())
+        } else {
+            let message = response.messages.length > 0 ? response.messages[0] : "Some error"
+            dispatch(stopSubmit("login", {_error: message}))
+        }
     }
 
 export const logout = () =>
-    (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
-        authAPI.logout().then(data => {
-            if (data.resultCode === 0) {
+    async (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType>) => {
+        let response=await authAPI.logout()
+            if (response.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false))
             }
-        })
     }
 
 export default authReducer
