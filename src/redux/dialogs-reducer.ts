@@ -12,7 +12,7 @@ export type MessageType = {
     message: string
 }
 
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE = "/dialogs/ADD-MESSAGE";
 
 let initialState = {
     dialogs: [
