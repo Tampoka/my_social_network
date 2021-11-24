@@ -24,11 +24,13 @@ import {
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.requestUsers(pageNumber, pageSize)
         this.props.setCurrentPage(pageNumber)
     }
 
@@ -66,19 +68,6 @@ type MapDispatchToPropsType = {
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-/*
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        usersPage: state.usersPage,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}
-*/
-
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: getUsersSelector(state),
@@ -90,7 +79,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-
 let mapDispatchToProps = {
     acceptFollow,
     acceptUnFollow,
@@ -101,4 +89,4 @@ let mapDispatchToProps = {
 }
 
 
-export default compose<React.ComponentType> (connect(mapStateToProps, mapDispatchToProps))(UsersContainer)
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps))(UsersContainer)
