@@ -7,14 +7,14 @@ type FormControlsPropsType = {
     meta: any
     children: any
 }
-const FormControl: React.FC<FormControlsPropsType> = ({input, meta, ...props}) => {
-    const hasError = meta.touched && meta.error
+const FormControl: React.FC<FormControlsPropsType> = ({meta: {touched, error}, children}) => {
+    const hasError = touched && error
     return (
         <div className={s.formControl + " " + (hasError ? s.error : "")}>
             <div>
-                {props.children}
+                {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
