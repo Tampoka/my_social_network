@@ -4,27 +4,23 @@ import userPhoto from "./../../assets/images/user.png"
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import {UsersContainerPropsType} from "./UsersContainer";
+import Paginator from "../../common/Paginator/Paginator";
 
 export type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     users: UserType[]
 }
-const Users: React.FC<UsersContainerPropsType & UsersPropsType> = (props) => {
-
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
-
+const Users: React.FC<UsersContainerPropsType & UsersPropsType> = ({
+                                                                       currentPage,
+                                                                       pageSize,
+                                                                       onPageChanged,
+                                                                       totalUsersCount,
+                                                                       ...props
+                                                                   }) => {
     return <div className={s.usersContainer}>
         <div className={s.users}>
-            {pages.map(p => {
-                const pageClass = s.page + ' ' + (props.currentPage === p ? s.activePage : '')
-                return <span className={pageClass}
-                             onClick={() => props.onPageChanged(p)}>{p}</span>})}
+            <Paginator onPageChanged={onPageChanged} totalUsersCount={totalUsersCount} pageSize={pageSize}
+                       currentPage={currentPage}/>
             {
                 props.users.map(u => <div key={u.id} className={s.user}>
                         <div className={s.avatar}>

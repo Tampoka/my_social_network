@@ -3,14 +3,6 @@
     width: 600px;
 }
 
-.page {
-    margin-left: 10px;
-}
-
-.activePage {
-    font-weight: bold;
-}
-
 .user {
     display: flex;
     justify-content: space-between;
