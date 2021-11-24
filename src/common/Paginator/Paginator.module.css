@@ -1,6 +1,11 @@
+.paginator {
+    margin-bottom: 20px;
+}
 
 .page {
     margin-left: 10px;
+    cursor:pointer;
+    overflow: hidden;
 }
 
 .activePage {
