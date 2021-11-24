@@ -34,7 +34,7 @@ export const Input: React.FC<any> = (props: any) => {
 };
 
 
-export const createField = (name: string, component: any, validators: Array<any>, placeholder: string = "", props: {}, text: string = "", wrapperClass: any, fieldClass: any) =>
+export const createField = (placeholder: string, name: string, component: any, validators: Array<any>, props = {}, text: string = "", wrapperClass: any = null, fieldClass: any = null) =>
     <div className={wrapperClass}>
         <Field placeholder={placeholder}
                name={name}
@@ -42,6 +42,7 @@ export const createField = (name: string, component: any, validators: Array<any>
                validate={validators}
                {...props}
                className={fieldClass}/>
+        {text}
     </div>
 
 
