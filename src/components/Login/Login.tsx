@@ -16,9 +16,9 @@ export type FormDataType = {
 
 const minLength5 = minLengthCreator(5)
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit,error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder="Email"
                        name="email"
@@ -36,8 +36,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field component={Input} name="rememberMe"
                        type="checkbox"/>remember me
             </div>
-            {props.error &&
-            <div className={s.formSummaryError}>{props.error}</div>}
+            {error &&
+            <div className={s.formSummaryError}>{error}</div>}
             <div>
                 <button>Login</button>
             </div>
