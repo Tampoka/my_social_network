@@ -160,24 +160,26 @@ export const requestUsers = (currentPage: number, pageSize: number) =>
         dispatch(setTotalUsersCount(300))
     }
 
+const followUnfollowFlow = async (dispatch: ThunkDispatch<AppStateType, unknown, UsersActionsType>, userId: number, apiMethod: any, actionCreator: any) => {
+    dispatch(toggleFollowingProgress(true, userId))
+    let data = await apiMethod(userId)
+
+    if (data.resultCode === 0) {
+        dispatch(actionCreator(userId))
+    }
+    dispatch(toggleFollowingProgress(false, userId))
+}
+
 export const unFollow = (userId: number) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, UsersActionsType>) => {
-        dispatch(toggleFollowingProgress(true, userId))
-        let data = await usersAPI.unFollow(userId)
-        if (data.resultCode === 0) {
-            dispatch(acceptUnFollow(userId))
-        }
-        dispatch(toggleFollowingProgress(false, userId))
+        let apiMethod = usersAPI.unFollow.bind(usersAPI)
+        followUnfollowFlow(dispatch, userId, apiMethod, acceptUnFollow)
     }
 
 export const follow = (userId: number) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, UsersActionsType>) => {
-        dispatch(toggleFollowingProgress(true, userId))
-        let data = await usersAPI.follow(userId)
-        if (data.resultCode === 0) {
-            dispatch(acceptFollow(userId))
-        }
-        dispatch(toggleFollowingProgress(false, userId))
+        let apiMethod = usersAPI.follow.bind(usersAPI)
+        followUnfollowFlow(dispatch, userId, apiMethod, acceptFollow)
     }
 
 
