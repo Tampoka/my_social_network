@@ -66,7 +66,7 @@ export const AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp}))(App);
 
 
-const MainApp = () => {
+export const MainApp = () => {
     return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
