@@ -9,4 +9,19 @@ describe("ProfileStatusComponent", () => {
         const instance = component.root
         expect(instance.props.status).toBe("test text")
     })
+    test("after creation <span> should be displayed", () => {
+        const component = create(<ProfileStatus status={"test text"}
+                                                updateStatus={updateStatus}/>)
+        const instance = component.root
+        let span = instance.findByType("span")
+        expect(span).not.toBeNull()
+    })
+    test("after creation <span> should be with correct status", () => {
+        const component = create(<ProfileStatus status={"test text"}
+                                                updateStatus={updateStatus}/>)
+        const instance = component.root
+        let span = instance.findByType("span")
+        expect(span.props.children).toBe("test text")
+    })
+
 })
