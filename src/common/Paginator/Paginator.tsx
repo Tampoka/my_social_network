@@ -20,7 +20,7 @@ const Paginator: React.FC<PaginatorPropsType> = ({onPageChanged, totalUsersCount
         <div className={s.paginator}>
             {pages.map(p => {
                 const pageClass = s.page + ' ' + (currentPage === p ? s.activePage : '')
-                return <span className={pageClass}
+                return <span key={p} className={pageClass}
                              onClick={() => onPageChanged(p)}>{p}</span>
             })}
         </div>)
