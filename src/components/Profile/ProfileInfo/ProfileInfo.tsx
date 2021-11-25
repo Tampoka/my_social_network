@@ -26,7 +26,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                      src={profile.photos.large ? profile.photos.large : userPhoto}
                      alt={"User avatar" + profile.fullName}/>
                 <ProfileStatusWithHooks status={status}
-                               updateStatus={updateStatus}/>
+                                        updateStatus={updateStatus}/>
             </div>
         </div>)
 }

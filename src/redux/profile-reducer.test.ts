@@ -37,7 +37,7 @@ test("correct post should be deleted", () => {
     expect(newState.posts.length).toBe(4)
 })
 
-test("post should not be deletef if incorrect id", () => {
+test("post should not be deleted if incorrect id", () => {
 
     //2.action
     let action = deletePost(11)
