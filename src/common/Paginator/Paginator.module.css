@@ -4,10 +4,16 @@
 
 .page {
     margin-left: 10px;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
 }
 
 .activePage {
     font-weight: bold;
+}
+
+.paginator button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #a9a6a6;
 }
