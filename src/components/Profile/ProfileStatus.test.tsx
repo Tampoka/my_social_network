@@ -23,7 +23,7 @@ describe("ProfileStatusComponent", () => {
         let span = instance.findByType("span")
         expect(span.props.children).toBe("test text")
     })
-    test("onDoubleClick input should be displayed", () => {
+    test("onDoubleClick <input> should be displayed", () => {
         const component = create(<ProfileStatus status={"test text"}
                                                 updateStatus={updateStatus}/>)
         const instance = component.root
@@ -32,5 +32,13 @@ describe("ProfileStatusComponent", () => {
         let input = instance.findByType("input")
         expect(input).not.toBeNull()
     })
-
+    test("<input> should be with correct value", () => {
+        const component = create(<ProfileStatus status={"test text"}
+                                                updateStatus={updateStatus}/>)
+        const instance = component.root
+        let span = instance.findByType("span")
+        span.props.onDoubleClick()
+        let input = instance.findByType("input")
+        expect(input.props.value).toBe("test text")
+    })
 })
