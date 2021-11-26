@@ -19,8 +19,11 @@ const Users: React.FC<UsersContainerPropsType & UsersPropsType> = ({
                                                                    }) => {
     return <div className={s.usersContainer}>
         <div className={s.users}>
-            <Paginator onPageChanged={onPageChanged} totalUsersCount={totalUsersCount} pageSize={pageSize}
-                       currentPage={currentPage}/>
+            <Paginator onPageChanged={onPageChanged}
+                       totalUsersCount={totalUsersCount}
+                       pageSize={pageSize}
+                       currentPage={currentPage}
+                       portionSize={10}/>
             {
                 users.map(u => <User key={u.id} user={u} followingInProgress={props.followingInProgress}
                                      follow={props.follow} unFollow={props.unFollow}/>)
