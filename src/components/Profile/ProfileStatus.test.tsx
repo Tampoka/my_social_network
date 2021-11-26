@@ -23,6 +23,14 @@ describe("ProfileStatusComponent", () => {
         let span = instance.findByType("span")
         expect(span.props.children).toBe("test text")
     })
+    test("after creation <input> shouldn't be displayed", () => {
+        const component = create(<ProfileStatus status={"test text"}
+                                                updateStatus={updateStatus}/>)
+        const instance = component.root
+        expect(()=>{
+            instance.findByType("input")
+        }).toThrow()
+    })
     test("onDoubleClick <input> should be displayed", () => {
         const component = create(<ProfileStatus status={"test text"}
                                                 updateStatus={updateStatus}/>)
