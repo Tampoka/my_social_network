@@ -31,7 +31,7 @@ describe("ProfileStatusComponent", () => {
             instance.findByType("input")
         }).toThrow()
     })
-    test("onDoubleClick <input> should be displayed", () => {
+    test("onDoubleClick <input> should be displayed in edit mode instead of <span>", () => {
         const component = create(<ProfileStatus status={"test text"}
                                                 updateStatus={updateStatus}/>)
         const instance = component.root
@@ -48,5 +48,14 @@ describe("ProfileStatusComponent", () => {
         span.props.onDoubleClick()
         let input = instance.findByType("input")
         expect(input.props.value).toBe("test text")
+    })
+    test("callback should be called", () => {
+        const mockCallback=jest.fn()
+        const component = create(<ProfileStatus status={"test text"}
+                                                updateStatus={mockCallback}/>)
+        const instance = component.getInstance()
+        // @ts-ignore
+        instance.deactivateEditMode()
+        expect(mockCallback.mock.calls.length).toBe(1)
     })
 })
