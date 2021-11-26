@@ -159,8 +159,8 @@ export const requestUsers = (currentPage: number, pageSize: number) =>
         let data = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
-        // dispatch(setTotalUsersCount(data.totalCount))
-        dispatch(setTotalUsersCount(300))
+        dispatch(setTotalUsersCount(data.totalCount))
+        // dispatch(setTotalUsersCount(300))
     }
 
 const followUnfollowFlow = async (dispatch: ThunkDispatch<AppStateType, unknown, UsersActionsType>, userId: number, apiMethod: any, actionCreator: any) => {
