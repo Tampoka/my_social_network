@@ -15,7 +15,7 @@ import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/Preloader";
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
-const  ProfileContainer= React.lazy(() => import ("./components/Profile/ProfileContainer"));
+const ProfileContainer = React.lazy(() => import ("./components/Profile/ProfileContainer"));
 
 class App extends React.Component<AppPropsType> {
     componentDidMount() {
@@ -31,10 +31,16 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() =>
-                        <DialogsContainer/>}/>
-                    <Route path="/profile/:userId?" render={() =>
-                        <ProfileContainer/>}/>
+                    <Route path="/dialogs" render={() => {
+                        return <React.Suspense fallback={<div>Loading...</div>}>
+                            <DialogsContainer/>
+                        </React.Suspense>
+                    }}/>
+                    <Route path="/profile/:userId?" render={() => {
+                        return <React.Suspense fallback={<div>Loading...</div>}>
+                            <ProfileContainer/>
+                        </React.Suspense>
+                    }}/>
                     <Route path="/users" render={() =>
                         <UsersContainer/>}/>
                     <Route path="/login" render={() =>
