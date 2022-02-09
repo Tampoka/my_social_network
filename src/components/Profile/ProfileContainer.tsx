@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getStatus, ProfileType, showUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, ProfileType, showUserProfile, updateStatus,savePhoto} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
@@ -24,8 +24,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-        if(this.props.match.params.userId!==prevProps.match.params.userId){
-        this.refreshProfile()
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
         }
     }
 
@@ -34,9 +34,10 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         return (
             <Profile {...this.props}
                      profile={this.props.profile}
-                     owner={!!this.props.match.params.userId}
+                     isOwner={!this.props.match.params.userId}
                      status={this.props.status}
-                     updateStatus={this.props.updateStatus}/>
+                     updateStatus={this.props.updateStatus}
+                     savePhoto={this.props.savePhoto}/>
         )
     }
 }
@@ -51,6 +52,7 @@ type MapDispatchToPropsType = {
     showUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
+    savePhoto: (photo: File) => void
 }
 
 type MatchParamsType = {
@@ -73,7 +75,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {showUserProfile, getStatus, updateStatus}),
+    connect(mapStateToProps, {showUserProfile, getStatus, updateStatus, savePhoto}),
     withRouter,
     // withAuthRedirect
 )

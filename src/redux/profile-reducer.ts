@@ -37,7 +37,8 @@ export type ProfileType = {
 const ADD_POST = "/profile/ADD-POST";
 const SET_USER_PROFILE = "/profile/SET-USER-PROFILE";
 const SET_STATUS = "/profile/SET-STATUS";
-const DELETE_POST = "/profile/DELETE-POST"
+const DELETE_POST = "/profile/DELETE-POST";
+const SAVE_PHOTO_SUCCESS = "profile/SAVE-PHOTO-SUCCESS"
 
 const initialState = {
     posts: [
@@ -78,6 +79,20 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCESS:
+
+            return {
+                ...state,
+                // @ts-ignore
+                profile: {
+                    ...state.profile,
+                    photos: {
+                        ...state.profile?.photos,
+                        small: action.photo,
+                        large: action.photo
+                    }
+                }
+            }
         default:
             return state
     }
@@ -88,15 +103,19 @@ export type ProfileActionsType =
     | SetUserProfileActionType
     | SetStatusActionType
     | DeletePostActionType
+    | SavePhotoSuccessActionType
 
 export type AddPostActionType = ReturnType<typeof addPost>
 export type DeletePostActionType = ReturnType<typeof deletePost>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetStatusActionType = ReturnType<typeof setStatus>
+export type SavePhotoSuccessActionType = ReturnType<typeof savePhotoSuccess>
 
 export const addPost = (text: string) => ({type: ADD_POST, text} as const)
 
 export const deletePost = (postId: number) => ({type: DELETE_POST, postId} as const)
+
+export const savePhotoSuccess = (photo: string) => ({type: SAVE_PHOTO_SUCCESS, photo} as const)
 
 export const setUserProfile = (profile: ProfileType) => ({
     type: SET_USER_PROFILE,
@@ -128,6 +147,13 @@ export const updateStatus = (status: string) =>
         let response = await profileAPI.updateStatus(status)
         if (response.resultCode === 0) {
             dispatch(setStatus(status))
+        }
+    }
+export const savePhoto = (photo: File) =>
+    async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+        let response = await profileAPI.savePhoto(photo)
+        if (response.resultCode === 0) {
+            dispatch(savePhotoSuccess(response.data.photos))
         }
     }
 

@@ -74,6 +74,16 @@ export const profileAPI = {
     updateStatus(status: string) {
         return instance.put<UpdateStatusResponseType>(`profile/status`, {status: status})
             .then(response => response.data)
+    },
+    savePhoto(photoFile: File) {
+        const formData = new FormData()
+        formData.append('image', photoFile)
+        return instance.put<UpdateStatusResponseType>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(response => response.data)
     }
 }
 
