@@ -7,7 +7,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
-    componentDidMount() {
+    refreshProfile() {
         let userId = Number(this.props.match.params.userId)
         if (!userId) {
             userId = Number(this.props.authorizedUserId)
@@ -17,6 +17,16 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         }
         this.props.showUserProfile(userId)
         this.props.getStatus(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userId!==prevProps.match.params.userId){
+        this.refreshProfile()
+        }
     }
 
     render() {
