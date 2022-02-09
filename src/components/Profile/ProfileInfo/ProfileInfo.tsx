@@ -6,14 +6,22 @@ import Preloader from "../../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "../ProfileStatusWithHooks";
 import ProfileDataForm from "./ProfileDataForm";
 
+export type FormDataType = {
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe:string
+}
+
 export type ProfileInfoPropsType = {
     profile: null | ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
     saveUserAvatar: (file: File) => void
+    saveProfile:(data:FormDataType)=>void
 }
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, saveUserAvatar}) => {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, saveUserAvatar,saveProfile}) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     if (!profile) {
         return <Preloader/>
@@ -22,6 +30,9 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
         if (e.target.files?.length) {
             saveUserAvatar(e.target.files[0])
         }
+    }
+    const onSubmit = (formData: FormDataType) => {
+        saveProfile(formData)
     }
     return (
         <div>
@@ -37,7 +48,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                 {isOwner && <div><input type="file" onChange={onUserAvatarSelected}/></div>}
                 <ProfileStatusWithHooks status={status}
                                         updateStatus={updateStatus}/>
-                {editMode ? <ProfileDataForm profile={profile}/> :
+                {editMode ? <ProfileDataForm profile={profile} onSubmit={onSubmit}/> :
                     <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
 
             </div>
@@ -60,6 +71,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => 
             {profile.lookingForAJob &&
             <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>
             }
+            <div><b>About me</b>: {profile.aboutMe}</div>
             <div><b>Contacts</b>: {Object.keys(profile.contacts).map(c => {
                 //@ts-ignore
                 return <Contact contactTitle={c} contactValue={profile.contacts[c]} key={c}/>

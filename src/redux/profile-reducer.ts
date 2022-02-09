@@ -1,6 +1,7 @@
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {profileAPI} from "../api/api";
+import { FormDataType } from "../components/Profile/ProfileInfo/ProfileInfo";
 
 export type InitialStateType = {
     posts: PostType[]
@@ -72,7 +73,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
 
         case SET_USER_PROFILE:
             return {
-                ...state, profile: action.profile
+                ...state, profile: {...state.profile,...action.profile}
             }
         case SET_STATUS:
             return {
@@ -145,6 +146,7 @@ export const updateStatus = (status: string) =>
             dispatch(setStatus(status))
         }
     }
+
 export const savePhoto = (photo: File) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
         let response = await profileAPI.savePhoto(photo)
@@ -153,5 +155,13 @@ export const savePhoto = (photo: File) =>
         }
     }
 
+export const saveProfile = (profile: FormDataType) =>
+    async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
+    debugger
+    let response = await profileAPI.updateProfile(profile)
+        if (response.resultCode === 0) {
+            dispatch(setUserProfile(response.data))
+        }
+    }
 
 export default profileReducer
