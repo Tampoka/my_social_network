@@ -4,6 +4,7 @@ import {ProfileType} from "../../../redux/profile-reducer";
 import userPhoto from "../../../assets/images/user.png"
 import Preloader from "../../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "../ProfileStatusWithHooks";
+import ProfileDataForm from "./ProfileDataForm";
 
 export type ProfileInfoPropsType = {
     profile: null | ProfileType
@@ -34,36 +35,26 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                      src={profile.photos.large ? profile.photos.large : userPhoto}
                      alt={"User avatar" + profile.fullName}/>
                 {isOwner && <div><input type="file" onChange={onUserAvatarSelected}/></div>}
-                {editMode ? <ProfileDataForm profile={profile}/> : <ProfileData profile={profile} isOwner={isOwner}/>}
                 <ProfileStatusWithHooks status={status}
                                         updateStatus={updateStatus}/>
+                {editMode ? <ProfileDataForm profile={profile}/> :
+                    <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
+
             </div>
         </div>)
 }
 
 type ProfileDataPropsType = {
     profile: ProfileType
-    isOwner?:boolean
+    isOwner: boolean
+    goToEditMode: () => void
 }
-const ProfileData = ({profile,isOwner}: ProfileDataPropsType) => {
+const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => {
     return (
         <div>
-            <div><button>Edit</button></div>
-            <div><b>Full Name</b>: {profile.fullName}</div>
-            <div><b>Looking for a Job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
-            {profile.lookingForAJob &&
-            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>
-            }
-            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(c => {
-                //@ts-ignore
-                return <Contact contactTitle={c} contactValue={profile.contacts[c]} key={c}/>
-            })}</div>
-        </div>
-    )
-}
-const ProfileDataForm = ({profile,isOwner=false}: ProfileDataPropsType) => {
-    return (
-        <div>
+            {isOwner && <div>
+                <button onClick={goToEditMode}>Edit</button>
+            </div>}
             <div><b>Full Name</b>: {profile.fullName}</div>
             <div><b>Looking for a Job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
             {profile.lookingForAJob &&
