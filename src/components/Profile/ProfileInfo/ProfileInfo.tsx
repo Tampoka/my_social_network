@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profile-reducer";
 import userPhoto from "../../../assets/images/user.png"
@@ -13,6 +13,7 @@ export type ProfileInfoPropsType = {
     saveUserAvatar: (file: File) => void
 }
 const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, saveUserAvatar}) => {
+    const [editMode, setEditMode] = useState<boolean>(false)
     if (!profile) {
         return <Preloader/>
     }
@@ -32,13 +33,54 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                 <img className={s.avatar}
                      src={profile.photos.large ? profile.photos.large : userPhoto}
                      alt={"User avatar" + profile.fullName}/>
-                {isOwner && <div>
-                    <input type="file" onChange={onUserAvatarSelected}/>
-                </div>}
+                {isOwner && <div><input type="file" onChange={onUserAvatarSelected}/></div>}
+                {editMode ? <ProfileDataForm profile={profile}/> : <ProfileData profile={profile} isOwner={isOwner}/>}
                 <ProfileStatusWithHooks status={status}
                                         updateStatus={updateStatus}/>
             </div>
         </div>)
 }
 
+type ProfileDataPropsType = {
+    profile: ProfileType
+    isOwner?:boolean
+}
+const ProfileData = ({profile,isOwner}: ProfileDataPropsType) => {
+    return (
+        <div>
+            <div><button>Edit</button></div>
+            <div><b>Full Name</b>: {profile.fullName}</div>
+            <div><b>Looking for a Job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
+            {profile.lookingForAJob &&
+            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>
+            }
+            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(c => {
+                //@ts-ignore
+                return <Contact contactTitle={c} contactValue={profile.contacts[c]} key={c}/>
+            })}</div>
+        </div>
+    )
+}
+const ProfileDataForm = ({profile,isOwner=false}: ProfileDataPropsType) => {
+    return (
+        <div>
+            <div><b>Full Name</b>: {profile.fullName}</div>
+            <div><b>Looking for a Job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
+            {profile.lookingForAJob &&
+            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>
+            }
+            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(c => {
+                //@ts-ignore
+                return <Contact contactTitle={c} contactValue={profile.contacts[c]} key={c}/>
+            })}</div>
+        </div>
+    )
+}
+type ContactsPropsType = {
+    contactTitle: string
+    contactValue: string
+}
+const Contact = ({contactTitle, contactValue}: ContactsPropsType) => {
+    return <div><b>{contactTitle}</b> {contactValue}</div>
+}
 export default ProfileInfo
