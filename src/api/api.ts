@@ -1,24 +1,13 @@
 import axios from "axios";
 import {UserType} from "../redux/users-reducer";
 import {ProfileType} from "../redux/profile-reducer";
+import { FormDataType } from "../components/Profile/ProfileInfo/ProfileInfo";
 
 
 type GetUserResponseType = {
     items: UserType[]
     error: string | null
     totalCount: number
-}
-
-type FollowResponseType = {
-    data: any
-    messages: string[]
-    resultCode: 0 | 1
-}
-
-type AuthLoginResponceType = {
-    data: any
-    messages: string[]
-    resultCode: 0 | 1
 }
 
 type GetProfileResponseType = ProfileType
@@ -33,12 +22,15 @@ type AuthMeResponseType = {
     resultCode: 0 | 1
 }
 
-type UpdateStatusResponseType = {
+type CommonResponseType = {
     data: any
     messages: string[]
     resultCode: 0 | 1
 }
 
+type UpdateProfileType=CommonResponseType&{
+    fieldsErrors:string[]
+}
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -53,11 +45,11 @@ export const usersAPI = {
             .then(response => response.data)
     },
     follow(userId: number) {
-        return instance.post<FollowResponseType>(`follow/${userId}`)
+        return instance.post<CommonResponseType>(`follow/${userId}`)
             .then(response => response.data)
     },
     unFollow(userId: number) {
-        return instance.delete<FollowResponseType>(`follow/${userId}`)
+        return instance.delete<CommonResponseType>(`follow/${userId}`)
             .then(response => response.data)
     }
 }
@@ -72,19 +64,24 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put<UpdateStatusResponseType>(`profile/status`, {status: status})
+        return instance.put<CommonResponseType>(`profile/status`, {status: status})
             .then(response => response.data)
     },
     savePhoto(photoFile: File) {
         const formData = new FormData()
         formData.append('image', photoFile)
-        return instance.put<UpdateStatusResponseType>(`profile/photo`, formData, {
+        return instance.put<CommonResponseType>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then(response => response.data)
-    }
+    },
+    updateProfile(data: FormDataType) {
+        return instance.put<CommonResponseType>(`profile`, data)
+            .then(response => response.data)
+    },
+
 }
 
 export const authAPI = {
@@ -93,11 +90,11 @@ export const authAPI = {
             .then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post<AuthLoginResponceType>(`auth/login`, {email, password, rememberMe})
+        return instance.post<CommonResponseType>(`auth/login`, {email, password, rememberMe})
             .then(response => response.data)
     },
     logout() {
-        return instance.delete<AuthLoginResponceType>(`auth/login`)
+        return instance.delete<CommonResponseType>(`auth/login`)
             .then(response => response.data)
     }
 }
