@@ -86,11 +86,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
                 // @ts-ignore
                 profile: {
                     ...state.profile,
-                    photos: {
-                        ...state.profile?.photos,
-                        small: action.photo,
-                        large: action.photo
-                    }
+                    photos: action.photos
                 }
             }
         default:
@@ -115,7 +111,7 @@ export const addPost = (text: string) => ({type: ADD_POST, text} as const)
 
 export const deletePost = (postId: number) => ({type: DELETE_POST, postId} as const)
 
-export const savePhotoSuccess = (photo: string) => ({type: SAVE_PHOTO_SUCCESS, photo} as const)
+export const savePhotoSuccess = (photos: { small:string,large:string }) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 
 export const setUserProfile = (profile: ProfileType) => ({
     type: SET_USER_PROFILE,
