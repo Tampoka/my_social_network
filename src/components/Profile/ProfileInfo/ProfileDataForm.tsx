@@ -7,12 +7,16 @@ import s from "./ProfiledataForm.module.css"
 
 type ProfileDataFormPropsType = {
     profile: ProfileType
+    errorMessage:string
 }
 const ProfileDataForm: React.FC<InjectedFormProps<FormDataType> & ProfileDataFormPropsType> = ({
                                                                                                    handleSubmit,
                                                                                                    profile,
-                                                                                                   error
+                                                                                                   error,
+                                                                                                   errorMessage
                                                                                                }) => {
+    console.log(errorMessage)
+    console.log(error)
     return (
         <form onSubmit={handleSubmit}>
             <div><b>Full Name</b>: {createField("Full name", "fullName", Input, [], {type: "text"})}</div>
@@ -25,7 +29,8 @@ const ProfileDataForm: React.FC<InjectedFormProps<FormDataType> & ProfileDataFor
                     <b>{c}: {createField(c + " url", "contacts." + c, Input, [], {type: "text"})}</b>
                 </div>
             })}</div>
-            {error && <div className={s.formSummaryError}>{error}</div>}
+            {/*{error && <div className={s.formSummaryError}>{error}</div>}*/}
+            {errorMessage && <div className={s.formSummaryError}>{errorMessage}</div>}
             <div>
                 <button disabled={!!error}>Save</button>
             </div>

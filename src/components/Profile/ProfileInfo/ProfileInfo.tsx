@@ -10,7 +10,7 @@ export type FormDataType = {
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    aboutMe:string
+    aboutMe: string
 }
 
 export type ProfileInfoPropsType = {
@@ -19,10 +19,18 @@ export type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     saveUserAvatar: (file: File) => void
-    saveProfile:(data:FormDataType)=>void
+    saveProfile: (data: FormDataType) => void
 }
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, saveUserAvatar,saveProfile}) => {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
+                                                         profile,
+                                                         status,
+                                                         updateStatus,
+                                                         isOwner,
+                                                         saveUserAvatar,
+                                                         saveProfile
+                                                     }) => {
     const [editMode, setEditMode] = useState<boolean>(false)
+    const [error,setError]=useState('')
     if (!profile) {
         return <Preloader/>
     }
@@ -31,9 +39,13 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
             saveUserAvatar(e.target.files[0])
         }
     }
-    const onSubmit = (formData: FormDataType) => {
-        saveProfile(formData)
-        // setEditMode(false)
+    const onSubmit = async (formData: FormDataType) => {
+        try {
+            await saveProfile(formData)
+            setEditMode(false)
+        } catch (err) {
+           setError(err as string)
+        }
     }
     return (
         <div>
@@ -51,7 +63,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                                         updateStatus={updateStatus}/>
                 {editMode ?
                     // @ts-ignore
-                    <ProfileDataForm  profile={profile} initialValues={profile} onSubmit={onSubmit}/>
+                    <ProfileDataForm profile={profile} initialValues={profile} onSubmit={onSubmit} errorMessage={error}/>
                     :
                     <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
 

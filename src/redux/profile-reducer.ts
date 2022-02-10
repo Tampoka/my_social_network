@@ -168,6 +168,8 @@ export const saveProfile = (profile: FormDataType) =>
         } else {
             const message = response.messages.length > 0 ? response.messages[0] : "Some error"
             dispatch(stopSubmit("edit-profile", {_error: message}))
+            // dispatch(stopSubmit("edit-profile", {"contacts": {"facebook":message}}))
+            return Promise.reject(message)
         }
     }
 
