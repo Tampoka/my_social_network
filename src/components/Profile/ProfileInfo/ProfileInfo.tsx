@@ -33,6 +33,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
     }
     const onSubmit = (formData: FormDataType) => {
         saveProfile(formData)
+        // setEditMode(false)
     }
     return (
         <div>
@@ -50,7 +51,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                                         updateStatus={updateStatus}/>
                 {editMode ?
                     // @ts-ignore
-                    <ProfileDataForm  initialValues={profile} onSubmit={onSubmit}/>
+                    <ProfileDataForm  profile={profile} initialValues={profile} onSubmit={onSubmit}/>
                     :
                     <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
 
