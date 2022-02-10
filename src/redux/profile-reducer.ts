@@ -157,7 +157,6 @@ export const savePhoto = (photo: File) =>
 
 export const saveProfile = (profile: FormDataType) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-    debugger
     let response = await profileAPI.updateProfile(profile)
         if (response.resultCode === 0) {
             dispatch(setUserProfile(response.data))

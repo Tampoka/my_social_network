@@ -3,15 +3,15 @@ import {ProfileType} from "../../../redux/profile-reducer"
 import {createField, Input, Textarea} from "../../FormControls/FormControls"
 import { FormDataType } from "./ProfileInfo"
 
-type ProfileDataFormPropsType =  {
-    profile: ProfileType
-}
-const ProfileDataForm:React.FC<InjectedFormProps<FormDataType>&ProfileDataFormPropsType> = ({handleSubmit,profile}) => {
+// type ProfileDataFormPropsType =  {
+//     profile: ProfileType
+// }
+const ProfileDataForm:React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div><b>Full Name</b>: {createField("Full name", "fullName", Input, [], {type: "text"})}</div>
             <div><b>Looking for a Job</b>: {createField("", "lookingForAJob", Input, [], {type: "checkbox"})}</div>
-            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}
+            <div><b>My professional skills</b>:
                 {createField("My professional skills", "lookingForAJobDescription", Textarea, [])}</div>
             <div><b>About me</b>: {createField(" About me", "aboutMe", Textarea, [])}</div>
             {/*<div><b>Contacts</b>: {Object.keys(profile.contacts).map(c => {*/}
@@ -27,7 +27,7 @@ const ProfileDataForm:React.FC<InjectedFormProps<FormDataType>&ProfileDataFormPr
 
 
 
-export default reduxForm<FormDataType,ProfileDataFormPropsType>({
+export default reduxForm<FormDataType>({
     form: 'edit-profile',
     //@ts-ignore
 })(ProfileDataForm)

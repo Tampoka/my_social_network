@@ -48,7 +48,10 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateSta
                 {isOwner && <div><input type="file" onChange={onUserAvatarSelected}/></div>}
                 <ProfileStatusWithHooks status={status}
                                         updateStatus={updateStatus}/>
-                {editMode ? <ProfileDataForm profile={profile} onSubmit={onSubmit}/> :
+                {editMode ?
+                    // @ts-ignore
+                    <ProfileDataForm  initialValues={profile} onSubmit={onSubmit}/>
+                    :
                     <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
 
             </div>
