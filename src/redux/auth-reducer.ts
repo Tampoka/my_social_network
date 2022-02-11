@@ -67,7 +67,7 @@ export const getAuth = () =>
         }
     }
 
-export const login = (email: string, password: string, rememberMe: boolean) =>
+export const login = (email: string, password: string, rememberMe: boolean,captcha:string|null) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, FormAction>) => {
         const response = await authAPI.login(email, password, rememberMe)
         if (response.resultCode === 0) {
