@@ -133,27 +133,34 @@ export const setStatus = (status: string) => ({
 
 export const getUserProfile = (userId: number) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        let response = await profileAPI.getProfile(userId)
+        const response = await profileAPI.getProfile(userId)
         dispatch(setUserProfile(response))
     }
 
 export const getStatus = (userId: number) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        let response = await profileAPI.getStatus(userId)
+        const response = await profileAPI.getStatus(userId)
         dispatch(setStatus(response))
     }
 
 export const updateStatus = (status: string) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        let response = await profileAPI.updateStatus(status)
-        if (response.resultCode === 0) {
-            dispatch(setStatus(status))
+        try{
+            const response = await profileAPI.updateStatus(status)
+            if (response.resultCode === 0) {
+                dispatch(setStatus(status))
+            } else {
+                console.error(response.messages[0])
+            }
+        }catch (err){
+            //dispatch AppError
+            console.error(err)
         }
     }
 
 export const savePhoto = (photo: File) =>
     async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileActionsType>) => {
-        let response = await profileAPI.savePhoto(photo)
+        const response = await profileAPI.savePhoto(photo)
         if (response.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.photos))
         }
