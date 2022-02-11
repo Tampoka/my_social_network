@@ -1,7 +1,7 @@
 import axios from "axios";
 import {UserType} from "../redux/users-reducer";
 import {ProfileType} from "../redux/profile-reducer";
-import { FormDataType } from "../components/Profile/ProfileInfo/ProfileInfo";
+import {FormDataType} from "../components/Profile/ProfileInfo/ProfileInfo";
 
 
 type GetUserResponseType = {
@@ -25,11 +25,15 @@ type AuthMeResponseType = {
 type CommonResponseType = {
     data: any
     messages: string[]
-    resultCode: 0 | 1
+    resultCode: 0 | 1 | 10
 }
 
-type UpdateProfileType=CommonResponseType&{
-    fieldsErrors:string[]
+type CaptchaResponseType = {
+    url: string
+}
+
+type UpdateProfileType = CommonResponseType & {
+    fieldsErrors: string[]
 }
 const instance = axios.create({
     withCredentials: true,
@@ -64,7 +68,7 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put<CommonResponseType>(`profile/status`, {status: status})
+        return instance.put<UpdateProfileType>(`profile/status`, {status: status})
             .then(response => response.data)
     },
     savePhoto(photoFile: File) {
@@ -96,5 +100,12 @@ export const authAPI = {
     logout() {
         return instance.delete<CommonResponseType>(`auth/login`)
             .then(response => response.data)
+    }
+}
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get<CaptchaResponseType>(`security/get-captcha-url`)
+        // .then(response => response.data)
     }
 }
