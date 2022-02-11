@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
-import {HashRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -13,6 +13,7 @@ import store, {AppStateType} from "./redux/redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/Preloader";
+import Profile from './components/Profile/Profile';
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import ("./components/Profile/ProfileContainer"));
@@ -48,7 +49,8 @@ class App extends React.Component<AppPropsType> {
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
-                    {/*<Redirect to="/profile"/>*/}
+                    <Route path="*" component={() => <div>404 Not found</div>}/>
+                    <Redirect to="/profile"/>
                 </div>
             </div>
         );
