@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy} from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
@@ -14,8 +14,9 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/Preloader";
 
-const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
-const ProfileContainer = React.lazy(() => import ("./components/Profile/ProfileContainer"));
+const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
+const ProfileContainer = lazy(() => import ("./components/Profile/ProfileContainer"));
+const ChatPage = lazy(() => import ("./pages/Chat/ChatPage"));
 
 class App extends React.Component<AppPropsType> {
     catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
@@ -59,6 +60,7 @@ class App extends React.Component<AppPropsType> {
                         <Route path="/news" component={News}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/settings" component={Settings}/>
+                        <Route path="/chat" component={ChatPage}/>
                         <Redirect from="/" to="/profile"/>
                         <Route path="*" component={() => <div>404 Not found</div>}/>
                     </Switch>

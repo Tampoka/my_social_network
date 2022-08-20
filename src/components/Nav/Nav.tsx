@@ -21,6 +21,9 @@ const Nav: React.FC<MapStateToPropsType> = (props) => {
                     <NavLink to="/users" activeClassName={s.active}>Users</NavLink>
                 </li>
                 <li className={s.item}>
+                    <NavLink to="/chat" activeClassName={s.active}>Chat</NavLink>
+                </li>
+                <li className={s.item}>
                     <NavLink to="/news" activeClassName={s.active}>News</NavLink>
                 </li>
                 <li className={s.item}>
