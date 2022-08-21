@@ -44,10 +44,10 @@ class App extends React.Component<AppPropsType> {
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/dialogs" render={() => {
-                        return <React.Suspense fallback={<Preloader/>}>
-                            <DialogsContainer/>
-                        </React.Suspense>
-                    }}/>
+                            return <React.Suspense fallback={<Preloader/>}>
+                                <DialogsContainer/>
+                            </React.Suspense>
+                        }}/>
                         <Route path="/profile/:userId?" render={() => {
                             return <React.Suspense fallback={<Preloader/>}>
                                 <ProfileContainer/>
@@ -60,7 +60,11 @@ class App extends React.Component<AppPropsType> {
                         <Route path="/news" component={News}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/settings" component={Settings}/>
-                        <Route path="/chat" component={ChatPage}/>
+                        <Route path="/chat" render={() => {
+                            return <React.Suspense fallback={<Preloader/>}>
+                                <ChatPage/>
+                            </React.Suspense>
+                        }}/>
                         <Redirect from="/" to="/profile"/>
                         <Route path="*" component={() => <div>404 Not found</div>}/>
                     </Switch>
@@ -70,22 +74,27 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-type MapStateToPropsType = {
-    initialized: boolean
-}
+type MapStateToPropsType =
+    {
+        initialized: boolean
+    }
 
-type MapDispatchToPropsType = {
-    initializeApp: any
-}
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    initialized: state.app.initialized
-})
+type MapDispatchToPropsType =
+    {
+        initializeApp: any
+    }
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => (
+    {
+        initialized: state.app.initialized
+    }
+)
 
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export const AppContainer = compose<React.ComponentType>(
-    withRouter,
-    connect(mapStateToProps, {initializeApp}))(App);
+export const AppContainer = compose
+    < React.ComponentType > (
+        withRouter,
+            connect(mapStateToProps, {initializeApp}))(App);
 
 
 export const MainApp = () => {
