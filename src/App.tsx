@@ -13,10 +13,15 @@ import store, {AppStateType} from "./redux/redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/Preloader";
+import {withSuspense} from './hoc/withSuspense';
 
 const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = lazy(() => import ("./components/Profile/ProfileContainer"));
 const ChatPage = lazy(() => import ("./pages/Chat/ChatPage"));
+
+const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedProfile = withSuspense(ProfileContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 class App extends React.Component<AppPropsType> {
     catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
@@ -75,16 +80,16 @@ class App extends React.Component<AppPropsType> {
 }
 
 type MapStateToPropsType = {
-        initialized: boolean
-    }
+    initialized: boolean
+}
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
-    initializeApp: ()=>void
+    initializeApp: () => void
 }
 
 type MapDispatchToPropsType = {
-        initializeApp: ()=>void
-    }
+    initializeApp: () => void
+}
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => (
     {
         initialized: state.app.initialized
