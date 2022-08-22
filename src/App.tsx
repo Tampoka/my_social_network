@@ -48,16 +48,8 @@ class App extends React.Component<AppPropsType> {
                 <Nav/>
                 <div className="app-wrapper-content">
                     <Switch>
-                        <Route path="/dialogs" render={() => {
-                            return <React.Suspense fallback={<Preloader/>}>
-                                <DialogsContainer/>
-                            </React.Suspense>
-                        }}/>
-                        <Route path="/profile/:userId?" render={() => {
-                            return <React.Suspense fallback={<Preloader/>}>
-                                <ProfileContainer/>
-                            </React.Suspense>
-                        }}/>
+                        <Route path="/dialogs" render={() =><SuspendedDialogs/>}/>
+                        <Route path="/profile/:userId?" render={() => <SuspendedProfile/>}/>
                         <Route path="/users" render={() =>
                             <UsersContainer/>}/>
                         <Route path="/login" render={() =>
@@ -65,11 +57,7 @@ class App extends React.Component<AppPropsType> {
                         <Route path="/news" component={News}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/settings" component={Settings}/>
-                        <Route path="/chat" render={() => {
-                            return <React.Suspense fallback={<Preloader/>}>
-                                <ChatPage/>
-                            </React.Suspense>
-                        }}/>
+                        <Route path="/chat" render={() => <SuspendedChatPage/>}/>
                         <Redirect from="/" to="/profile"/>
                         <Route path="*" component={() => <div>404 Not found</div>}/>
                     </Switch>
