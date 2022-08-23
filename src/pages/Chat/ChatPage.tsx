@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
 
+const ws=new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
 const ChatPage: FC = () => {
     return (
         <div>
@@ -22,9 +24,10 @@ const Messages: FC = () => {
     const messages: any = [1, 2, 3, 4]
     return (
         <div style={{height:400,overflowY:'auto'}}>
-            {messages.map((m: any) => <Message/>)}
-            {messages.map((m: any) => <Message/>)}
-            {messages.map((m: any) => <Message/>)}
+            {messages.map((m: any,i:number) => <Message key={i}/>)}
+            {messages.map((m: any,i:number) => <Message key={i}/>)}
+            {messages.map((m: any,i:number) => <Message key={i}/>)}
+
         </div>
     )
 }
