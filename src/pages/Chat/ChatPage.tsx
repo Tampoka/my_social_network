@@ -21,7 +21,7 @@ const Chat: FC = () => {
 const Messages: FC = () => {
     const messages: any = [1, 2, 3, 4]
     return (
-        <div>
+        <div style={{height:400,overflowY:'auto'}}>
             {messages.map((m: any) => <Message/>)}
             {messages.map((m: any) => <Message/>)}
             {messages.map((m: any) => <Message/>)}
