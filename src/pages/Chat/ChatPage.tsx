@@ -8,8 +8,10 @@ export interface IMessage {
     userId: number,
     userName: string,
     message: string,
-    photo: string
+    photo: Optional<string>
 }
+
+export type Optional<T> = T | null
 
 const ChatPage: FC = () => {
     return (
@@ -49,18 +51,29 @@ const Messages = ({messages}: MessagesProps) => {
 }
 
 const AddMessageForm: FC = () => {
-const user=useSelector<AppStateType,string|null>(state=>state.auth.login)
-    const messageRef=useRef<HTMLTextAreaElement>()
-    const [message,setMessage]=useState('')
-    const sendMessage=()=>{
+    const userName = useSelector<AppStateType, Optional<string>>(state => state.profilePage.profile!.fullName)
+    const userId = useSelector<AppStateType, Optional<number> | null>(state => state.profilePage.profile!.userId)
+    const photo = useSelector<AppStateType, Optional<string> | null>(state => state.profilePage.profile!.photos.small)
+    const messageRef = useRef<HTMLTextAreaElement>(null)
+    const [message, setMessage] = useState('')
 
+    const sendMessage = () => {
+        const newMessage: IMessage = {
+            userName: userName || 'Anonymous',
+            userId: userId!,
+            photo,
+            message
+        }
+        console.log(newMessage)
     }
-    console.log(message)
+
     return (
         <div>
-            <div><textarea ref={messageRef} onChange={()=>setMessage(messageRef.current?.value!)}></textarea></div>
+            <div><textarea ref={messageRef}
+                           onChange={() => setMessage(messageRef.current?.value!)}></textarea>
+            </div>
             <div>
-                <button>Send</button>
+                <button onClick={sendMessage}>Send</button>
             </div>
         </div>
     )
@@ -73,7 +86,9 @@ export type MessageProps = {
 const Message = ({message}: MessageProps) => {
     return (
         <div>
-            <img src={message.photo}/> <b>{message.userName}</b>
+            {message.photo ?
+                <p><img src={message.photo} alt='user'/> <b>{message.userName}</b></p> :
+                <span>No photo</span>}
             <br/>
             {message.message}
             <hr/>
