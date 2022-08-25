@@ -1,4 +1,6 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
+import {useSelector} from 'react-redux';
+import {AppStateType} from '../../redux/redux-store';
 
 const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
@@ -47,10 +49,16 @@ const Messages = ({messages}: MessagesProps) => {
 }
 
 const AddMessageForm: FC = () => {
+const user=useSelector<AppStateType,string|null>(state=>state.auth.login)
+    const messageRef=useRef<HTMLTextAreaElement>()
+    const [message,setMessage]=useState('')
+    const sendMessage=()=>{
 
+    }
+    console.log(message)
     return (
         <div>
-            <div><textarea></textarea></div>
+            <div><textarea ref={messageRef} onChange={()=>setMessage(messageRef.current?.value!)}></textarea></div>
             <div>
                 <button>Send</button>
             </div>
