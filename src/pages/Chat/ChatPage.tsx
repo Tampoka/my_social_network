@@ -1,6 +1,13 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 
-const ws=new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
+export interface IMessage {
+    userId: number,
+    userName: string,
+    message: string,
+    photo: string
+}
 
 const ChatPage: FC = () => {
     return (
@@ -11,22 +18,29 @@ const ChatPage: FC = () => {
 };
 
 const Chat: FC = () => {
+    const [messages, setMessages] = useState([])
 
+    useEffect(() => {
+        ws.addEventListener('message', (e) => {
+            setMessages(JSON.parse(e.data))
+        })
+    }, [])
     return (
         <div>
-            <Messages/>
+            <Messages messages={messages}/>
             <AddMessageForm/>
         </div>
     )
 }
 
-const Messages: FC = () => {
-    const messages: any = [1, 2, 3, 4]
+export type MessagesProps = {
+    messages: IMessage[]
+}
+
+const Messages = ({messages}: MessagesProps) => {
     return (
-        <div style={{height:400,overflowY:'auto'}}>
-            {messages.map((m: any,i:number) => <Message key={i}/>)}
-            {messages.map((m: any,i:number) => <Message key={i}/>)}
-            {messages.map((m: any,i:number) => <Message key={i}/>)}
+        <div style={{height: 400, overflowY: 'auto'}}>
+            {messages.map((m: any) => <Message key={m.userId} message={m}/>)}
 
         </div>
     )
@@ -44,17 +58,16 @@ const AddMessageForm: FC = () => {
     )
 }
 
-const Message: FC = () => {
-    const message = {
-        url: 'https://via.placeholder.com/30',
-        author: 'Tampoka',
-        text: 'Hello,friends!'
-    }
+export type MessageProps = {
+    message: IMessage
+}
+
+const Message = ({message}: MessageProps) => {
     return (
         <div>
-            <img src={message.url}/> <b>{message.author}</b>
+            <img src={message.photo}/> <b>{message.userName}</b>
             <br/>
-            {message.text}
+            {message.message}
             <hr/>
         </div>
     )
