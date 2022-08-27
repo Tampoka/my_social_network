@@ -26,7 +26,8 @@ const Chat: FC = () => {
 
     useEffect(() => {
         ws.addEventListener('message', (e) => {
-            setMessages([...messages,JSON.parse(e.data) ])
+            const newMessages = JSON.parse(e.data)
+            setMessages((prevMessages)=>[...prevMessages,...newMessages])
         })
     }, [])
     return (
