@@ -22,11 +22,11 @@ const ChatPage: FC = () => {
 };
 
 const Chat: FC = () => {
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState<IMessage[]>([])
 
     useEffect(() => {
         ws.addEventListener('message', (e) => {
-            setMessages(JSON.parse(e.data))
+            setMessages([...messages,JSON.parse(e.data) ])
         })
     }, [])
     return (
@@ -87,9 +87,10 @@ const Message = ({message}: MessageProps) => {
     return (
         <div>
             {message.photo ?
-                <p><img src={message.photo} alt='user'/> <b>{message.userName}</b></p> :
+                <p style={{display:'flex',alignItems:'center'}}><img src={message.photo} style={{width: '30px'}} alt='user'/>
+                    <b>{message.userName}</b>
+                </p> :
                 <span>No photo</span>}
-            <br/>
             {message.message}
             <hr/>
         </div>
