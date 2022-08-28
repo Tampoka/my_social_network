@@ -52,11 +52,18 @@ const Messages = ({messages}: MessagesProps) => {
 
 const AddMessageForm: FC = () => {
     const [message, setMessage] = useState('')
+    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
 
     const sendMessage = () => {
         ws.send(message)
         setMessage('')
     }
+
+    useEffect(() => {
+        ws.addEventListener('open',()=>{
+            setReadyStatus('ready')
+        })
+    })
 
     return (
         <div>
@@ -64,7 +71,9 @@ const AddMessageForm: FC = () => {
                 onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
             </div>
             <div>
-                <button onClick={sendMessage} disabled={ws.readyState!==WebSocket.OPEN}>Send</button>
+                <button onClick={sendMessage}
+                        disabled={readyStatus==='pending'}>Send
+                </button>
             </div>
         </div>
     )
@@ -75,9 +84,9 @@ export type MessageProps = {
 }
 
 const Message = ({message}: MessageProps) => {
-    const fullName=useSelector<AppStateType,string|null>(state=>state.profilePage.profile!.fullName)
+    const fullName = useSelector<AppStateType, string | null>(state => state.profilePage.profile!.fullName)
 
-    const deleteMessage=(messageId:number)=>{
+    const deleteMessage = (messageId: number) => {
     }
     return (
         <div>
@@ -88,8 +97,8 @@ const Message = ({message}: MessageProps) => {
                 </p> :
                 <span>No photo</span>}
             {message.message}
-            {message.userName===fullName&& <div>
-                <button >Delete</button>
+            {message.userName === fullName && <div>
+                <button>Delete</button>
             </div>}
             <hr/>
         </div>
