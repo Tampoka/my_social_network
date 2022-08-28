@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 
@@ -46,7 +46,6 @@ const Messages = ({messages}: MessagesProps) => {
     return (
         <div style={{height: 400, overflowY: 'auto'}}>
             {messages.map((m: any) => <Message key={m.userId} message={m}/>)}
-
         </div>
     )
 }
@@ -59,14 +58,13 @@ const AddMessageForm: FC = () => {
         setMessage('')
     }
 
-    console.log(message)
     return (
         <div>
             <div><textarea
                 onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
             </div>
             <div>
-                <button onClick={sendMessage}>Send</button>
+                <button onClick={sendMessage} disabled={ws.readyState!==WebSocket.OPEN}>Send</button>
             </div>
         </div>
     )
@@ -77,6 +75,10 @@ export type MessageProps = {
 }
 
 const Message = ({message}: MessageProps) => {
+    const fullName=useSelector<AppStateType,string|null>(state=>state.profilePage.profile!.fullName)
+
+    const deleteMessage=(messageId:number)=>{
+    }
     return (
         <div>
             {message.photo ?
@@ -86,6 +88,9 @@ const Message = ({message}: MessageProps) => {
                 </p> :
                 <span>No photo</span>}
             {message.message}
+            {message.userName===fullName&& <div>
+                <button >Delete</button>
+            </div>}
             <hr/>
         </div>
     )
