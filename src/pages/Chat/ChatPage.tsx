@@ -25,9 +25,9 @@ const Chat: FC = () => {
     const [messages, setMessages] = useState<IMessage[]>([])
 
     useEffect(() => {
-        ws.addEventListener('message', (e:MessageEvent) => {
+        ws.addEventListener('message', (e: MessageEvent) => {
             const newMessages = JSON.parse(e.data)
-            setMessages((prevMessages)=>[...prevMessages,...newMessages])
+            setMessages((prevMessages) => [...prevMessages, ...newMessages])
         })
     }, [])
     return (
@@ -52,26 +52,18 @@ const Messages = ({messages}: MessagesProps) => {
 }
 
 const AddMessageForm: FC = () => {
-    const userName = useSelector<AppStateType, Optional<string>>(state => state.profilePage.profile!.fullName)
-    const userId = useSelector<AppStateType, Optional<number> | null>(state => state.profilePage.profile!.userId)
-    const photo = useSelector<AppStateType, Optional<string> | null>(state => state.profilePage.profile!.photos.small)
-    const messageRef = useRef<HTMLTextAreaElement>(null)
     const [message, setMessage] = useState('')
 
     const sendMessage = () => {
-        const newMessage: IMessage = {
-            userName: userName || 'Anonymous',
-            userId: userId!,
-            photo,
-            message
-        }
-        console.log(newMessage)
+        ws.send(message)
+        setMessage('')
     }
 
+    console.log(message)
     return (
         <div>
-            <div><textarea ref={messageRef}
-                           onChange={() => setMessage(messageRef.current?.value!)}></textarea>
+            <div><textarea
+                onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
             </div>
             <div>
                 <button onClick={sendMessage}>Send</button>
@@ -88,7 +80,8 @@ const Message = ({message}: MessageProps) => {
     return (
         <div>
             {message.photo ?
-                <p style={{display:'flex',alignItems:'center'}}><img src={message.photo} style={{width: '30px'}} alt='user'/>
+                <p style={{display: 'flex', alignItems: 'center'}}><img
+                    src={message.photo} style={{width: '30px'}} alt='user'/>
                     <b>{message.userName}</b>
                 </p> :
                 <span>No photo</span>}
