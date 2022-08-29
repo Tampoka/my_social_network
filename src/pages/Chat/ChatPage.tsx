@@ -72,7 +72,7 @@ const AddMessageForm: FC = () => {
             </div>
             <div>
                 <button onClick={sendMessage}
-                        disabled={readyStatus==='pending'}>Send
+                        disabled={readyStatus!=='ready'}>Send
                 </button>
             </div>
         </div>
