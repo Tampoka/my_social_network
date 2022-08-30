@@ -2,7 +2,11 @@ import React, {FC, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 
-const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+let ws: WebSocket
+
+function createChannel() {
+    ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+}
 
 export interface IMessage {
     userId: number,
@@ -60,7 +64,7 @@ const AddMessageForm: FC = () => {
     }
 
     useEffect(() => {
-        ws.addEventListener('open',()=>{
+        ws.addEventListener('open', () => {
             setReadyStatus('ready')
         })
     })
@@ -72,7 +76,7 @@ const AddMessageForm: FC = () => {
             </div>
             <div>
                 <button onClick={sendMessage}
-                        disabled={readyStatus!=='ready'}>Send
+                        disabled={readyStatus !== 'ready'}>Send
                 </button>
             </div>
         </div>
