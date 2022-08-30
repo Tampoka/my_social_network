@@ -2,12 +2,6 @@ import React, {FC, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 
-let ws: WebSocket
-
-function createChannel() {
-    ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-}
-
 export interface IMessage {
     userId: number,
     userName: string,
@@ -26,27 +20,42 @@ const ChatPage: FC = () => {
 };
 
 const Chat: FC = () => {
-    const [messages, setMessages] = useState<IMessage[]>([])
+    const [ws, setWs] = useState<Optional<WebSocket>>(null)
+    useEffect(() => {
+        function createChannel() {
+            setWs(new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'))
+        }
+
+        createChannel()
+    }, [])
 
     useEffect(() => {
-        ws.addEventListener('message', (e: MessageEvent) => {
-            const newMessages = JSON.parse(e.data)
-            setMessages((prevMessages) => [...prevMessages, ...newMessages])
+        ws?.addEventListener('close', () => {
+            console.log('WSChannel is CLOSED')
         })
-    }, [])
+    }, [ws])
     return (
         <div>
-            <Messages messages={messages}/>
-            <AddMessageForm/>
+            <Messages ws={ws}/>
+            <AddMessageForm ws={ws}/>
         </div>
     )
 }
 
 export type MessagesProps = {
-    messages: IMessage[]
+    ws: Optional<WebSocket>
 }
 
-const Messages = ({messages}: MessagesProps) => {
+const Messages = ({ws}: MessagesProps) => {
+    const [messages, setMessages] = useState<IMessage[]>([])
+
+    useEffect(() => {
+        ws?.addEventListener('message', (e: MessageEvent) => {
+            const newMessages = JSON.parse(e.data)
+            setMessages((prevMessages) => [...prevMessages, ...newMessages])
+        })
+    }, [ws])
+
     return (
         <div style={{height: 400, overflowY: 'auto'}}>
             {messages.map((m: any) => <Message key={m.userId} message={m}/>)}
@@ -54,29 +63,30 @@ const Messages = ({messages}: MessagesProps) => {
     )
 }
 
-const AddMessageForm: FC = () => {
+const AddMessageForm: FC<{ ws: Optional<WebSocket> }> = ({ws}) => {
     const [message, setMessage] = useState('')
     const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
 
     const sendMessage = () => {
-        ws.send(message)
+        ws?.send(message)
         setMessage('')
     }
 
     useEffect(() => {
-        ws.addEventListener('open', () => {
+        ws?.addEventListener('open', () => {
             setReadyStatus('ready')
         })
-    })
+    }, [ws])
 
     return (
         <div>
             <div><textarea
-                onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
+                onChange={(e) => setMessage(e.currentTarget.value)}
+                value={message}></textarea>
             </div>
             <div>
                 <button onClick={sendMessage}
-                        disabled={readyStatus !== 'ready'}>Send
+                        disabled={readyStatus !== 'ready' || !message}>Send
                 </button>
             </div>
         </div>
