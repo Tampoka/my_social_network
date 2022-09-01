@@ -20,24 +20,24 @@ const ChatPage: FC = () => {
 };
 
 const Chat: FC = () => {
-    const [ws, setWs] = useState<Optional<WebSocket>>(null)
+    const [wsChannel, setWsChannel] = useState<Optional<WebSocket>>(null)
+
     useEffect(() => {
         function createChannel() {
-            setWs(new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'))
+            let ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+            ws.addEventListener('close', () => {
+                console.log('WSChannel is CLOSED')
+            })
+            setWsChannel(ws)
         }
 
         createChannel()
     }, [])
 
-    useEffect(() => {
-        ws?.addEventListener('close', () => {
-            console.log('WSChannel is CLOSED')
-        })
-    }, [ws])
     return (
         <div>
-            <Messages ws={ws}/>
-            <AddMessageForm ws={ws}/>
+            <Messages ws={wsChannel}/>
+            <AddMessageForm ws={wsChannel}/>
         </div>
     )
 }
@@ -86,7 +86,7 @@ const AddMessageForm: FC<{ ws: Optional<WebSocket> }> = ({ws}) => {
             </div>
             <div>
                 <button onClick={sendMessage}
-                        disabled={readyStatus !== 'ready' || !message}>Send
+                        disabled={ws == null && (readyStatus !== 'ready' || !message)}>Send
                 </button>
             </div>
         </div>
