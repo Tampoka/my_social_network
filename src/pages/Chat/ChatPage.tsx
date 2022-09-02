@@ -32,6 +32,7 @@ const Chat: FC = () => {
         function createChannel() {
             if (ws !== null) {
                 ws.removeEventListener('close', closeHandler)
+                ws.close()
             }
             ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
             ws.addEventListener('close', closeHandler)
@@ -84,9 +85,14 @@ const AddMessageForm: FC<{ ws: Optional<WebSocket> }> = ({ws}) => {
     }
 
     useEffect(() => {
-        ws?.addEventListener('open', () => {
+        const openHandler = () => {
             setReadyStatus('ready')
-        })
+        }
+        ws?.addEventListener('open', openHandler)
+        return () => {
+            ws?.removeEventListener('open', openHandler)
+        }
+
     }, [ws])
 
     return (
