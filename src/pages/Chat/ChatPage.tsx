@@ -26,7 +26,7 @@ const Chat: FC = () => {
         function createChannel() {
             let ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
             ws.addEventListener('close', () => {
-                console.log('WSChannel is CLOSED')
+                createChannel()
             })
             setWsChannel(ws)
         }
