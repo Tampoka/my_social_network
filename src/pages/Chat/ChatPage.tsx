@@ -23,15 +23,26 @@ const Chat: FC = () => {
     const [wsChannel, setWsChannel] = useState<Optional<WebSocket>>(null)
 
     useEffect(() => {
+        let ws: WebSocket
+        const closeHandler = () => {
+            setTimeout(createChannel, 3000)
+            console.log('Closed ws')
+        }
+
         function createChannel() {
-            let ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-            ws.addEventListener('close', () => {
-                createChannel()
-            })
+            if (ws !== null) {
+                ws.removeEventListener('close', closeHandler)
+            }
+            ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+            ws.addEventListener('close', closeHandler)
             setWsChannel(ws)
         }
 
         createChannel()
+        return () => {
+            ws.removeEventListener('close', closeHandler)
+            ws.close()
+        }
     }, [])
 
     return (
