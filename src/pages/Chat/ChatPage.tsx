@@ -1,13 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
-
-export interface IMessage {
-    userId: number,
-    userName: string,
-    message: string,
-    photo: Optional<string>
-}
+import {IMessage} from '../../api/chat-api';
 
 export type Optional<T> = T | null
 
