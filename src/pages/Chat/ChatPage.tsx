@@ -98,7 +98,7 @@ const AddMessageForm: FC<{ wsChannel: Optional<WebSocket> }> = ({wsChannel}) => 
     }, [wsChannel])
 
     return (
-        <div>
+        <div style={{marginTop:15}}>
             <div><textarea
                 onChange={(e) => setMessage(e.currentTarget.value)}
                 value={message}></textarea>
@@ -131,7 +131,7 @@ const Message = ({message}: MessageProps) => {
                 <span>No photo</span>}
             {message.message}
             {message.userName === fullName && <div>
-                <button>Delete</button>
+                <button style={{marginTop:10,padding:'5px 10px',backgroundColor:'indianred',border:'none'}}>Delete</button>
             </div>}
             <hr/>
         </div>
