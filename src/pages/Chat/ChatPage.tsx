@@ -30,10 +30,8 @@ const Chat: FC = () => {
         }
 
         function createChannel() {
-            if (ws !== null) {
-                ws.removeEventListener('close', closeHandler)
-                ws.close()
-            }
+            ws?.removeEventListener('close', closeHandler)
+            ws?.close()
             ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
             ws.addEventListener('close', closeHandler)
             setWsChannel(ws)
@@ -48,25 +46,29 @@ const Chat: FC = () => {
 
     return (
         <div>
-            <Messages ws={wsChannel}/>
-            <AddMessageForm ws={wsChannel}/>
+            <Messages wsChannel={wsChannel}/>
+            <AddMessageForm wsChannel={wsChannel}/>
         </div>
     )
 }
 
 export type MessagesProps = {
-    ws: Optional<WebSocket>
+    wsChannel: Optional<WebSocket>
 }
 
-const Messages = ({ws}: MessagesProps) => {
+const Messages = ({wsChannel}: MessagesProps) => {
     const [messages, setMessages] = useState<IMessage[]>([])
 
     useEffect(() => {
-        ws?.addEventListener('message', (e: MessageEvent) => {
+        const messageHandler = (e: MessageEvent) => {
             const newMessages = JSON.parse(e.data)
             setMessages((prevMessages) => [...prevMessages, ...newMessages])
-        })
-    }, [ws])
+        }
+        wsChannel?.addEventListener('message', messageHandler)
+        return () => {
+            wsChannel?.removeEventListener('message', messageHandler)
+        }
+    }, [wsChannel])
 
     return (
         <div style={{height: 400, overflowY: 'auto'}}>
@@ -75,12 +77,12 @@ const Messages = ({ws}: MessagesProps) => {
     )
 }
 
-const AddMessageForm: FC<{ ws: Optional<WebSocket> }> = ({ws}) => {
+const AddMessageForm: FC<{ wsChannel: Optional<WebSocket> }> = ({wsChannel}) => {
     const [message, setMessage] = useState('')
     const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
 
     const sendMessage = () => {
-        ws?.send(message)
+        wsChannel?.send(message)
         setMessage('')
     }
 
@@ -88,12 +90,12 @@ const AddMessageForm: FC<{ ws: Optional<WebSocket> }> = ({ws}) => {
         const openHandler = () => {
             setReadyStatus('ready')
         }
-        ws?.addEventListener('open', openHandler)
+        wsChannel?.addEventListener('open', openHandler)
         return () => {
-            ws?.removeEventListener('open', openHandler)
+            wsChannel?.removeEventListener('open', openHandler)
         }
 
-    }, [ws])
+    }, [wsChannel])
 
     return (
         <div>
@@ -103,7 +105,7 @@ const AddMessageForm: FC<{ ws: Optional<WebSocket> }> = ({ws}) => {
             </div>
             <div>
                 <button onClick={sendMessage}
-                        disabled={ws == null && (readyStatus !== 'ready' || !message)}>Send
+                        disabled={wsChannel == null && (readyStatus !== 'ready' || !message)}>Send
                 </button>
             </div>
         </div>
