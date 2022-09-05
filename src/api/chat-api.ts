@@ -1,7 +1,7 @@
 import {Optional} from '../pages/Chat/ChatPage';
 
 
-const subscribers = [] as Array<SubscriberType>
+let subscribers = [] as Array<SubscriberType>
 let ws: WebSocket
 
 function createChannel() {
@@ -30,7 +30,7 @@ export const chatAPI = {
         }
     },
     unsubscribe(callback: SubscriberType) {
-        subscribers.filter(s => s !== callback)
+        subscribers=subscribers.filter(s => s !== callback)
     }
 }
 
