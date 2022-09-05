@@ -25,8 +25,9 @@ const Chat: FC = () => {
     useEffect(() => {
         let ws: WebSocket
         const closeHandler = () => {
-            setTimeout(createChannel, 3000)
             console.log('Closed ws')
+            setTimeout(createChannel, 3000)
+            // TODO: show notification modal on reconnect + send button disable
         }
 
         function createChannel() {
@@ -98,7 +99,7 @@ const AddMessageForm: FC<{ wsChannel: Optional<WebSocket> }> = ({wsChannel}) => 
     }, [wsChannel])
 
     return (
-        <div style={{marginTop:15}}>
+        <div style={{marginTop: 15}}>
             <div><textarea
                 onChange={(e) => setMessage(e.currentTarget.value)}
                 value={message}></textarea>
@@ -131,7 +132,13 @@ const Message = ({message}: MessageProps) => {
                 <span>No photo</span>}
             {message.message}
             {message.userName === fullName && <div>
-                <button style={{marginTop:10,padding:'5px 10px',backgroundColor:'indianred',border:'none'}}>Delete</button>
+                <button style={{
+                    marginTop: 10,
+                    padding: '5px 10px',
+                    backgroundColor: 'indianred',
+                    border: 'none'
+                }}>Delete
+                </button>
             </div>}
             <hr/>
         </div>
