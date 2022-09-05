@@ -19,12 +19,18 @@ const closeHandler = () => {
 
 const messageHandler = (e: MessageEvent) => {
     const newMessages = JSON.parse(e.data)
-    subscribers.forEach(s=>s(newMessages))
+    subscribers.forEach(s => s(newMessages))
 }
 
 export const chatAPI = {
     subscribe(callback: SubscriberType) {
         subscribers.push(callback)
+        return () => {
+            subscribers.filter(s => s !== callback)
+        }
+    },
+    unsubscribe(callback: SubscriberType) {
+        subscribers.filter(s => s !== callback)
     }
 }
 
