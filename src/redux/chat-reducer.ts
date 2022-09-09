@@ -1,6 +1,5 @@
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
-import {authAPI} from "../api/api";
 import {chatAPI, IMessage} from '../api/chat-api';
 import {Dispatch} from 'redux';
 

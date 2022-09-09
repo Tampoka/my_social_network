@@ -9,6 +9,7 @@ function createChannel() {
     ws?.close()
     ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
     ws.addEventListener('close', closeHandler)
+    ws.addEventListener('message',messageHandler)
 }
 
 const closeHandler = () => {
